@@ -32,6 +32,10 @@ users.users.sandydoo = {
   };
 };
 
+programs.ssh = {
+  startAgent = true;
+};
+
 services.xserver = {
   enable = true;
   displayManager = {
