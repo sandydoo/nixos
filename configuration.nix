@@ -22,7 +22,7 @@ users.users.sandydoo = {
   home = "/home/sandydoo";
   createHome = true;
   description = "Sander";
-  password = "36rt!SAN";
+  password = "horses have feelings";
   extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
 
   openssh = {
