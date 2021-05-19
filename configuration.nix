@@ -104,6 +104,7 @@ environment.systemPackages = with pkgs; [
   vim
   kakoune
   git
+  unstable.gh
   python3
   openssl
   dnsutils
