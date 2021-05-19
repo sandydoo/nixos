@@ -54,8 +54,12 @@ users.users.sandydoo = {
   };
 };
 
-programs.ssh = {
-  startAgent = true;
+programs = {
+  gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryFlavor = "curses";
+  };
 };
 
 services.xserver = {
@@ -88,6 +92,9 @@ services = {
     enable = true;
     allowSFTP = true;
     passwordAuthentication = false;
+    extraConfig = ''
+      StreamLocalBindUnlink yes
+    '';
   };
   sshd.enable = true;
   tailscale.enable = true;
@@ -105,6 +112,8 @@ environment.systemPackages = with pkgs; [
   kakoune
   git
   unstable.gh
+  gnupg
+  pinentry-gnome
   python3
   openssl
   dnsutils
