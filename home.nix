@@ -13,6 +13,10 @@
     enable = true;
     userName = "sandydoo";
     userEmail = "hey@sandydoo.me";
+    signing = {
+      key = "171257C9C397032E";
+      signByDefault = true;
+    };
     extraConfig = {
       push = {
         default = "simple";
