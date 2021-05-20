@@ -42,5 +42,17 @@
       push.default = "simple";
     };
   };
-}
 
+  programs.gpg.enable = true;
+
+  programs.gpg.settings = {
+    # Use ASCII armored output instead of binary
+    armor = true;
+
+    # Show key IDs in 16-character format
+    keyid-format = "0xlong";
+
+    keyserver = "hkps://keys.openpgp.org";
+    use-agent = true;
+ };
+}
