@@ -11,6 +11,17 @@
 
   programs.fish = {
     enable = true;
+    plugins = [
+      {
+        name = "pure";
+        src = pkgs.fetchFromGitHub {
+          owner = "pure-fish";
+          repo = "pure";
+          rev = "v3.5.0";
+          sha256 = "0nr97z138v93lmvi4zh4h09gi5mzaxk4j6rk4x3calk0vjgfw7qs";
+        };
+      }
+    ];
   };
 
   programs.git = {
