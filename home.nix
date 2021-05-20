@@ -18,9 +18,13 @@
       signByDefault = true;
     };
     extraConfig = {
-      push = {
-        default = "simple";
+      core = {
+        editor = "kak";
+        quotepath = "off";
       };
+      init.defaultbranch = "main";
+      pull.ff = "simple";
+      push.default = "simple";
     };
   };
 }
