@@ -9,6 +9,10 @@
     gnomeExtensions.dash-to-dock
   ];
 
+  programs.fish = {
+    enable = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "sandydoo";
