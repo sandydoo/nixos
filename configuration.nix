@@ -15,6 +15,11 @@ in
     <unstable/nixos/modules/services/networking/tailscale.nix>
   ];
 
+  nix.extraOptions = ''
+    keep-derivations = true
+    keep-outputs = true
+  '';
+
   nixpkgs.config = allowUnfree // {
     packageOverrides = pkgs: {
       tailscale = unstable.tailscale;
