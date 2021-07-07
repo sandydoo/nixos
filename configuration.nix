@@ -85,8 +85,8 @@ in
     };
     sshd.enable = true;
     tailscale.enable = true;
-    dbus.packages = [ pkgs.gnome3.dconf ];
-    udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
+    dbus.packages = [ pkgs.gnome.dconf ];
+    udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
     xserver = {
       enable = true;
       displayManager = {
@@ -96,7 +96,7 @@ in
           user = "sandydoo";
         };
       };
-      desktopManager.gnome3.enable = true;
+      desktopManager.gnome.enable = true;
       videoDrivers = [ "vboxvideo" ];
     };
   };
