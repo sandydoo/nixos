@@ -30,7 +30,7 @@ in
   #   options = [ "rw" ];
   # };
 
-  boot.kernelPackages = pkgs.linuxPackages_5_10;
+  boot.kernelPackages = pkgs.linuxPackages_5_12;
 
   hardware = {
     opengl.extraPackages = [ pkgs.intel-ocl ];
@@ -126,11 +126,8 @@ in
     firefox
     iperf3
     openvpn
-    wireguard
     wireguard-tools
     ocl-icd
     clinfo
-    linuxPackages.wireguard
-    linuxPackages.virtualboxGuestAdditions
   ];
 }
