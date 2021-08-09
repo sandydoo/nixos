@@ -19,7 +19,14 @@ in
   nix.extraOptions = ''
     keep-derivations = true
     keep-outputs = true
+    min-free = ${toString (1024 * 1024 * 1024)}
   '';
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   nixpkgs.config = allowUnfree // {
     packageOverrides = pkgs: {
