@@ -7,14 +7,7 @@ let
   unstable = import <unstable> { config = allowUnfree; };
 in
 {
-  disabledModules = [ "services/networking/tailscale.nix" ];
-
-  imports = [
-    <nixpkgs/nixos/modules/virtualisation/virtualbox-image.nix>
-    <nixpkgs/nixos/modules/virtualisation/virtualbox-guest.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-    <unstable/nixos/modules/services/networking/tailscale.nix>
-  ];
+  # Nix store
 
   nix.extraOptions = ''
     keep-derivations = true
@@ -28,28 +21,8 @@ in
     options = "--delete-older-than 30d";
   };
 
-  nixpkgs.config = allowUnfree // {
-    packageOverrides = pkgs: {
-      tailscale = unstable.tailscale;
-    };
-  };
 
-  nixpkgs.overlays = [
-    (self: super: {
-      linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
-        virtualboxGuestAdditions = unstable.linuxPackages_5_12.virtualboxGuestAdditions;
-      });
-    })
-  ];
-
-  # Mount a VirtualBox shared folder.
-  # This is configurable in the VirtualBox menu at
-  # Machine / Settings / Shared Folders.
-  # fileSystems."/mnt" = {
-  #   fsType = "vboxsf";
-  #   device = "nameofdevicetomount";
-  #   options = [ "rw" ];
-  # };
+  # Hardware and kernel
 
   boot.kernelPackages = pkgs.linuxPackages_5_12;
 
@@ -60,20 +33,60 @@ in
 
   virtualisation.virtualbox.guest.enable = true;
 
+
+  # Modules
+
+  disabledModules = [ "services/networking/tailscale.nix" ];
+
+  imports = [
+    <nixpkgs/nixos/modules/virtualisation/virtualbox-image.nix>
+    <nixpkgs/nixos/modules/virtualisation/virtualbox-guest.nix>
+    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    <unstable/nixos/modules/services/networking/tailscale.nix>
+  ];
+
+
+  # Package overrides and overlays
+
+  nixpkgs.config = allowUnfree // {
+    packageOverrides = pkgs: {
+      # Use latest tailscale
+      tailscale = unstable.tailscale;
+    };
+  };
+
+  nixpkgs.overlays = [
+    (self: super: {
+      linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
+        # Use latest guest additions
+        virtualboxGuestAdditions = unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+      });
+    })
+  ];
+
+
+  # Users
+
   users.users.sandydoo = {
     isNormalUser = true;
     home = "/home/sandydoo";
     createHome = true;
     description = "Sander";
-    password = "horses have feelings";
     extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
     shell = pkgs.fish;
-    openssh = {
-      authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me"
-      ];
-    };
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me"
+    ];
   };
+
+  # Mount a VirtualBox shared folder.
+  # This is configurable in the VirtualBox menu at
+  # Machine / Settings / Shared Folders.
+  # fileSystems."/mnt" = {
+  #   fsType = "vboxsf";
+  #   device = "nameofdevicetomount";
+  #   options = [ "rw" ];
+  # };
 
   programs = {
     fish.enable = true;
@@ -110,6 +123,7 @@ in
     udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
     xserver = {
       enable = true;
+      desktopManager.gnome.enable = true;
       displayManager = {
         gdm.enable = true;
         autoLogin = {
@@ -117,7 +131,6 @@ in
           user = "sandydoo";
         };
       };
-      desktopManager.gnome.enable = true;
     };
   };
 
