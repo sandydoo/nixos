@@ -35,8 +35,8 @@ in
   # Modules
 
   imports = [
-    ./virtualbox
-    ./taiscale
+    ./virtualbox.nix
+    ./taiscale.nix
   ];
 
 
