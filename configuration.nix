@@ -32,7 +32,7 @@ with lib;
 
   imports = [
     ./virtualbox.nix
-    ./taiscale.nix
+    ./tailscale.nix
   ];
 
 
