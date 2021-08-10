@@ -2,10 +2,6 @@
 
 with lib;
 
-let
-  allowUnfree = { allowUnfree = true; };
-  unstable = import <unstable> { config = allowUnfree; };
-in
 {
   # Nix store
 
@@ -22,71 +18,53 @@ in
   };
 
 
+  # Nix packages
+
+  # Allow proprietary packages
+  nixpkgs.config.allowUnfree = true;
+
+  # Add alias to unstable channel
+  nixpkgs.overlays = [
+    (self: super: {
+      unstable = (import <unstable> { config = config.nixpkgs.config; });
+    })
+  ];
+
+
+  # Modules
+
+  imports = [
+    ./virtualbox.nix
+    ./tailscale.nix
+  ];
+
+
   # Hardware and kernel
 
-  boot.kernelPackages = pkgs.linuxPackages_5_12;
+  boot.kernelPackages = pkgs.linuxPackages_5_12.extend (self: super: {
+    # Use a newer version of guest additions
+    virtualboxGuestAdditions = pkgs.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+  });
 
   hardware = {
     opengl.extraPackages = [ pkgs.intel-ocl ];
     pulseaudio.enable = true;
   };
 
-  virtualisation.virtualbox.guest.enable = true;
-
-
-  # Modules
-
-  disabledModules = [ "services/networking/tailscale.nix" ];
-
-  imports = [
-    <nixpkgs/nixos/modules/virtualisation/virtualbox-image.nix>
-    <nixpkgs/nixos/modules/virtualisation/virtualbox-guest.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-    <unstable/nixos/modules/services/networking/tailscale.nix>
-  ];
-
-
-  # Package overrides and overlays
-
-  nixpkgs.config = allowUnfree // {
-    packageOverrides = pkgs: {
-      # Use latest tailscale
-      tailscale = unstable.tailscale;
-    };
-  };
-
-  nixpkgs.overlays = [
-    (self: super: {
-      linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
-        # Use latest guest additions
-        virtualboxGuestAdditions = unstable.linuxPackages_5_12.virtualboxGuestAdditions;
-      });
-    })
-  ];
-
 
   # Users
 
   users.users.sandydoo = {
-    isNormalUser = true;
     home = "/home/sandydoo";
-    createHome = true;
     description = "Sander";
     extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
-    shell = pkgs.fish;
+    isNormalUser = true;
+    createHome = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me"
     ];
+    shell = pkgs.fish;
   };
-
-  # Mount a VirtualBox shared folder.
-  # This is configurable in the VirtualBox menu at
-  # Machine / Settings / Shared Folders.
-  # fileSystems."/mnt" = {
-  #   fsType = "vboxsf";
-  #   device = "nameofdevicetomount";
-  #   options = [ "rw" ];
-  # };
 
   programs = {
     fish.enable = true;
@@ -99,10 +77,10 @@ in
 
   time.timeZone = "Europe/Moscow";
 
+  networking.hostName = "sandydoo";
+
   networking.firewall = {
     enable = true;
-    trustedInterfaces = [ "tailscale0" ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
     allowedTCPPorts = [ 22 ];
   };
 
@@ -134,8 +112,6 @@ in
     };
   };
 
-  # List packages installed in system profile. To search, run:
-  # \$ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
     fish
@@ -153,7 +129,6 @@ in
     nodejs-14_x
     nodePackages.npm
     nodePackages.yarn
-    unstable.tailscale
     glxinfo
     google-chrome
     firefox
