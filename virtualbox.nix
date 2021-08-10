@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [
@@ -8,13 +8,13 @@
   ];
 
   # Use latest guest additions
-  nixpkgs.overlays = [
-    (self: super: {
-      linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
-        virtualboxGuestAdditions = super.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
-      });
-    })
-  ];
+  #nixpkgs.overlays = [
+  #  (self: super: {
+  #    linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
+  #      virtualboxGuestAdditions = super.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+  #    });
+  #  })
+  #];
 
   virtualisation.virtualbox.guest.enable = true;
 

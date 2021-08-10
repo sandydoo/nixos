@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   disabledModules = [ "services/networking/tailscale.nix" ];
@@ -7,12 +7,12 @@
     <unstable/nixos/modules/services/networking/tailscale.nix>
   ];
 
-  nixpkgs.config = {
-    packageOverrides = pkgs: {
-      # Use latest tailscale
-      tailscale = unstable.tailscale;
-    };
-  };
+  #nixpkgs.config = {
+  #  packageOverrides = with pkgs; {
+  #    # Use latest tailscale
+  #    tailscale = unstable.tailscale;
+  #  };
+  #};
 
   networking.firewall = {
     trustedInterfaces = [ "tailscale0" ];
@@ -20,6 +20,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    tailscale
+    unstable.tailscale
   ];
 }

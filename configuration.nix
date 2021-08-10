@@ -36,7 +36,10 @@ with lib;
 
     overlays = [
       (self: super: {
-        unstable = (import <unstable> { config = super.config; });
+        unstable = (import <unstable> { config = { allowUnfree = true; }; });
+        linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
+          virtualboxGuestAdditions = super.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+        });
       })
     ];
 
