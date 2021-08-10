@@ -34,6 +34,12 @@ with lib;
     # Allow proprietary packages
     allowUnfree = true;
 
+    overlays = [
+      (self: super: {
+        unstable = (import <unstable> { config = super.config; });
+      })
+    ];
+
     # Add an alias for the unstable channel
     packageOverrides = pkgs: {
       unstable = import <unstable> { config = config.nixpkgs.config; };
