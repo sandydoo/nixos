@@ -28,14 +28,6 @@ with lib;
   };
 
 
-  # Modules
-
-  imports = [
-    ./virtualbox.nix
-    ./tailscale.nix
-  ];
-
-
   # Package overrides and overlays
 
   nixpkgs.config = {
@@ -47,6 +39,13 @@ with lib;
       unstable = import <unstable> { config = config.nixpkgs.config; };
     };
   };
+
+  # Modules
+
+  imports = [
+    ./virtualbox.nix
+    ./tailscale.nix
+  ];
 
 
   # Users
