@@ -18,37 +18,18 @@ with lib;
   };
 
 
-  # Hardware and kernel
+  # Nix packages
 
-  boot.kernelPackages = pkgs.linuxPackages_5_12;
+  # Allow proprietary packages
+  nixpkgs.config.allowUnfree = true;
 
-  hardware = {
-    opengl.extraPackages = [ pkgs.intel-ocl ];
-    pulseaudio.enable = true;
-  };
+  # Add alias to unstable channel
+  nixpkgs.overlays = [
+    (self: super: {
+      unstable = (import <unstable> { config = config.nixpkgs.config; });
+    })
+  ];
 
-
-  # Package overrides and overlays
-
-  nixpkgs.config = {
-    # Allow proprietary packages
-    allowUnfree = true;
-
-    overlays = [
-      (self: super: {
-        unstable = (import <unstable> { config = { allowUnfree = true; }; });
-        tailscale = super.unstable.tailscale;
-        linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
-          virtualboxGuestAdditions = super.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
-        });
-      })
-    ];
-
-    # Add an alias for the unstable channel
-    packageOverrides = pkgs: {
-      unstable = import <unstable> { config = config.nixpkgs.config; };
-    };
-  };
 
   # Modules
 
@@ -56,6 +37,19 @@ with lib;
     ./virtualbox.nix
     ./tailscale.nix
   ];
+
+
+  # Hardware and kernel
+
+  boot.kernelPackages = pkgs.linuxPackages_5_12.extend (self: super: {
+    # Use a newer version of guest additions
+    virtualboxGuestAdditions = pkgs.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+  });
+
+  hardware = {
+    opengl.extraPackages = [ pkgs.intel-ocl ];
+    pulseaudio.enable = true;
+  };
 
 
   # Users
