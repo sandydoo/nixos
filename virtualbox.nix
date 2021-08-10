@@ -1,4 +1,4 @@
-{ pkgs, unstable, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -11,7 +11,7 @@
   nixpkgs.overlays = [
     (self: super: {
       linuxPackages_5_12 = super.linuxPackages_5_12.extend (lpself: lpsuper: {
-        virtualboxGuestAdditions = unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+        virtualboxGuestAdditions = super.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
       });
     })
   ];

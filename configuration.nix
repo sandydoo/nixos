@@ -2,10 +2,6 @@
 
 with lib;
 
-let
-  allowUnfree = { allowUnfree = true; };
-  unstable = import <unstable> { config = allowUnfree; };
-in
 {
   # Nix store
 
@@ -42,7 +38,15 @@ in
 
   # Package overrides and overlays
 
-  nixpkgs.config = allowUnfree;
+  nixpkgs.config = {
+    # Allow proprietary packages
+    allowUnfree = true;
+
+    # Add an alias for the unstable channel
+    packageOverrides = pkgs: {
+      unstable = import <unstable> { config = config.nixpkgs.config; };
+    };
+  };
 
 
   # Users

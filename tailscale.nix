@@ -1,8 +1,5 @@
 { pkgs, ... }:
 
-let
-  unstable = import <unstable> { config = { allowUnfree = true; }; };
-in
 {
   disabledModules = [ "services/networking/tailscale.nix" ];
 
