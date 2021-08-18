@@ -9,6 +9,10 @@
     gnomeExtensions.dash-to-dock
   ];
 
+  home.sessionVariables = {
+    EDITOR = "kak";
+  };
+
   programs.fish = {
     enable = true;
     plugins = [
