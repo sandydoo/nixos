@@ -1,4 +1,4 @@
-{ config, pkgs, nix-unstable, stdenv, lib, ... }:
+{ config, pkgs, nix-unstable, unstable, stdenv, lib, ... }:
 
 with lib;
 
@@ -26,14 +26,6 @@ with lib;
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
 
-  # Add alias to unstable channel
-  nixpkgs.overlays = [
-    (self: super: {
-      unstable = (import nix-unstable { config = config.nixpkgs.config; });
-    })
-  ];
-
-
   # Modules
 
   imports = [
@@ -46,7 +38,7 @@ with lib;
 
   boot.kernelPackages = pkgs.linuxPackages_5_13.extend (self: super: {
     # Use a newer version of guest additions
-    virtualboxGuestAdditions = pkgs.unstable.linuxPackages_5_13.virtualboxGuestAdditions;
+    virtualboxGuestAdditions = unstable.linuxPackages_5_13.virtualboxGuestAdditions;
   });
 
   hardware = {

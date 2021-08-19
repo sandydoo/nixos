@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nix-unstable, unstable, ... }:
 
 {
   disabledModules = [ "services/networking/tailscale.nix" ];
 
   imports = [
-    <unstable/nixos/modules/services/networking/tailscale.nix>
+    "${nix-unstable}/nixos/modules/services/networking/tailscale.nix"
   ];
 
   networking.firewall = {
@@ -12,7 +12,7 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     unstable.tailscale
   ];
 }
