@@ -30,7 +30,6 @@ with lib;
 
   imports = [
     ./virtualbox.nix
-    ./tailscale.nix
   ];
 
 
@@ -91,7 +90,6 @@ with lib;
       '';
     };
     sshd.enable = true;
-    tailscale.enable = true;
     dbus.packages = [ pkgs.gnome.dconf ];
     udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
     xserver = {

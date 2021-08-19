@@ -15,6 +15,7 @@
 
       modules = [
         ./configuration.nix
+        ./tailscale.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
