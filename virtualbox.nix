@@ -1,10 +1,10 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, modulesPath, ... }:
 
 {
   imports = [
-    <nixpkgs/nixos/modules/virtualisation/virtualbox-image.nix>
-    <nixpkgs/nixos/modules/virtualisation/virtualbox-guest.nix>
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
+    "${modulesPath}/virtualisation/virtualbox-image.nix"
+    "${modulesPath}/virtualisation/virtualbox-guest.nix"
+    "${modulesPath}/installer/cd-dvd/channel.nix"
   ];
 
   virtualisation.virtualbox.guest.enable = true;

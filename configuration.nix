@@ -1,14 +1,17 @@
-{ config, pkgs, stdenv, lib, ... }:
+{ config, pkgs, nix-unstable, stdenv, lib, ... }:
 
 with lib;
 
 {
   # Nix store
 
+  nix.package = pkgs.nixUnstable;
+
   nix.extraOptions = ''
     keep-derivations = true
     keep-outputs = true
     min-free = ${toString (1024 * 1024 * 1024)}
+    experimental-features = nix-command flakes
   '';
 
   nix.gc = {
@@ -26,7 +29,7 @@ with lib;
   # Add alias to unstable channel
   nixpkgs.overlays = [
     (self: super: {
-      unstable = (import <unstable> { config = config.nixpkgs.config; });
+      unstable = (import nix-unstable { config = config.nixpkgs.config; });
     })
   ];
 
@@ -41,9 +44,9 @@ with lib;
 
   # Hardware and kernel
 
-  boot.kernelPackages = pkgs.linuxPackages_5_12.extend (self: super: {
+  boot.kernelPackages = pkgs.linuxPackages_5_13.extend (self: super: {
     # Use a newer version of guest additions
-    virtualboxGuestAdditions = pkgs.unstable.linuxPackages_5_12.virtualboxGuestAdditions;
+    virtualboxGuestAdditions = pkgs.unstable.linuxPackages_5_13.virtualboxGuestAdditions;
   });
 
   hardware = {
