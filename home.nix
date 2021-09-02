@@ -33,7 +33,7 @@
     userName = "sandydoo";
     userEmail = "hey@sandydoo.me";
     signing = {
-      key = "171257C9C397032E";
+      key = "D1A763BC84F34603";
       signByDefault = true;
     };
     extraConfig = {
