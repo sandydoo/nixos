@@ -59,4 +59,11 @@
     keyserver = "hkps://keys.openpgp.org";
     use-agent = true;
  };
+
+ programs.bat.enable = true;
+
+ programs.exa = {
+   enable = true;
+   enableAliases = true;
+ };
 }
