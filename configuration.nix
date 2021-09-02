@@ -35,11 +35,6 @@ with lib;
 
   # Hardware and kernel
 
-  boot.kernelPackages = pkgs.linuxPackages_5_13.extend (self: super: {
-    # Use a newer version of guest additions
-    virtualboxGuestAdditions = unstable.linuxPackages_5_13.virtualboxGuestAdditions;
-  });
-
   hardware = {
     opengl.extraPackages = [ pkgs.intel-ocl ];
     pulseaudio.enable = true;
