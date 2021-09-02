@@ -104,7 +104,7 @@ with lib;
     fish
     fd
     vim
-    kakoune
+    unstable.kakoune
     git
     unstable.gh
     gnupg
