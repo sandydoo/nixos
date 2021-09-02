@@ -50,7 +50,7 @@ with lib;
     isNormalUser = true;
     createHome = true;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOWLadQ+eO8lQ5NdY5gUxi3EO6h2uIqp5HSVxPzx2gMGGQkZ1GIqpkeaA0RibrlyyoLA9wJvXvxgAXVQaQkdXhjkstvkxj7mwghgvs+TCE0PpYIWgL4AYqc5BLVR9EBZ8CBgE9dDdvdJ5J0cr63WXFgwaDClAXVaeUzHn8qnrbl0E5ExbQjxFtHYpUxrKnNmCWn+vmaNXQSiyarrTh0MiHwZ7pOuwFQq0ZTdIVV/FU6nS4Ci6E35s2N2FhMFzJFDlG/tGHXrI4OqCHfdfcNGBHEXh9C7QnQRiKIpGaTcBoUlY/a45Vt2RrEl9PgoGwBMcyax6P9O0UYIWoRpFiPay9wZVzy/QPYmgg38cfYF9BEmy8nsLoeaGASGd+xY+GRPWXBdXmgVglInONx9Io32tKe9lUQz7Tclsth87Cj5/llDKFGkqxyoERgKZ83APxRJMw/v4rzSda7sMS2qWggfb53OXXmsDDEqzKXkD7h5i/Vhnzl0xMRag5ebAJN2Vsv+xjlzMa/la3UFcvuOImn/DDCFgxifji+RCs84pu12787Hg38SrgyKB7sYZAnw9uRfaQR6wOjYVDo2jojDZ+PMDhAszjQnvgmz3rXdfxqDHIZcRvz9C8m2QJS00QWrz+Qlsn65qe3BGNvpQrGlYpIgjoPM+EGUqhazSpyeeFQDHk4w== hey@sandydoo.me"
     ];
     shell = pkgs.fish;
   };
