@@ -41,7 +41,7 @@
         editor = "kak";
         quotepath = "off";
       };
-      init.defaultbranch = "main";
+      init.defaultBranch = "main";
       pull.ff = "simple";
       push.default = "simple";
     };
