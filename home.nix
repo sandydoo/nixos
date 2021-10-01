@@ -66,4 +66,9 @@
    enable = true;
    enableAliases = true;
  };
+
+ programs.zoxide = {
+   enable = true;
+   enableFishIntegration = true;
+ };
 }
