@@ -13,6 +13,15 @@
     EDITOR = "kak";
   };
 
+  programs.firefox = {
+    enable = true;
+    profiles.sandydoo.settings = {
+      "browser.startup.homepage" = "https://duckduckgo.com/";
+      "browser.search.region" = "GB";
+      "general.useragent.locale" = "en-GB";
+    };
+  };
+
   programs.fish = {
     enable = true;
     plugins = [
