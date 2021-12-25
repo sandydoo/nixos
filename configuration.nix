@@ -26,12 +26,6 @@ with lib;
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
 
-  # Modules
-
-  imports = [
-    ./virtualbox.nix
-  ];
-
 
   # Hardware and kernel
 

@@ -1,10 +1,8 @@
-{ pkgs, modulesPath, ... }:
+{ nix-unstable, ... }:
 
 {
   imports = [
-    "${modulesPath}/virtualisation/virtualbox-image.nix"
-    "${modulesPath}/virtualisation/virtualbox-guest.nix"
-    "${modulesPath}/installer/cd-dvd/channel.nix"
+    "${nix-unstable}/nixos/modules/virtualisation/virtualbox-image.nix"
   ];
 
   virtualisation.virtualbox.guest.enable = true;
