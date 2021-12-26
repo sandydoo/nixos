@@ -60,6 +60,7 @@ with lib;
       enable = true;
       enableSSHSupport = true;
     };
+    mosh.enable = true;
   };
 
   time.timeZone = "Europe/Moscow";
