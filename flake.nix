@@ -16,7 +16,7 @@
       modules = [
         ./configuration.nix
         ./tailscale.nix
-        ./virtualbox.nix
+        ./vmware-guest.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

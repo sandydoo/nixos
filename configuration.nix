@@ -29,11 +29,10 @@ with lib;
 
   # Hardware and kernel
 
-  boot.kernelPackages = pkgs.linuxPackages.extend (self: super: {
-    # Use the latest version of guest additions
-    virtualboxGuestAdditions = unstable.linuxPackages.virtualboxGuestAdditions;
-  });
-
+  imports = [
+    ./hardware-configuration.nix
+  ];
+  
   hardware = {
     opengl.extraPackages = [ pkgs.intel-ocl ];
     pulseaudio.enable = true;
@@ -45,7 +44,7 @@ with lib;
   users.users.sandydoo = {
     home = "/home/sandydoo";
     description = "Sander";
-    extraGroups = [ "wheel" "networkmanager" "vboxsf" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     isNormalUser = true;
     createHome = true;
     openssh.authorizedKeys.keys = [
