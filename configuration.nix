@@ -53,13 +53,15 @@ with lib;
     shell = pkgs.fish;
   };
 
+  programs.mosh.enable = true;
+  services.eternal-terminal.enable = true;
+
   programs = {
     fish.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
-    mosh.enable = true;
   };
 
   time.timeZone = "Europe/Moscow";
