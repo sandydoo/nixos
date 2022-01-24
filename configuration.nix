@@ -70,7 +70,7 @@ with lib;
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 22 config.services.eternal-terminal.port ];
   };
 
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
