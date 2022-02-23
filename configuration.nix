@@ -5,7 +5,7 @@ with lib;
 {
   # Nix store
 
-  nix.package = pkgs.nixUnstable;
+  nix.package = unstable.nix;
 
   nix.binaryCaches = [
     "https://cache.nixos.org"
