@@ -115,28 +115,47 @@ with lib;
 
   environment.systemPackages = with pkgs; [
     home-manager
+
+    # Shell
     fish
+
+    # Tools
     fd
+    jq
+    neofetch
+    glxinfo
+    ocl-icd
+    clinfo
+
+    # Editors
     vim
     unstable.kakoune
+
+    # Version control
     git
     unstable.gh
+
+    # Crypto
     gnupg
     pinentry-gnome
+
     python3
+
+    # JavaScript
+    nodejs
+    nodePackages.npm
+    nodePackages.yarn
+
+    google-chrome
+    firefox
+
+    # Networking
+    iperf3
+    dogdns
     openssl
     dnsutils
     nftables
-    nodejs-14_x
-    nodePackages.npm
-    nodePackages.yarn
-    glxinfo
-    google-chrome
-    firefox
-    iperf3
     openvpn
     wireguard-tools
-    ocl-icd
-    clinfo
   ];
 }
