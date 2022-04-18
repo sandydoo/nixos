@@ -149,6 +149,9 @@ with lib;
     google-chrome
     firefox
 
+    # Send files
+    croc
+
     # Networking
     iperf3
     dogdns
