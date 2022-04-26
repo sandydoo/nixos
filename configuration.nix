@@ -1,4 +1,4 @@
-{ config, pkgs, nix-unstable, unstable, stdenv, lib, ... }:
+{ config, pkgs, lib, nixpkgs, nix-unstable, unstable, ... }:
 
 with lib;
 
@@ -6,6 +6,9 @@ with lib;
   # Nix store
 
   nix.package = unstable.nix;
+
+  nix.registry.nixpkgs.flake = nixpkgs;
+  nix.registry.unstable.flake = nix-unstable;
 
   nix.binaryCaches = [
     "https://cache.nixos.org"

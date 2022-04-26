@@ -6,9 +6,8 @@
     home-manager.inputs.nixpkgs.follows = "nix-unstable";
   };
 
-  outputs = { self, nixpkgs, nix-unstable, home-manager }: {
-    nix.registry.nixpkgs.flake = nixpkgs;
-    nix.registry.unstable.flake = nix-unstable;
+  outputs = { self, nixpkgs, nix-unstable, home-manager }@inputs: {
+    formatter.x86_64-linux = nix-unstable.legacyPackages.x86_64-linux.nixfmt;
 
     nixosConfigurations.sandydoo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -26,13 +25,11 @@
         {
           # Let 'nixos-version --json' know about the Git revision
           # of this flake.
-          system.configurationRevision =
-            nixpkgs.lib.mkIf (self ? rev) self.rev;
+          system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
         }
       ];
 
-      specialArgs = {
-        inherit nix-unstable;
+      specialArgs = inputs // {
         unstable = import nix-unstable {
           system = "x86_64-linux";
           config.allowUnfree = true;
