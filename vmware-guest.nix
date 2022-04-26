@@ -1,4 +1,4 @@
-{ nix-unstable, ...}:
+{ nix-unstable, ... }:
 
 {
   virtualisation.vmware.guest = {

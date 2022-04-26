@@ -9,9 +9,7 @@
     gnomeExtensions.dash-to-dock
   ];
 
-  home.sessionVariables = {
-    EDITOR = "kak";
-  };
+  home.sessionVariables = { EDITOR = "kak"; };
 
   programs.firefox = {
     enable = true;
@@ -24,17 +22,15 @@
 
   programs.fish = {
     enable = true;
-    plugins = [
-      {
-        name = "pure";
-        src = pkgs.fetchFromGitHub {
-          owner = "pure-fish";
-          repo = "pure";
-          rev = "v3.5.0";
-          sha256 = "0nr97z138v93lmvi4zh4h09gi5mzaxk4j6rk4x3calk0vjgfw7qs";
-        };
-      }
-    ];
+    plugins = [{
+      name = "pure";
+      src = pkgs.fetchFromGitHub {
+        owner = "pure-fish";
+        repo = "pure";
+        rev = "v3.5.0";
+        sha256 = "0nr97z138v93lmvi4zh4h09gi5mzaxk4j6rk4x3calk0vjgfw7qs";
+      };
+    }];
   };
 
   programs.git = {
@@ -67,17 +63,17 @@
 
     keyserver = "hkps://keys.openpgp.org";
     use-agent = true;
- };
+  };
 
- programs.bat.enable = true;
+  programs.bat.enable = true;
 
- programs.exa = {
-   enable = true;
-   enableAliases = true;
- };
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
 
- programs.zoxide = {
-   enable = true;
-   enableFishIntegration = true;
- };
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }

@@ -36,24 +36,19 @@ with lib;
     options = "--delete-older-than 30d";
   };
 
-
   # Nix packages
 
   # Allow proprietary packages
   nixpkgs.config.allowUnfree = true;
 
-
   # Hardware and kernel
 
-  imports = [
-    ./hardware-configuration.nix
-  ];
-  
+  imports = [ ./hardware-configuration.nix ];
+
   hardware = {
     opengl.extraPackages = [ pkgs.intel-ocl ];
     pulseaudio.enable = true;
   };
-
 
   # Users
 
