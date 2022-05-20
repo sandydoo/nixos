@@ -14,6 +14,8 @@
 
       modules = [
         ./configuration.nix
+        # ./gnome.nix
+        ./i3.nix
         ./tailscale.nix
         ./vmware-guest.nix
         home-manager.nixosModules.home-manager
