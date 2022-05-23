@@ -1,0 +1,193 @@
+{ config, pkgs, unstable, nixpkgs, nix-unstable, ... }:
+
+{
+  # Include the results of the hardware scan.
+  imports = [
+    ./hardware-configuration.nix
+  ];
+  
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  hardware.video.hidpi.enable = true;
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.setLdLibraryPath = true;
+  hardware.opengl.extraPackages = [ pkgs.intel-ocl ];
+
+  networking.hostName = "superstrizh";
+
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  networking.useDHCP = false;
+  networking.interfaces.ens33.useDHCP = true;
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
+  # Disable the firewall for now.
+  networking.firewall.enable = false;
+
+  virtualisation.vmware.guest.enable = true;
+  virtualisation.vmware.guest.headless = false;
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # Don’t require password for sudo.
+  security.sudo.wheelNeedsPassword = false;
+
+  nix.package = unstable.nix;
+
+  nix.registry.nixpkgs.flake = nixpkgs;
+  nix.registry.unstable.flake = nix-unstable;
+
+  nix.binaryCaches = [
+    "http://192.168.2.19"
+    "https://cache.nixos.org"
+    "https://iohk.cachix.org"
+    # "https://hydra.iohk.io"
+    "https://nix-community.cachix.org"
+  ];
+
+  nix.binaryCachePublicKeys = [
+    "192.168.2.19:KkLdvn2/872hg0Bv3RYE41JNIFtcYJR5dJh+xeOiQrc="
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  ];
+
+  nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+    min-free = ${toString (1024 * 1024 * 1024)}
+    experimental-features = nix-command flakes
+  '';
+
+  nix.autoOptimiseStore = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
+  # Allow proprietary packages.
+  nixpkgs.config.allowUnfree = true;
+
+  users.mutableUsers = false;
+
+  services.openssh = {
+    enable = true;
+    allowSFTP = true;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+    extraConfig = ''
+      StreamLocalBindUnlink yes
+    '';
+  };
+
+  services.sshd.enable = true;
+
+  # services.xserver = {
+  #   enable = true;
+  #   layout = "us";
+  #   desktopManager.gnome.enable = true;
+  #   displayManager = {
+  #     gdm.enable = true;
+  #     autoLogin = {
+  #       enable = true;
+  #       user = "sandydoo";
+  #     };
+  #   };
+  #   # desktopManager.xterm.enable = false;
+
+  #   # displayManager.defaultSession = "none+i3";
+  #   # displayManager.autoLogin = {
+  #   #   enable = false;
+  #   #   user = "sandydoo";
+  #   # };
+  #   # displayManager.lightdm.enable = true;
+  #   # # displayManager.lightdm.greeters.pantheon.enable = true;
+
+  #   # windowManager.i3.enable = true;
+  #   # windowManager.i3.package = pkgs.i3-gaps;
+  #   # windowManager.i3.extraPackages = with pkgs; [ dmenu i3status ];
+  # };
+
+  programs.mosh.enable = true;
+  programs.fish.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    home-manager
+
+    # Tools
+    fd
+    jq
+    ripgrep
+    xclip
+    neofetch
+    gparted
+
+    # Graphics
+    glxinfo
+    ocl-icd
+    clinfo
+    renderdoc
+
+    xscreensaver
+
+    # Editors
+    vim
+    kakoune
+
+    # Version control
+    git
+    gh
+
+    # Crypto
+    gnupg
+    pinentry-gnome
+
+    python3
+
+    # JavaScript
+    nodejs
+    nodePackages.npm
+    nodePackages.yarn
+
+    google-chrome
+    firefox
+
+    # Send files
+    croc
+
+    # Networking
+    iperf3
+    dogdns
+    openssl
+    dnsutils
+    nftables
+    openvpn
+    wireguard-tools
+
+    # VM
+    xorg.xf86videovmware
+  ];
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "21.11"; # Did you read the comment?
+}

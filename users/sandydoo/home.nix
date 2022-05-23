@@ -26,7 +26,26 @@ with lib.hm.gvariant;
   services.xscreensaver.enable = true;
   services.xscreensaver.settings.mode = "blank";
 
-  services.picom.enable = true;
+  programs.rofi.enable = true;
+
+  programs.i3status = {
+    enable = true;
+
+    general = {
+      colors = true;
+      color_good = "#8C9440";
+      color_bad = "#A54242";
+      color_degraded = "#DE935F";
+    };
+
+    modules = {
+      ipv6.enable = false;
+      "wireless _first_".enable = false;
+      "battery all".enable = false;
+    };
+  };
+  
+  services.picom.enable = false;
   services.picom.extraOptions = ''
     corner-radius: 15;
   '';
@@ -35,6 +54,13 @@ with lib.hm.gvariant;
 
   home.sessionVariables = { EDITOR = "kak"; };
 
+  # Disable this helper script on flake-based machines.
+  # programs.command-not-found.enable = false;
+  programs.nix-index.enable = true;
+  programs.nix-index.enableBashIntegration = true;
+  programs.nix-index.enableFishIntegration = true;
+
+  programs.kitty.enable = true;
   programs.alacritty.enable = true;
   programs.alacritty.settings = {
     import = [ "/etc/nixos/alacritty/ayu_dark.yaml" ];
@@ -43,25 +69,25 @@ with lib.hm.gvariant;
       padding.y = 5;
     };
 
-    font = {
-      normal = {
-        family = "IBM Plex Mono";
-        style = "Regular";
-      };
-      bold = {
-        family = "IBM Plex Mono";
-        style = "Bold";
-      };
-      italic = {
-        family = "IBM Plex Mono";
-        style = "Italic";
-      };
-      bold_italic = {
-        family = "IBM Plex Mono";
-        style = "Bold Italic";
-      };
-      size = 8.0;
-    };
+    # font = {
+    #   normal = {
+    #     family = "";
+    #     style = "Regular";
+    #   };
+    #   bold = {
+    #     family = "IBM Plex Mono";
+    #     style = "Bold";
+    #   };
+    #   italic = {
+    #     family = "IBM Plex Mono";
+    #     style = "Italic";
+    #   };
+    #   bold_italic = {
+    #     family = "IBM Plex Mono";
+    #     style = "Bold Italic";
+    #   };
+    #   size = 8.0;
+    # };
 
     live_config_reload = true;
   };
@@ -113,7 +139,6 @@ with lib.hm.gvariant;
     [ vscode-extensions.ms-vscode-remote.remote-ssh ];
 
   programs.gpg.enable = true;
-
   programs.gpg.settings = {
     # Use ASCII armored output instead of binary
     armor = true;

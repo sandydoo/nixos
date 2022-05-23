@@ -14,7 +14,7 @@
       user = "sandydoo";
     };
     displayManager.lightdm.enable = true;
-    displayManager.lightdm.greeters.pantheon.enable = true;
+    # displayManager.lightdm.greeters.pantheon.enable = true;
 
     windowManager.i3.enable = true;
     windowManager.i3.package = pkgs.i3-gaps;
