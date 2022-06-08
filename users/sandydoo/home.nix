@@ -135,8 +135,10 @@ with lib.hm.gvariant;
   };
 
   programs.vscode.enable = true;
-  programs.vscode.extensions = with pkgs;
-    [ vscode-extensions.ms-vscode-remote.remote-ssh ];
+  # Workaround for https://github.com/nix-community/home-manager/issues/2798
+  programs.vscode.mutableExtensionsDir = false;
+  programs.vscode.extensions = with pkgs.vscode-extensions;
+    [ ms-vscode-remote.remote-ssh ];
 
   programs.gpg.enable = true;
   programs.gpg.settings = {
