@@ -128,11 +128,15 @@ with lib.hm.gvariant;
         quotepath = "off";
       };
       init.defaultBranch = "main";
-      pull.ff = "simple";
-      push.default = "simple";
+      merge.ff = "no";
+      pull.ff = "only";
+      push.default = "current";
+      tag.gpgSign = true;
     };
     ignores = [ ".DS_Store" ];
   };
+
+  programs.git.difftastic.enable = true;
 
   programs.vscode.enable = true;
   # Workaround for https://github.com/nix-community/home-manager/issues/2798
