@@ -5,12 +5,14 @@ with lib.hm.gvariant;
 {
   programs.home-manager.enable = true;
 
-  # home.packages = with pkgs; [
+  home.packages = with pkgs; [
+    latest.neovim
+
   #   gnome3.gnome-tweak-tool
   #   gnomeExtensions.appindicator
   #   gnomeExtensions.dash-to-dock
   #   gnome.dconf-editor
-  # ];
+  ];
 
   # dconf.settings = {
   #     "org/gnome/desktop/session" = {
