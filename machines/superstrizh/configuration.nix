@@ -41,19 +41,19 @@
 
   nix.package = unstable.nix;
 
-  nix.registry.nixpkgs.flake = nixpkgs;
-  nix.registry.unstable.flake = nix-unstable;
+  nix.registry.stable.flake = nixpkgs;
+  nix.registry.latest.flake = nix-unstable;
 
-  nix.binaryCaches = [
-    "https://cache.nixos.org"
-    "https://nix-community.cachix.org"
-    "https://iohk.cachix.org"
-  ];
-
-  nix.binaryCachePublicKeys = [
+  nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
+    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+  ];
+
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://nix-community.cachix.org"
+    "https://cache.iog.io"
   ];
 
   nix.extraOptions = ''
@@ -72,6 +72,11 @@
 
   # Allow proprietary packages.
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
+  nixpkgs.overlays = [
+    (import ../../overlays)
+    (final: prev: { latest = unstable; })
+  ];
 
   users.mutableUsers = false;
 
