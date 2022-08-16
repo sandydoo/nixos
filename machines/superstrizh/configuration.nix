@@ -118,6 +118,8 @@
   #   # windowManager.i3.extraPackages = with pkgs; [ dmenu i3status ];
   # };
 
+  services.vscode-server.enable = true;
+
   programs.mosh.enable = true;
   programs.fish.enable = true;
   programs.gnupg.agent = {
