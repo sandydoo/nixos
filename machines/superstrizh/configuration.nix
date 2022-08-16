@@ -186,6 +186,7 @@
     croc
 
     # Networking
+    mtr
     iperf3
     dogdns
     openssl
