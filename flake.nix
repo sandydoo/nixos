@@ -4,9 +4,10 @@
     nix-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = { self, nixpkgs, nix-unstable, home-manager }@inputs:
+  outputs = { self, nixpkgs, nix-unstable, home-manager, vscode-server }@inputs:
     let system = "x86_64-linux";
     in {
       formatter.${system} = nix-unstable.legacyPackages.${system}.nixfmt;
@@ -15,6 +16,7 @@
         inherit system;
 
         modules = [
+          vscode-server.nixosModule
           ./machines/superstrizh/configuration.nix
           ./users/sandydoo.nix
           # ./gnome.nix
