@@ -129,7 +129,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages =
+    let
+      haskell-language-server-custom = pkgs.latest.haskell-language-server.override {
+        supportedGhcVersions = [ "8107" "902" "923" ];
+      };
+    in with pkgs; [
     home-manager
 
     # Tools
@@ -166,6 +171,13 @@
     nodejs
     nodePackages.npm
     nodePackages.yarn
+
+    # Haskell
+    latest.stack
+    latest.cabal-install
+    haskell-language-server-custom
+    latest.hlint
+    latest.ormolu
 
     google-chrome
     firefox
