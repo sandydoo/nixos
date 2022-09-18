@@ -51,6 +51,11 @@
 
   nix.registry.stable.flake = nixpkgs;
   nix.registry.latest.flake = nix-unstable;
+  nix.nixPath = [
+    "nixpkgs=${pkgs.path}"
+    "stable=${pkgs.path}"
+    "latest=${unstable.path}"
+  ];
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
