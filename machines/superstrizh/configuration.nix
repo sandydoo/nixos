@@ -18,7 +18,8 @@
     "net.ipv6.conf.all.forwarding" = true;
   };
 
-  hardware.video.hidpi.enable = true;
+  # systemd-boot.consoleMode "1" throws errors in VMWare
+  hardware.video.hidpi.enable = false;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.setLdLibraryPath = true;
