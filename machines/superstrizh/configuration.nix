@@ -129,6 +129,17 @@
 
   services.eternal-terminal.enable = true;
   programs.mosh.enable = true;
+  programs.tmux.enable = true;
+  programs.tmux.plugins = with pkgs.tmuxPlugins; [
+    sensible
+    pain-control
+    resurrect
+    continuum
+    sidebar
+    prefix-highlight
+    tmux-thumbs
+  ];
+
   programs.fish.enable = true;
   programs.gnupg.agent = {
     enable = true;
