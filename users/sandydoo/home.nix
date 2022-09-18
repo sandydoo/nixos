@@ -62,6 +62,9 @@ with lib.hm.gvariant;
   programs.nix-index.enableBashIntegration = true;
   programs.nix-index.enableFishIntegration = true;
 
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
+
   programs.kitty.enable = true;
   programs.alacritty.enable = true;
   programs.alacritty.settings = {
