@@ -5,7 +5,7 @@
     isNormalUser = true;
     home = "/home/sandydoo";
     description = "Sander";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" "postgres" ];
     shell = pkgs.fish;
     hashedPassword = "$6$0v8AhbJr0C8TH5Dq$dsxXIZGLgoL2thXhBBPlCiiSiWKo.MZxIHX.9j71ZeHwQcm.rdXQZXtP.acuXXD4A7ifUexMuIzCkUNG5LUWO1";
     openssh.authorizedKeys.keys = [

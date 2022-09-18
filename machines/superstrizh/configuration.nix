@@ -33,6 +33,8 @@
   virtualisation.vmware.guest.enable = true;
   virtualisation.vmware.guest.headless = false;
 
+  virtualisation.docker.enable = true;
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
