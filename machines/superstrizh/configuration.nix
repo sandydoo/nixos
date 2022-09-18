@@ -164,7 +164,7 @@
     let
       haskell-language-server-custom = pkgs.haskell-language-server.override {
         dynamic = true;
-        supportedGhcVersions = [ "8107" "902" "923" ];
+        supportedGhcVersions = [ "8107" "902" "923" "924" ];
       };
     in with pkgs; [
     home-manager
