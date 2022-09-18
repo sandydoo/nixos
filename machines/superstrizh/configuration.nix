@@ -150,7 +150,8 @@
   # $ nix search wget
   environment.systemPackages =
     let
-      haskell-language-server-custom = pkgs.latest.haskell-language-server.override {
+      haskell-language-server-custom = pkgs.haskell-language-server.override {
+        dynamic = true;
         supportedGhcVersions = [ "8107" "902" "923" ];
       };
     in with pkgs; [
@@ -192,11 +193,11 @@
     nodePackages.yarn
 
     # Haskell
-    latest.stack
-    latest.cabal-install
+    stack
+    cabal-install
+    hlint
+    ormolu
     haskell-language-server-custom
-    latest.hlint
-    latest.ormolu
 
     google-chrome
     firefox
