@@ -1,10 +1,10 @@
 { config, nix-unstable, unstable, ... }:
 
 {
-  disabledModules = [ "services/networking/tailscale.nix" ];
+  # disabledModules = [ "services/networking/tailscale.nix" ];
 
-  imports =
-    [ "${nix-unstable}/nixos/modules/services/networking/tailscale.nix" ];
+  # imports =
+  #   [ "${nix-unstable}/nixos/modules/services/networking/tailscale.nix" ];
 
   services.tailscale = {
     enable = true;
