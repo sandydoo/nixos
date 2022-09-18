@@ -64,8 +64,8 @@
   ];
 
   nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
+    keep-outputs = false
+    keep-derivations = false
     min-free = ${toString (1024 * 1024 * 1024)}
     experimental-features = nix-command flakes
   '';
