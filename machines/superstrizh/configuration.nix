@@ -33,6 +33,10 @@
   networking.interfaces.ens33.useDHCP = true;
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
+  networking.nat.enable = true;
+  networking.nat.internalInterfaces = [ "ve-*" ];
+  networking.nat.externalInterface = "ens33";
+
   # Disable the firewall for now.
   networking.firewall.enable = false;
 
