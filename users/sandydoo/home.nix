@@ -129,7 +129,7 @@ with lib.hm.gvariant;
     };
     extraConfig = {
       core = {
-        editor = "kak";
+        editor = "nvim";
         quotepath = "off";
       };
       init.defaultBranch = "main";
@@ -137,6 +137,15 @@ with lib.hm.gvariant;
       pull.ff = "only";
       push.default = "current";
       tag.gpgSign = true;
+      alias = {
+        last = "log -1 HEAD";
+        graph = "log --graph --format='%C(auto) %h %s'";
+        p = "switch -";
+        st = "status";
+        staged = "diff --staged";
+        undo = "reset HEAD~";
+        unstage = "reset HEAD --";
+      };
     };
     ignores = [ ".DS_Store" ];
   };
