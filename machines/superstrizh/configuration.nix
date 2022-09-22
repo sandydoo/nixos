@@ -139,6 +139,7 @@
   # };
 
   services.vscode-server.enable = true;
+  services.lorri.enable = true;
 
   services.eternal-terminal.enable = true;
   programs.mosh.enable = true;
