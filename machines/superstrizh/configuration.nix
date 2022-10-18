@@ -181,6 +181,7 @@
     xclip
     neofetch
     gparted
+    ncdu
 
     # Graphics
     glxinfo
