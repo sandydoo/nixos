@@ -76,6 +76,8 @@
     "https://cache.iog.io"
   ];
 
+  nix.settings.system-features = ["kvm" "big-parallel"];
+
   nix.extraOptions = ''
     keep-outputs = false
     keep-derivations = false
