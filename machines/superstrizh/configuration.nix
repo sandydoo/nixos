@@ -109,10 +109,16 @@
     permitRootLogin = "no";
     extraConfig = ''
       StreamLocalBindUnlink yes
+      AcceptEnv COLORTERM
     '';
   };
 
   services.sshd.enable = true;
+
+  programs.ssh.extraConfig = ''
+    SendEnv LANG LC_*
+    SendEnv COLORTERM
+  '';
 
   # services.xserver = {
   #   enable = true;
