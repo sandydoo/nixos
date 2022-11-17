@@ -9,16 +9,16 @@
   };
 
   outputs = { self, nixpkgs, nix-unstable, home-manager, vscode-server }@inputs:
-    let system = "x86_64-linux";
+    let system = "aarch64-linux";
     in {
       formatter.${system} = nix-unstable.legacyPackages.${system}.nixfmt;
 
-      nixosConfigurations.superstrizh = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
 
         modules = [
           vscode-server.nixosModule
-          ./machines/superstrizh/configuration.nix
+          ./machines/nixos/configuration.nix
           ./users/sandydoo.nix
           # ./gnome.nix
           ./i3.nix
