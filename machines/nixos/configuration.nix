@@ -64,6 +64,7 @@
     "latest=${unstable.path}"
   ];
 
+  nix.settings.trusted-users = [ "root" "sandydoo" ];
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     "cachix-private.cachix.org-1:3axMmTI11ok4U2nMmWX8MZsRLmQzQBuRdOJ0EszhPuY="
