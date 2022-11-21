@@ -91,8 +91,8 @@
   nix.autoOptimiseStore = true;
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 60d";
+    dates = "monthly";
+    options = "--delete-older-than 180d";
   };
 
   # Allow proprietary packages.
@@ -183,6 +183,7 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    pinentryFlavor = "curses";
   };
 
   # List packages installed in system profile. To search, run:
@@ -224,6 +225,7 @@
 
     # Crypto
     gnupg
+    pinentry-curses
     pinentry-gnome
 
     python3
