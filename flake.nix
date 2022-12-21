@@ -1,8 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
-    nix-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nix-unstable.url = "github:NixOS/nixpkgs/6e51c97f1c849efdfd4f3b78a4870e6aa2da4198";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,8 +20,8 @@
           vscode-server.nixosModule
           ./machines/nixos/configuration.nix
           ./users/sandydoo.nix
-          # ./gnome.nix
-          ./i3.nix
+          ./gnome.nix
+          # ./i3.nix
           ./modules/tailscale.nix
           home-manager.nixosModules.home-manager
           {
@@ -41,6 +41,7 @@
           unstable = import nix-unstable {
             inherit system;
             config.allowUnfree = true;
+            config.allowBroken = true;
           };
         };
       };

@@ -13,7 +13,7 @@
     };
   };
 
-  services.dbus.packages = [ pkgs.gnome.dconf ];
+  services.dbus.packages = [ pkgs.dconf ];
   services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
 
   programs.xwayland.enable = false;
