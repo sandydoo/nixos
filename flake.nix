@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nix-unstable.url = "github:NixOS/nixpkgs/6e51c97f1c849efdfd4f3b78a4870e6aa2da4198";
+    nixpkgs.url = "github:NixOS/nixpkgs/22.11-beta";
+    nix-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:msteen/nixos-vscode-server";
