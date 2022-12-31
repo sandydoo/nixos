@@ -1,10 +1,10 @@
 
 {
-  nix = {
-    binaryCaches = [
+  nix.settings = {
+    substituters = [
       "https://cachix-test.cachix.org"
     ];
-    binaryCachePublicKeys = [
+    trusted-public-keys = [
       "cachix-test.cachix.org-1:vBABBNe24kTznC3irYprL3w12YYqpd3OqLnsnLeiCRg="
     ];
   };
