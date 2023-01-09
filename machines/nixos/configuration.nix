@@ -25,7 +25,6 @@
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.setLdLibraryPath = true;
-  # hardware.opengl.extraPackages = [ pkgs.intel-ocl ];
 
   networking.hostName = "nixos";
 
@@ -43,7 +42,9 @@
   networking.firewall.enable = false;
 
   virtualisation.docker.enable = true;
-  
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
+
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
   # services.spice-webdavd.enable = true;
@@ -194,7 +195,7 @@
     let
       haskell-language-server-custom = pkgs.haskell-language-server.override {
         dynamic = true;
-        supportedGhcVersions = [ "8107" "902" "923" "924" ];
+        supportedGhcVersions = [ "8107" "902" "924" "925" ];
       };
     in with pkgs; [
     home-manager
@@ -233,16 +234,25 @@
     python3
 
     # JavaScript
-    nodejs
+    nodejs-16_x
     nodePackages.npm
     nodePackages.yarn
+    nodePackages.vscode-json-languageserver
+
+    # Nix
+    nil
 
     # Haskell
     stack
     cabal-install
     hlint
-    ormolu
+    latest.ormolu
     haskell-language-server-custom
+
+    # Elm
+    elmPackages.elm
+    elmPackages.elm-language-server
+    elmPackages.elm-format
 
     # google-chrome
     firefox
