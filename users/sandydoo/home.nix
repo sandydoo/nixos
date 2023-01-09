@@ -168,6 +168,8 @@ with lib.hm.gvariant;
 
     keyserver = "hkps://keys.openpgp.org";
     use-agent = true;
+
+    default-key = "F4869E8B85ED07AC611E2EAF171257C9C397032E";
   };
 
   programs.bat.enable = true;
