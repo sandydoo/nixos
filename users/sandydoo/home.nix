@@ -48,7 +48,7 @@ with lib.hm.gvariant;
   };
   
   services.picom.enable = false;
-  services.picom.extraOptions = ''
+  services.picom.settings = ''
     corner-radius: 15;
   '';
   # services.polybar.enable = true;
@@ -181,4 +181,6 @@ with lib.hm.gvariant;
     enable = true;
     enableFishIntegration = true;
   };
+
+  home.stateVersion = "22.11";
 }
