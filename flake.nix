@@ -8,7 +8,7 @@
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nix-unstable, home-manager, vscode-server }@inputs:
+  outputs = { self, nixpkgs, nix-unstable, home-manager, vscode-server, ... }@inputs:
     let system = "aarch64-linux";
     in {
       formatter.${system} = nix-unstable.legacyPackages.${system}.nixfmt;
@@ -24,17 +24,6 @@
           # ./i3.nix
           ./modules/tailscale.nix
           home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.sandydoo = import ./users/sandydoo/home.nix;
-          }
-          {
-            # Let 'nixos-version --json' know about the Git revision
-            # of this flake.
-            system.configurationRevision =
-              nixpkgs.lib.mkIf (self ? rev) self.rev;
-          }
         ];
 
         specialArgs = inputs // {

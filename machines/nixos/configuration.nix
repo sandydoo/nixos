@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, nixpkgs, nix-unstable, ... }:
+{ config, lib, pkgs, unstable, inputs, nixpkgs, nix-unstable, ... }:
 
 {
   # Include the results of the hardware scan.
@@ -57,8 +57,11 @@
 
   nix.package = unstable.nix;
 
-  nix.registry.stable.flake = nixpkgs;
-  nix.registry.latest.flake = nix-unstable;
+  nix.registry = {
+    stable.flake = inputs.nixpkgs;
+    latest.flake = inputs.nix-unstable;
+    nix-config.flake = inputs.self;
+  };
   nix.nixPath = [
     "nixpkgs=${pkgs.path}"
     "stable=${pkgs.path}"
@@ -106,6 +109,11 @@
     (import ../../overlays)
     (final: prev: { latest = unstable; })
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 
   users.mutableUsers = false;
 
@@ -271,15 +279,21 @@
     wireguard-tools
 
     # VM
+    # Graphics driver for QEMU guests
+    virglrenderer
     # xorg.xf86videovmware
 
     # Clipboard
     gtkmm3
-    
+
     (writeShellScriptBin "xrandr-auto" ''
       xrandr --output Virtual-1 --auto
     '')
   ];
+
+  # Let 'nixos-version --json' know about the Git revision
+  # of this flake.
+  system.configurationRevision = lib.mkIf (inputs.self ? rev) inputs.self.rev;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
