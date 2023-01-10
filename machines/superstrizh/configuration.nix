@@ -85,7 +85,7 @@
     experimental-features = nix-command flakes
   '';
 
-  nix.autoOptimiseStore = true;
+  nix.settings.auto-optimise-store = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -174,7 +174,7 @@
     let
       haskell-language-server-custom = pkgs.haskell-language-server.override {
         dynamic = true;
-        supportedGhcVersions = [ "8107" "902" "923" "924" ];
+        supportedGhcVersions = [ "8107" "902" "924" "925" ];
       };
     in with pkgs; [
     home-manager
