@@ -257,7 +257,7 @@
     stack
     cabal-install
     hlint
-    latest.ormolu
+    ormolu
     haskell-language-server-custom
 
     # Elm
