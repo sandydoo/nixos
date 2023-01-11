@@ -135,6 +135,9 @@
     SendEnv COLORTERM
   '';
 
+  # See: https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   services.xserver = {
     enable = true;
     layout = "us";
