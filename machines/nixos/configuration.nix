@@ -32,7 +32,15 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp0s1.useDHCP = true;
+  networking.interfaces.enp0s1 = {
+    useDHCP = true;
+    ipv4.addresses = [
+      {
+        address = "192.168.64.2";
+        prefixLength = 24;
+      }
+    ];
+  };
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
   networking.nat.enable = true;
