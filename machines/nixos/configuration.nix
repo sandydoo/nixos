@@ -224,6 +224,7 @@
     fd
     jq
     ripgrep
+    killall
     xclip
     neofetch
     gparted
@@ -240,6 +241,7 @@
     # Editors
     vim
     kakoune
+    helix
 
     # Version control
     git
@@ -272,6 +274,9 @@
     elmPackages.elm
     elmPackages.elm-language-server
     elmPackages.elm-format
+
+    # Lua (for neovim configs)
+    sumneko-lua-language-server
 
     # google-chrome
     firefox
