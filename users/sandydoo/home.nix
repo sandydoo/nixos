@@ -153,6 +153,8 @@ with lib.hm.gvariant;
   programs.git.difftastic.enable = true;
 
   programs.vscode.enable = true;
+  # Workaround for https://github.com/nix-community/home-manager/issues/2798
+  programs.vscode.mutableExtensionsDir = false;
   programs.vscode.extensions = with pkgs.vscode-extensions;
     [ ms-vscode-remote.remote-ssh ];
 
