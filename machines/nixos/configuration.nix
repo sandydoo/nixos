@@ -272,6 +272,7 @@
     # Haskell
     stack
     cabal-install
+    ghc
     hlint
     ormolu
     haskell-language-server-custom
