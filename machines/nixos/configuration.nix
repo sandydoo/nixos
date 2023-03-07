@@ -49,6 +49,11 @@
 
   networking.firewall.enable = false;
 
+  networking.extraHosts = ''
+    127.0.0.3 cachix-development.nixos
+    127.0.0.4 api.nixos
+  '';
+
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
