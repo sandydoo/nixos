@@ -123,8 +123,9 @@
     (final: prev: { latest = unstable; })
   ];
 
-  home-manager.useGlobalPkgs = true;
+
   home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
   home-manager.extraSpecialArgs = { inherit inputs; };
   home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 

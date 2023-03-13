@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, nixpkgs, nix-unstable, ... }:
+{ config, pkgs, inputs, unstable, nixpkgs, nix-unstable, ... }:
 
 {
   # Include the results of the hardware scan.
@@ -109,6 +109,11 @@
     (import ../../overlays)
     (final: prev: { latest = unstable; })
   ];
+
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 
   users.mutableUsers = false;
 

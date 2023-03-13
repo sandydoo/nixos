@@ -6,8 +6,8 @@ with lib.hm.gvariant;
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    latest.neovim
-    latest.helix
+    neovim
+    helix
 
   #   gnome3.gnome-tweak-tool
   #   gnomeExtensions.appindicator
