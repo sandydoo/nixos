@@ -26,17 +26,22 @@
   hardware.opengl.extraPackages = [ pkgs.intel-ocl ];
 
   networking.hostName = "superstrizh";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.ens33.useDHCP = true;
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
+  networking.hosts = {
+    "127.0.0.2" = [ "superstrizh" "test.superstrizh" "api.superstrizh" "app.superstrizh" ];
+  };
 
   networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "ve-*" ];
   networking.nat.externalInterface = "ens33";
+
+  # Bridge for VMs
+  networking.bridges = {
+    # br0.interfaces = ["ens33"] ;
+    # virbr0.interfaces = [];
+  };
+  # networking.interfaces.virbr0.useDHCP = true;
 
   # Disable the firewall for now.
   networking.firewall.enable = false;
@@ -45,6 +50,9 @@
   virtualisation.vmware.guest.headless = false;
 
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
+  programs.dconf.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -62,6 +70,8 @@
     "latest=${unstable.path}"
   ];
 
+  nix.trustedUsers = [ "root" "@wheel" ];
+
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     "cachix-private.cachix.org-1:3axMmTI11ok4U2nMmWX8MZsRLmQzQBuRdOJ0EszhPuY="
@@ -76,7 +86,7 @@
     "https://cache.iog.io"
   ];
 
-  nix.settings.system-features = ["kvm" "big-parallel"];
+  nix.settings.system-features = [ "big-parallel" "kvm" "nixos-test" ];
 
   nix.extraOptions = ''
     keep-outputs = false
@@ -146,6 +156,12 @@
   #   # windowManager.i3.extraPackages = with pkgs; [ dmenu i3status ];
   # };
 
+  # Serve the store as a binary cache
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/cache-priv-key.pem";
+  };
+
   services.vscode-server.enable = true;
   services.lorri.enable = true;
 
@@ -176,15 +192,26 @@
         dynamic = true;
         supportedGhcVersions = [ "8107" "902" "924" "925" ];
       };
+
+      typescript-language-server = pkgs.symlinkJoin {
+        name = "typescript-language-server";
+        paths = [ pkgs.nodePackages.typescript-language-server ];
+        buildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/typescript-language-server \
+            --add-flags --tsserver-path=${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/
+        '';
+      };
     in with pkgs; [
     home-manager
     cachix
 
     # Tools
+    killall
     fd
     jq
     ripgrep
-    xclip
+    xsel
     neofetch
     gparted
     ncdu
@@ -209,12 +236,28 @@
     gnupg
     pinentry-gnome
 
+    # C
+    gnumake
+    cmake
+    gcc
+
+    # Python
     python3
 
     # JavaScript
     nodejs
     nodePackages.npm
     nodePackages.yarn
+
+    # TypeScript
+    nodePackages.typescript
+    typescript-language-server
+
+    # Lua
+    sumneko-lua-language-server
+
+    # JSON
+    nodePackages.vscode-langservers-extracted
 
     # Haskell
     stack
@@ -241,6 +284,7 @@
 
     # VM
     xorg.xf86videovmware
+    virt-manager
   ];
 
   # This value determines the NixOS release from which the default

@@ -7,6 +7,7 @@ with lib.hm.gvariant;
 
   home.packages = with pkgs; [
     latest.neovim
+    latest.helix
 
   #   gnome3.gnome-tweak-tool
   #   gnomeExtensions.appindicator
@@ -167,10 +168,15 @@ with lib.hm.gvariant;
     keyid-format = "0xlong";
 
     keyserver = "hkps://keys.openpgp.org";
+
     use-agent = true;
 
     default-key = "F4869E8B85ED07AC611E2EAF171257C9C397032E";
+
+    no-autostart = true;
   };
+
+  services.gpg-agent.enable = true;
 
   programs.bat.enable = true;
 
