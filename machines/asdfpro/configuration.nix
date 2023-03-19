@@ -71,6 +71,7 @@ in
 
     gnupg
     pinentry
+    pinentry_mac
     blackbox
 
     cmus
