@@ -227,6 +227,9 @@
     home-manager
     cachix
 
+    # Development
+    gdb
+
     # Tools
     fd
     jq
