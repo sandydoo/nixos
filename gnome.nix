@@ -3,15 +3,15 @@
 {
   services.xserver = {
     enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.defaultSession = "gnome";
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
     displayManager.gdm.autoSuspend = false;
+    displayManager.defaultSession = "gnome";
     displayManager.autoLogin = {
       enable = true;
       user = "sandydoo";
     };
+    desktopManager.gnome.enable = true;
   };
 
   # services.dbus.packages = [ pkgs.dconf ];

@@ -123,7 +123,6 @@
     (final: prev: { latest = unstable; })
   ];
 
-
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.extraSpecialArgs = { inherit inputs; };
@@ -151,45 +150,6 @@
 
   # See: https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
-
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    # dpi = 220;
-
-    resolutions = [
-      { x = 3840; y = 2160; }
-    ];
-  #   desktopManager.gnome.enable = true;
-  #   displayManager = {
-  #     gdm.enable = true;
-  #     autoLogin = {
-  #       enable = true;
-  #       user = "sandydoo";
-  #     };
-  #   };
-  #   # desktopManager.xterm.enable = false;
-
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm.enable = true;
-     
-      sessionCommands = ''
-        ${pkgs.xorg.xset}/bin/xset r rate 200 40
-        ${pkgs.xorg.xrandr}/bin/xrandr -s '2880x1800'
-      '';
-    };
-  #   # displayManager.autoLogin = {
-  #   #   enable = false;
-  #   #   user = "sandydoo";
-  #   # };
-  #   # displayManager.lightdm.enable = true;
-  #   # # displayManager.lightdm.greeters.pantheon.enable = true;
-
-  #   # windowManager.i3.enable = true;
-  #   # windowManager.i3.package = pkgs.i3-gaps;
-  #   # windowManager.i3.extraPackages = with pkgs; [ dmenu i3status ];
-  };
 
   services.vscode-server.enable = true;
   services.lorri.enable = true;
@@ -228,17 +188,20 @@
     cachix
 
     # Development
+    binutils
     gdb
+    strace
 
     # Tools
-    fd
-    jq
-    ripgrep
+    fd                      # Find files
+    jq                      # Handle JSON
+    ripgrep                 # Replace grep
     killall
-    xclip
+    xclip                   # Copy to clipboard
     neofetch
     gparted
     ncdu
+    comma                   # Run programs without installing them
 
     # Graphics
     glxinfo
@@ -250,19 +213,20 @@
 
     # Editors
     vim
-    kakoune
-    helix
 
     # Version control
     git
-    gh
+    git-absorb              # git commit --fixup, but automatic
+    gh                      # GitHub CLI
 
     # Crypto
     gnupg
     pinentry-curses
     pinentry-gnome
 
+    # Python
     python3
+    python3.pkgs.black      # Format python code
 
     # JavaScript
     nodejs-16_x
@@ -272,6 +236,10 @@
 
     # Nix
     nil
+    nix-prefetch
+
+    # Shell
+    shfmt                   # Format shell scripts
 
     # Haskell
     stack

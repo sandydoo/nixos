@@ -6,30 +6,21 @@ with lib.hm.gvariant;
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    # Editors
     latest.neovim
+    kakoune
     helix
 
-    # Set terminal colors
-    vivid
-
-  #   gnome3.gnome-tweak-tool
-  #   gnomeExtensions.appindicator
-  #   gnomeExtensions.dash-to-dock
-  #   gnome.dconf-editor
+    # Terminal
+    vivid         # Set terminal colors with LS_COLORS
   ];
-
-  # dconf.settings = {
-  #     "org/gnome/desktop/session" = {
-  #         "idle-delay" = mkUint32 0;
-  #     };
-  # };
 
   # xsession.enable = true;
   # xsession.initExtra = ''
   #   ${pkgs.xscreensaver}/bin/xscreensaver -no-splash &
   # '';
 
-  services.xscreensaver.enable = true;
+  services.xscreensaver.enable = false;
   services.xscreensaver.settings.mode = "blank";
 
   programs.rofi.enable = true;
@@ -195,6 +186,9 @@ with lib.hm.gvariant;
     enable = true;
     enableFishIntegration = true;
   };
+
+  # Sync files between machines
+  services.syncthing.enable = false;
 
   home.stateVersion = "22.11";
 }
