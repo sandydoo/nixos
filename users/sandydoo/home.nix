@@ -9,6 +9,9 @@ with lib.hm.gvariant;
     latest.neovim
     helix
 
+    # Set terminal colors
+    vivid
+
   #   gnome3.gnome-tweak-tool
   #   gnomeExtensions.appindicator
   #   gnomeExtensions.dash-to-dock
@@ -109,6 +112,9 @@ with lib.hm.gvariant;
 
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      set -x LS_COLORS (vivid generate gruvbox-light)
+    '';
     plugins = [{
       name = "pure";
       src = pkgs.fetchFromGitHub {
