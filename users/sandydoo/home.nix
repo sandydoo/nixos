@@ -120,8 +120,8 @@ with lib.hm.gvariant;
       src = pkgs.fetchFromGitHub {
         owner = "pure-fish";
         repo = "pure";
-        rev = "v3.5.0";
-        sha256 = "0nr97z138v93lmvi4zh4h09gi5mzaxk4j6rk4x3calk0vjgfw7qs";
+        rev = "v4.4.1";
+        sha256 = "sha256-2b2/LZXSchHnPKyjwAcR/oCY38qJ/7Dq8cJHrJmdjoc=";
       };
     }];
   };
