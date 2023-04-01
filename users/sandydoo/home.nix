@@ -6,7 +6,7 @@ with lib.hm.gvariant;
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    neovim
+    latest.neovim
     helix
 
   #   gnome3.gnome-tweak-tool
