@@ -284,7 +284,7 @@
     elmPackages.elm-format
 
     # Lua (for neovim configs)
-    sumneko-lua-language-server
+    latest.lua-language-server
 
     # google-chrome
     firefox

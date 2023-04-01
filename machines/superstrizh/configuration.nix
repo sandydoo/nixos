@@ -259,7 +259,7 @@
     typescript-language-server
 
     # Lua
-    sumneko-lua-language-server
+    latest.lua-language-server
 
     # JSON
     nodePackages.vscode-langservers-extracted
