@@ -101,10 +101,18 @@ with lib.hm.gvariant;
     };
   };
 
+  programs.bash.enable = true;
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
       set -x LS_COLORS (vivid generate gruvbox-light)
+      . $HOME/.homesick/repos/homeshick/homeshick.fish
+      source "$HOME/.homesick/repos/homeshick/completions/homeshick.fish"
+
+      # Integrate with iTerm2
+      test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
     '';
     plugins = [{
       name = "pure";
