@@ -50,8 +50,11 @@
   networking.firewall.enable = false;
 
   networking.extraHosts = ''
-    127.0.0.3 cachix-development.nixos
-    127.0.0.4 api.nixos
+    127.0.0.1 cachix-development.nixos
+    127.0.0.1 api.nixos
+    127.0.0.1 cachix
+    127.0.0.1 app.cachix
+    127.0.0.1 test.cachix
   '';
 
   virtualisation.docker.enable = true;
