@@ -49,7 +49,7 @@ with lib.hm.gvariant;
   # services.polybar.enable = true;
   # services.polybar.script = "polybar bar &";
 
-  home.sessionVariables = { EDITOR = "kak"; };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   # Disable this helper script on flake-based machines.
   # programs.command-not-found.enable = false;
