@@ -20,6 +20,7 @@ in
     difftastic
     neofetch
 
+    starship
     tmux
     kakoune
     kak-lsp
@@ -194,7 +195,6 @@ in
     fish_add_path --move --prepend --path /run/current-system/sw/bin /nix/var/nix/profiles/default/bin
   '';
   programs.nix-index.enable = true;
-  programs.starship.enable = true;
 
   security.pam.enableSudoTouchIdAuth = true;
 
