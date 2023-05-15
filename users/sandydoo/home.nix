@@ -127,22 +127,13 @@ with lib.hm.gvariant;
 
   programs.git = {
     enable = true;
-    userName = "sandydoo";
+    userName = "Sander";
     userEmail = "hey@sandydoo.me";
     signing = {
       key = "D1A763BC84F34603";
       signByDefault = true;
     };
     extraConfig = {
-      core = {
-        editor = "nvim";
-        quotepath = "off";
-      };
-      init.defaultBranch = "main";
-      merge.ff = "no";
-      pull.ff = "only";
-      push.default = "current";
-      tag.gpgSign = true;
       alias = {
         last = "log -1 HEAD";
         graph = "log --graph --format='%C(auto) %h %s'";
@@ -152,6 +143,16 @@ with lib.hm.gvariant;
         undo = "reset HEAD~";
         unstage = "reset HEAD --";
       };
+      branch.autosetuprebase = "always";
+      core = {
+        editor = "nvim";
+        quotepath = "off";
+      };
+      init.defaultBranch = "main";
+      merge.ff = "no";
+      pull.ff = "only";
+      push.default = "current";
+      tag.gpgSign = true;
     };
     ignores = [ ".DS_Store" ];
   };
