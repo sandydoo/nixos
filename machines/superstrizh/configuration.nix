@@ -128,8 +128,6 @@
     '';
   };
 
-  services.sshd.enable = true;
-
   programs.ssh.extraConfig = ''
     SendEnv LANG LC_*
     SendEnv COLORTERM

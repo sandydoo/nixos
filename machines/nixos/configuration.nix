@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
     ../../cachix.nix
   ];
-  
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -143,8 +143,6 @@
       AcceptEnv COLORTERM
     '';
   };
-
-  services.sshd.enable = true;
 
   programs.ssh.extraConfig = ''
     SendEnv LANG LC_*
