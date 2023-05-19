@@ -154,7 +154,7 @@ with lib.hm.gvariant;
       push.default = "current";
       tag.gpgSign = true;
     };
-    ignores = [ ".DS_Store" ];
+    ignores = [ ".DS_Store" ".nlsp-settings" ];
   };
 
   programs.git.difftastic.enable = true;
