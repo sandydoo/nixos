@@ -165,7 +165,6 @@
     secretKeyFile = "/var/cache-priv-key.pem";
   };
 
-  services.vscode-server.enable = true;
   services.lorri.enable = true;
 
   services.eternal-terminal.enable = true;

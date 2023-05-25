@@ -22,7 +22,6 @@
         system = "aarch64-linux";
 
         modules = [
-          vscode-server.nixosModule
           ./machines/nixos/configuration.nix
           ./users/sandydoo.nix
           ./gnome.nix

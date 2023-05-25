@@ -1,8 +1,12 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 
 with lib.hm.gvariant;
 
 {
+  imports = [
+    inputs.vscode-server.homeModules.default
+  ];
+
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
@@ -164,6 +168,10 @@ with lib.hm.gvariant;
   programs.vscode.mutableExtensionsDir = false;
   programs.vscode.extensions = with pkgs.vscode-extensions;
     [ ms-vscode-remote.remote-ssh ];
+
+  services.vscode-server.enable = true;
+  services.vscode-server.enableFHS = false;
+  services.vscode-server.installPath = "~/.vscode-server-insiders";
 
   programs.gpg.enable = true;
   programs.gpg.settings = {
