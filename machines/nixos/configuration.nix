@@ -107,7 +107,7 @@
     keep-outputs = false
     keep-derivations = false
     min-free = ${toString (1024 * 1024 * 1024)}
-    experimental-features = nix-command flakes
+    experimental-features = nix-command flakes auto-allocate-uids
   '';
 
   nix.settings.auto-optimise-store = true;
