@@ -24,6 +24,19 @@ with lib.hm.gvariant;
   #   ${pkgs.xscreensaver}/bin/xscreensaver -no-splash &
   # '';
 
+  xresources.extraConfig = ''
+    ! URXVT FONT SETTINGS
+    !------------------------------------------------
+    Xft.dpi: 180
+    Xft.autohint: true
+    Xft.antialias: true
+    Xft.hinting: true
+    Xft.hintstyle: hintslight
+    Xft.rgba: rgb
+    Xft.lcdfilter: lcddefault
+    xterm*faceName: monospace:pixelsize=18
+  '';
+
   services.xscreensaver.enable = false;
   services.xscreensaver.settings.mode = "blank";
 
