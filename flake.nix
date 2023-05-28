@@ -24,7 +24,7 @@
         modules = [
           ./machines/nixos/configuration.nix
           ./users/sandydoo.nix
-          ./gnome.nix
+          ./modules/i3.nix
           ./modules/tailscale.nix
           home-manager.nixosModules.home-manager
         ];
@@ -46,7 +46,7 @@
           vscode-server.nixosModule
           ./machines/superstrizh/configuration.nix
           ./users/sandydoo.nix
-          ./i3.nix
+          ./modules/i3.nix
           ./modules/tailscale.nix
           home-manager.nixosModules.home-manager
         ];

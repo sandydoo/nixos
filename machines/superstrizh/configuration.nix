@@ -4,7 +4,7 @@
   # Include the results of the hardware scan.
   imports = [
     ./hardware-configuration.nix
-    ../../cachix.nix
+    "${inputs.self}/modules/cachix.nix"
   ];
   
   # Use the systemd-boot EFI boot loader.
