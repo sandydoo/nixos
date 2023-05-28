@@ -7,10 +7,14 @@
     "${inputs.self}/modules/cachix.nix"
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 3;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Only mode 0 is suppored by VMWare
   boot.loader.systemd-boot.consoleMode = "0";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -20,7 +24,6 @@
     "net.ipv6.conf.all.forwarding" = true;
   };
 
-  # systemd-boot.consoleMode "1" throws errors in VMWare
   hardware.video.hidpi.enable = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
