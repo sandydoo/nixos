@@ -36,9 +36,9 @@
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp0s1 = {
-    useDHCP = true;
     ipv4.addresses = [
       {
+        # Configured by the macOS host. See README.md for details.
         address = "192.168.64.2";
         prefixLength = 24;
       }
