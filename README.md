@@ -12,6 +12,45 @@ nix build ./#darwinConfigurations.asdfPro.system
 ./result/sw/bin/darwin-rebuild switch --flake ./
 ```
 
+## Setting up VMs on a macOS host
+
+#### How do I change the default NAT subnet for VMs?
+
+```shell
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.vmnet.plist Shared_Net_Address -string 192.168.64.1
+```
+
+Restart the DHCP server:
+
+```shell
+sudo /bin/launchctl kickstart -kp system/com.apple.bootpd
+```
+
+#### How do I give a VM a static IP address?
+
+Note the MAC address of the VM's network interface. Then, add an entry to `/etc/bootptab`:
+
+```
+%%
+# hostname      hwtype  hwaddr              ipaddr          bootfile
+nixos           1       0A:1E:0E:51:29:4C   192.168.64.2
+```
+
+Restart the DHCP server:
+
+```shell
+sudo /bin/launchctl kickstart -kp system/com.apple.bootpd
+```
+
+#### I'm running out of IP addresses. How do I increase the number of VMs I can run?
+
+Reduce the lease time for DHCP leases. The default is 86400 seconds (24 hours). The following command will reduce it to 600 seconds (10 minutes):
+
+```
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist bootpd -dict DHCPLeaseTimeSecs -int 600
+```
+
+
 ## Maintenance
 
 ### Delete older generations
