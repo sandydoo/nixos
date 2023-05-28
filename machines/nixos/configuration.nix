@@ -139,8 +139,9 @@
   services.openssh = {
     enable = true;
     allowSFTP = true;
+    KbdInteractiveAuthentication = false;
     passwordAuthentication = false;
-    permitRootLogin = "no";
+    permitRootLogin = false;
     extraConfig = ''
       StreamLocalBindUnlink yes
       AcceptEnv COLORTERM
