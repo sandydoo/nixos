@@ -24,7 +24,6 @@
     "net.ipv6.conf.all.forwarding" = true;
   };
 
-  hardware.video.hidpi.enable = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.setLdLibraryPath = true;
@@ -139,13 +138,11 @@
   services.openssh = {
     enable = true;
     allowSFTP = true;
-    KbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
-    permitRootLogin = false;
-    extraConfig = ''
-      StreamLocalBindUnlink yes
-      AcceptEnv COLORTERM
-    '';
+    settings.KbdInteractiveAuthentication = true;
+    settings.PasswordAuthentication = false;
+    settings.PermitRootLogin = "no";
+    settings.StreamLocalBindUnlink = "yes";
+    settings.AcceptEnv = "COLORTERM";
   };
 
   programs.ssh.extraConfig = ''
@@ -239,7 +236,7 @@
     python3.pkgs.black      # Format python code
 
     # JavaScript
-    nodejs-16_x
+    nodejs
     nodePackages.npm
     nodePackages.yarn
     nodePackages.vscode-json-languageserver
