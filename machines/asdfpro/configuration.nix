@@ -117,7 +117,6 @@ in
     python3
 
     # Rust
-    rustup
     rust-analyzer
     zld
     # mold
