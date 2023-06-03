@@ -37,6 +37,8 @@ with lib.hm.gvariant;
     xterm*faceName: monospace:pixelsize=18
   '';
 
+  home.file.".config/sway/config".source = ./sway;
+
   services.xscreensaver.enable = false;
   services.xscreensaver.settings.mode = "blank";
 

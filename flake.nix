@@ -24,7 +24,7 @@
         modules = [
           ./machines/nixos/configuration.nix
           ./users/sandydoo.nix
-          ./modules/i3.nix
+          ./modules/sway.nix
           ./modules/tailscale.nix
           home-manager.nixosModules.home-manager
         ];
