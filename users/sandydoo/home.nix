@@ -76,6 +76,11 @@ with lib.hm.gvariant;
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  home.file.".config/direnv/direnv.toml".text = ''
+    [global]
+    strict_env = true
+    warn_timeout = "1h"
+  '';
 
   programs.kitty.enable = true;
   programs.alacritty.enable = true;
