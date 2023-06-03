@@ -236,6 +236,10 @@
     pinentry-curses
     pinentry-gnome
 
+    # C
+    gnumake
+    gcc
+
     # Python
     python3
     python3.pkgs.black      # Format python code
