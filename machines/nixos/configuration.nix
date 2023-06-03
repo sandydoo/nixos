@@ -7,17 +7,20 @@
     "${inputs.self}/modules/cachix.nix"
   ];
 
-  boot.loader.timeout = 3;
+  boot.loader.timeout = 2;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 10;
 
-  # Only mode 0 is suppored by VMWare
-  boot.loader.systemd-boot.consoleMode = "0";
+  # The default mode "1" is not suppored by VMWare
+  boot.loader.systemd-boot.consoleMode = "keep";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "video=Virtual-1:3024x1964@60" ];
+
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.forwarding" = true;
