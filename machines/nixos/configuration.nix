@@ -182,11 +182,6 @@
   ];
 
   programs.fish.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryFlavor = "curses";
-  };
   programs._1password.enable = true;
 
   # List packages installed in system profile. To search, run:
