@@ -195,7 +195,9 @@ with lib.hm.gvariant;
 
   programs.gpg.enable = true;
   programs.gpg.publicKeys = [
-    { source = "./hey@sandydoo.me.public.asc"; trust = "ultimate"; }
+    { source = ./hey-at-sandydoo.me.public.asc;
+      trust = "ultimate";
+    }
   ];
   programs.gpg.settings = {
     # Use ASCII armored output instead of binary
