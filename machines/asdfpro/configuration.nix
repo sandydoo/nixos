@@ -192,6 +192,9 @@ in
   # https://github.com/LnL7/nix-darwin/issues/122
   programs.fish.loginShellInit = ''
     fish_add_path --move --prepend --path /run/current-system/sw/bin /nix/var/nix/profiles/default/bin
+
+    # Add UTM and utmctl commands
+    fish_add_path /Applications/UTM.app/Contents/MacOS/
   '';
   programs.nix-index.enable = true;
 
