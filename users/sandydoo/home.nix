@@ -194,6 +194,9 @@ with lib.hm.gvariant;
   services.vscode-server.installPath = "~/.vscode-server-insiders";
 
   programs.gpg.enable = true;
+  programs.gpg.publicKeys = [
+    { source = "./hey@sandydoo.me.public.asc"; trust = "ultimate"; }
+  ];
   programs.gpg.settings = {
     # Use ASCII armored output instead of binary
     armor = true;
