@@ -180,10 +180,6 @@
   ];
 
   programs.fish.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
