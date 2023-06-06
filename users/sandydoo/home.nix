@@ -167,7 +167,7 @@ with lib.hm.gvariant;
         undo = "reset HEAD~";
         unstage = "reset HEAD --";
       };
-      branch.autosetuprebase = "always";
+      branch.autoSetupRebase = "always";
       core = {
         editor = "nvim";
         quotepath = "off";
