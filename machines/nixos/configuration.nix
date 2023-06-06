@@ -146,7 +146,7 @@
   services.openssh = {
     enable = true;
     allowSFTP = true;
-    settings.KbdInteractiveAuthentication = true;
+    settings.KbdInteractiveAuthentication = false;
     settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "no";
     settings.StreamLocalBindUnlink = "yes";
