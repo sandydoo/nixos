@@ -119,12 +119,11 @@
   services.openssh = {
     enable = true;
     allowSFTP = true;
-    passwordAuthentication = false;
-    permitRootLogin = "no";
-    extraConfig = ''
-      StreamLocalBindUnlink yes
-      AcceptEnv COLORTERM
-    '';
+    settings.KbdInteractiveAuthentication = false;
+    settings.PasswordAuthentication = false;
+    settings.PermitRootLogin = "no";
+    settings.StreamLocalBindUnlink = "yes";
+    settings.AcceptEnv = "COLORTERM";
   };
 
   programs.ssh.extraConfig = ''
