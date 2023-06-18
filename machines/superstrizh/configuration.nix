@@ -184,11 +184,6 @@
   # $ nix search wget
   environment.systemPackages =
     let
-      haskell-language-server-custom = pkgs.haskell-language-server.override {
-        dynamic = true;
-        supportedGhcVersions = [ "8107" "902" "924" "925" ];
-      };
-
       typescript-language-server = pkgs.symlinkJoin {
         name = "typescript-language-server";
         paths = [ pkgs.nodePackages.typescript-language-server ];
@@ -260,7 +255,7 @@
     cabal-install
     hlint
     ormolu
-    haskell-language-server-custom
+    haskell-language-server
 
     google-chrome
     firefox

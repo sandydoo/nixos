@@ -186,13 +186,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages =
-    let
-      haskell-language-server-custom = pkgs.haskell-language-server.override {
-        dynamic = true;
-        supportedGhcVersions = [ "925" ];
-      };
-    in with pkgs; [
+  environment.systemPackages = with pkgs; [
     home-manager
     cachix
 
@@ -261,7 +255,7 @@
     ghc
     hlint
     ormolu
-    haskell-language-server-custom
+    haskell-language-server
 
     # Elm
     elmPackages.elm
