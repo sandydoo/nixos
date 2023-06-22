@@ -141,7 +141,12 @@ in
   ];
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  services.nix-daemon = {
+    enable = true;
+    logFile = "/var/log/nix-daemon.log";
+    tempDir = "/tmp";
+  };
+  launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
   nix.package = pkgs.nix;
 
   # Stable: pinned stable channel
