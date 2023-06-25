@@ -32,7 +32,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  nix.package = unstable.nix;
+  nix.package = pkgs.nixVersions.nix_2_16;
 
   # Stable: pinned stable channel
   nix.registry.stable.flake = inputs.nixpkgs;
