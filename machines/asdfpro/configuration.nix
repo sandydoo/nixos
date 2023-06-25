@@ -147,7 +147,8 @@ in
     tempDir = "/tmp";
   };
   launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
-  nix.package = pkgs.nix;
+
+  nix.package = pkgs.nixVersions.nix_2_16;
 
   # Stable: pinned stable channel
   nix.registry.stable.flake = nixpkgs;
