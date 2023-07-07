@@ -89,6 +89,7 @@
   nixpkgs.overlays = [
     (import "${inputs.self}/overlays")
     (final: prev: { latest = unstable; })
+    inputs.neovim-nightly.overlay
   ];
 
   home-manager.useUserPackages = true;

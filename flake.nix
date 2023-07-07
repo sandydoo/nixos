@@ -9,6 +9,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, nix-unstable, home-manager, darwin, nix-darwin, vscode-server, ... }@inputs:
