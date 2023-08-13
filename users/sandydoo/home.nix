@@ -125,6 +125,8 @@ with lib.hm.gvariant;
     };
   };
 
+  programs.starship.enable = true;
+
   programs.bash.enable = true;
 
   programs.fish = {
