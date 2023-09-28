@@ -225,6 +225,8 @@
 
     # Lua (for neovim configs)
     latest.lua-language-server
+    # To auto-install tree-sitter parsers
+    latest.tree-sitter
 
     firefox
 
