@@ -192,6 +192,7 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
+  programs.zsh.enable = true;
   programs.fish.enable = true;
   # Work around incorrect order in PATH. These paths need to come before
   # the system ones.
@@ -202,6 +203,7 @@ in
     # Add UTM and utmctl commands
     fish_add_path /Applications/UTM.app/Contents/MacOS/
   '';
+
   programs.nix-index.enable = true;
 
   security.pam.enableSudoTouchIdAuth = true;
