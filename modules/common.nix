@@ -68,6 +68,8 @@
     "https://cache.zw3rk.com"
   ];
 
+  nix.settings.max-jobs = "auto";
+
   nix.extraOptions = ''
     keep-outputs = false
     keep-derivations = false
