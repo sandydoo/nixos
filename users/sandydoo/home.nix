@@ -138,17 +138,36 @@ with lib.hm.gvariant;
 
       # Integrate with iTerm2
       test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
-
     '';
-    plugins = [{
-      name = "pure";
-      src = pkgs.fetchFromGitHub {
-        owner = "pure-fish";
-        repo = "pure";
-        rev = "v4.4.1";
-        sha256 = "sha256-2b2/LZXSchHnPKyjwAcR/oCY38qJ/7Dq8cJHrJmdjoc=";
-      };
-    }];
+    plugins = [
+      {
+        name = "pure";
+        src = pkgs.fetchFromGitHub {
+          owner = "pure-fish";
+          repo = "pure";
+          rev = "v4.8.1";
+          sha256 = "sha256-MnlqKRmMNVp6g9tet8sr5Vd8LmJAbZqLIGoDE5rlu8E=";
+        };
+      }
+      {
+        name = "z";
+        src = pkgs.fetchFromGitHub {
+          owner = "jethrokuan";
+          repo = "z";
+          rev = "master";
+          sha256 = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
+        };
+      }
+      {
+        name = "fish-abbreviation-tips";
+        src = pkgs.fetchFromGitHub {
+          owner = "gazorby";
+          repo = "fish-abbreviation-tips";
+          rev = "v0.7.0";
+          sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+        };
+      }
+    ];
   };
 
   programs.git = {
