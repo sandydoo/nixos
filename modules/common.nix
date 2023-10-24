@@ -73,6 +73,8 @@
   nix.extraOptions = ''
     keep-outputs = false
     keep-derivations = false
+    log-lines = 30
+    show-trace = true
     min-free = ${toString (1024 * 1024 * 1024)}
     experimental-features = nix-command flakes auto-allocate-uids
   '';
@@ -80,7 +82,7 @@
   nix.settings.auto-optimise-store = true;
   nix.gc = {
     automatic = true;
-    dates = "monthly";
+    dates = "weekly";
     options = "--delete-older-than 180d";
   };
 
