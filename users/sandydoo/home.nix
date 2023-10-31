@@ -11,7 +11,7 @@ with lib.hm.gvariant;
 
   home.packages = with pkgs; [
     # Editors
-    neovim-nightly
+    latest.neovim
     kakoune
     helix
 
