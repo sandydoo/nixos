@@ -40,6 +40,26 @@
         };
       };
 
+      nixosConfigurations.nixos-avf = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+
+        modules = [
+          ./machines/nixos-avf/configuration.nix
+          ./users/sandydoo.nix
+          ./modules/gnome.nix
+          home-manager.nixosModules.home-manager
+        ];
+
+        specialArgs = inputs // {
+          inherit inputs;
+          unstable = import nix-unstable {
+            system = "aarch64-linux";
+            config.allowUnfree = true;
+            config.allowBroken = true;
+          };
+        };
+      };
+
       nixosConfigurations.superstrizh = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
