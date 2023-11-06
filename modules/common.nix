@@ -210,6 +210,7 @@
     # Nix
     nil
     nix-prefetch
+    nix-output-monitor
 
     # Shell
     shfmt                   # Format shell scripts
