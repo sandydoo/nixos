@@ -57,6 +57,6 @@
   # nix.settings.system-features = ["kvm" "big-parallel"];
 
   environment.systemPackages = with pkgs; [
-    
+    virglrenderer
   ];
 }

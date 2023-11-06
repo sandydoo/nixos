@@ -12,10 +12,13 @@
       user = "sandydoo";
     };
     desktopManager.gnome.enable = true;
+    desktopManager.gnome.extraGSettingsOverrides = ''
+      [org.gnome.desktop.interface]
+      scaling-factor = 2
+    '';
   };
 
-  # services.dbus.packages = [ pkgs.dconf ];
-  # services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+  # services.gnome.gnome-settings-daemon.enable = true;
 
   programs.xwayland.enable = false;
 }

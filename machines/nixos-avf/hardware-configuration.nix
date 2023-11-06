@@ -4,41 +4,39 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
-    ];
+  imports = [ ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "sr_mod" "uhci_hcd" "usb_storage" "usbhid" "virtiofs" ];
-  boot.initrd.kernelModules = [
+  boot.initrd.availableKernelModules = [ "virtio_net" "virtio_pci" "virtio_mmio" "virtio_blk" "virtio_scsi" "9p" "9pnet_virtio" ];
+  boot.initrd.kernelModules = [ 
+    "virtio_balloon"
+    "virtio_console"
+    "virtio_rng"
     "virtio_gpu"
-    "drm"
+    # "drm"
   ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c9ab15d3-cfc6-41bf-8d0c-8a06cd4e9486";
+    { device = "/dev/disk/by-uuid/d17dfa41-5396-464d-9b9e-2912ee4ea14b";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8736-F1B8";
+    { device = "/dev/disk/by-uuid/C2A5-BA5C";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/79c1ea3b-e7d1-4695-8932-39f827d9ae3b"; }
+    [ { device = "/dev/disk/by-uuid/a082dcac-2da5-400f-8913-45e4446bcf9d"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  # networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
+  networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }
