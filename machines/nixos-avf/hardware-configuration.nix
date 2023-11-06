@@ -12,6 +12,7 @@
     "virtio_console"
     "virtio_rng"
     "virtio_gpu"
+    # DRM crashes the machine
     # "drm"
   ];
   boot.kernelModules = [ ];
