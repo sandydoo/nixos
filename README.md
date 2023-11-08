@@ -59,6 +59,6 @@ Eventually, the boot drive will fill up with older generations. This is particul
 To delete the older generations, run the following:
 
 ```bash
-nix-env --profile /nix/var/nix/profiles/system --delete-generations +5
-/run/current-system/bin/switch-to-configuration switch
+sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +5
+sudo /run/current-system/bin/switch-to-configuration switch
 ```
