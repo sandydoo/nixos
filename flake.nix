@@ -40,7 +40,7 @@
         };
       };
 
-      nixosConfigurations.superstrizh = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos-x86 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [

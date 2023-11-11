@@ -1,8 +1,8 @@
 { config, pkgs, inputs, unstable, nixpkgs, nix-unstable, ... }:
 
 {
-  # Include the results of the hardware scan.
   imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${inputs.self}/modules/common.nix"
     "${inputs.self}/modules/cachix.nix"
@@ -10,7 +10,7 @@
 
   hardware.opengl.extraPackages = [ pkgs.intel-ocl ];
 
-  networking.hostName = "superstrizh";
+  networking.hostName = "nixos-x86";
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
   networking.hosts = {
