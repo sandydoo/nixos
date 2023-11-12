@@ -237,6 +237,7 @@ with lib.hm.gvariant;
   };
 
   services.gpg-agent.enable = true;
+  services.gpg-agent.enableSshSupport = true;
 
   programs.bat.enable = true;
 
