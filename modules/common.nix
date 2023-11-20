@@ -131,6 +131,7 @@
   services.eternal-terminal.enable = true;
   programs.mosh.enable = true;
   programs.tmux.enable = true;
+  programs.tmux.aggressiveResize = false;
   programs.tmux.plugins = with pkgs.tmuxPlugins; [
     sensible
     pain-control
