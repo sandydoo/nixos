@@ -126,6 +126,17 @@ with lib.hm.gvariant;
   };
 
   programs.starship.enable = true;
+  programs.starship.settings = {
+    add_newline = true;
+
+    character = {
+      success_symbol = "[➜](bold green)";
+    };
+
+    aws = {
+      disabled = true;
+    };
+  };
 
   programs.bash.enable = true;
 
