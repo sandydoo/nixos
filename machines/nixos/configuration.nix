@@ -33,8 +33,21 @@
         via = "192.168.64.1";
       }
     ];
+    ipv6.addresses = [
+      {
+        address = "fdc6:a11c:ce40:6c86:10cb:1e63:905d:2dd6";
+        prefixLength = 64;
+      }
+    ];
+    ipv6.routes = [
+      {
+        address = "::";
+        prefixLength = 0;
+        via = "fdc6:a11c:ce40:6c86:10cb:1e63:905d:2dd6";
+      }
+    ];
   };
-  networking.nameservers = [ "192.168.64.1" ];
+  networking.nameservers = [ "192.168.64.1" "fdc6:a11c:ce40:6c86:10cb:1e63:905d:2dd6" ];
 
   networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "ve-*" ];
