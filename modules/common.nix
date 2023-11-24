@@ -217,12 +217,12 @@
     shfmt                   # Format shell scripts
 
     # Haskell
-    stack
-    cabal-install
-    ghc
-    hlint
-    ormolu
-    haskell-language-server
+    latest.stack
+    latest.cabal-install
+    latest.ghc
+    latest.hlint
+    latest.ormolu
+    latest.haskell-language-server
 
     # Elm
     elmPackages.elm
