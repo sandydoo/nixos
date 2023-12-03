@@ -148,7 +148,7 @@ in
   };
   launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
 
-  nix.package = pkgs.nixVersions.nix_2_16;
+  nix.package = pkgs.nixVersions.nix_2_18;
 
   # Stable: pinned stable channel
   nix.registry.stable.flake = nixpkgs;
@@ -161,6 +161,12 @@ in
     repo = "nixpkgs";
     type = "github";
   };
+  # Only for legacy channel stuff, i.e. <nixpkgs>
+  nix.nixPath = [
+    "nixpkgs=${config.nix.registry.stable.flake}"
+    "stable=${config.nix.registry.stable.flake}"
+    "latest=${config.nix.registry.latest.flake}"
+  ];
 
   # Do not enable sandboxing on macOS.
   # nix.useSandbox = false;
@@ -170,7 +176,7 @@ in
     auto-optimise-store = false
     keep-derivations = false
     keep-outputs = false
-    experimental-features = nix-command flakes
+    experimental-features = nix-command flakes repl-flake
   '';
   nix.settings.trusted-users = [ "root" "sander" ];
   nix.settings.substituters = [
