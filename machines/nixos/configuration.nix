@@ -65,8 +65,6 @@
   # Don’t require password for sudo.
   security.sudo.wheelNeedsPassword = false;
 
-  nix.settings.system-features = ["kvm" "big-parallel"];
-
   environment.systemPackages = with pkgs; [
     # VM
     # Graphics driver for QEMU guests
