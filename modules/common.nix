@@ -24,11 +24,6 @@
 
   networking.firewall.enable = lib.mkDefault true;
 
-  networking.extraHosts = ''
-    127.0.0.1 cachix-development.nixos api.nixos
-    127.0.0.1 cachix app.cachix test.cachix
-  '';
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -102,6 +97,19 @@
   home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 
   users.mutableUsers = false;
+
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      server = [ "1.1.1.1" "1.0.0.1" ];
+      listen-address = "127.0.0.1";
+      bind-interfaces = true;
+      address = [
+        "/nixos/127.0.0.1"
+        "/cachix/127.0.0.1"
+      ];
+    };
+  };
 
   services.openssh = {
     enable = true;
