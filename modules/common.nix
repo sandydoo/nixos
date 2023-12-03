@@ -30,6 +30,7 @@
   nix.package = pkgs.nixVersions.nix_2_17;
 
   # Stable: pinned stable channel
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
   nix.registry.stable.flake = inputs.nixpkgs;
   # Latest: pinned unstable channel
   nix.registry.latest.flake = inputs.nix-unstable;
