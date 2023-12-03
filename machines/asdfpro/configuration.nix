@@ -22,7 +22,7 @@ in
 
     starship
     tmux
-    kakoune
+    latest.kakoune # Backport needed: https://github.com/NixOS/nixpkgs/pull/269884
     kak-lsp
     neovim
     helix
@@ -58,7 +58,7 @@ in
 
     bat
     broot
-    exa
+    eza
     duf
     du-dust
     fd
