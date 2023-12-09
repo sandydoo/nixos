@@ -197,7 +197,6 @@
     # Crypto
     gnupg
     pinentry-curses
-    pinentry-gnome
 
     # C
     gnumake
