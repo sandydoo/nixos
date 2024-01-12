@@ -12,12 +12,14 @@
   boot.loader.systemd-boot.consoleMode = "keep";
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "mitigations=off" ];
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.forwarding" = true;
     "net.ipv6.conf.all.forwarding" = true;
   };
 
+  hardware.enableAllFirmware = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.setLdLibraryPath = true;
@@ -27,7 +29,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  nix.package = pkgs.nixVersions.nix_2_18;
+  nix.package = pkgs.nixVersions.nix_2_19;
 
   # Stable: pinned stable channel
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
@@ -108,6 +110,7 @@
       address = [
         "/nixos/127.0.0.1"
         "/cachix/127.0.0.1"
+        "/cachix.internal/127.0.0.1"
       ];
     };
   };
