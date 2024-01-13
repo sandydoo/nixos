@@ -148,7 +148,7 @@ in
   };
   launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
 
-  nix.package = pkgs.nixVersions.nix_2_18;
+  nix.package = pkgs.nixVersions.nix_2_19;
 
   # Stable: pinned stable channel
   nix.registry.nixpkgs.flake = nixpkgs;
