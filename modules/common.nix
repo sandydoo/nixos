@@ -74,7 +74,7 @@
     log-lines = 30
     show-trace = true
     min-free = ${toString (1024 * 1024 * 1024)}
-    experimental-features = nix-command flakes repl-flake auto-allocate-uids
+    experimental-features = nix-command flakes auto-allocate-uids
   '';
 
   nix.settings.auto-optimise-store = true;

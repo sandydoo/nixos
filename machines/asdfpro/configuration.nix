@@ -177,7 +177,7 @@ in
     auto-optimise-store = false
     keep-derivations = false
     keep-outputs = false
-    experimental-features = nix-command flakes repl-flake
+    experimental-features = nix-command flakes
   '';
   nix.settings.trusted-users = [ "root" "sander" ];
   nix.settings.substituters = [
