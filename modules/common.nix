@@ -246,6 +246,7 @@
     latest.tree-sitter
 
     firefox
+    ungoogled-chromium
 
     # Send files
     croc
