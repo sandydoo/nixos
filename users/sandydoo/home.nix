@@ -223,7 +223,7 @@ with lib.hm.gvariant;
 
   services.vscode-server.enable = true;
   services.vscode-server.enableFHS = false;
-  services.vscode-server.installPath = "~/.vscode-server-insiders";
+  services.vscode-server.installPath = "~/.vscode-server";
 
   programs.gpg.enable = true;
   programs.gpg.publicKeys = [
