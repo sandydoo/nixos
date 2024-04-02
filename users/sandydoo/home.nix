@@ -155,8 +155,12 @@ with lib.hm.gvariant;
       end
     '';
     plugins = [
-      pkgs.fishPlugins.pure
-      pkgs.fishPlugins.z
+      { name = "pure";
+        src = pkgs.fishPlugins.pure.src;
+      }
+      { name = "zoxide";
+        src = pkgs.fishPlugins.z.src;
+      }
       {
         name = "fish-abbreviation-tips";
         src = pkgs.fetchFromGitHub {
