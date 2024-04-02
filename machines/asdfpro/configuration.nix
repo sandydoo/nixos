@@ -1,4 +1,4 @@
-{ config, pkgs, nixpkgs, nix-unstable, ... }:
+{ config, pkgs, lib, nixpkgs, nix-unstable, ... }:
 
 let
   typescript-language-server = pkgs.symlinkJoin {
@@ -10,6 +10,21 @@ let
         --add-flags --tsserver-path=${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/
     '';
   };
+
+  pinentry-custom = pkgs.writeShellScriptBin "pinentry-custom" ''
+    pinentry=${lib.getBin pkgs.pinentry}/bin/pinentry
+    case "$PINENTRY_USER_DATA" in
+    *USE_TTY*)  pinentry=${lib.getBin pkgs.pinentry}/bin/pinentry ;;
+    *USE_CURSES*) pinentry=${lib.getBin pkgs.pinentry-curses}/bin/pinentry ;;
+    ${lib.optionalString pkgs.stdenv.isLinux ''
+    *USE_GNOME3*) pinentry=${lib.getBin pkgs.pinentry-gnome}/bin/pinentry ;;
+    ''}
+    ${lib.optionalString pkgs.stdenv.isDarwin ''
+    *USE_MAC*) pinentry=${lib.getBin pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac ;;
+    ''}
+    esac
+    exec $pinentry "$@"
+  '';
 in
 {
   environment.systemPackages = with pkgs; [
@@ -72,6 +87,7 @@ in
     gnupg
     pinentry
     pinentry_mac
+    pinentry-custom
     blackbox
 
     cmus
@@ -209,6 +225,8 @@ in
 
     # Add UTM and utmctl commands
     fish_add_path /Applications/UTM.app/Contents/MacOS/
+
+    set -x PINENTRY_USER_DATA "USE_MAC=1"
   '';
 
   programs.nix-index.enable = true;
