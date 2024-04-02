@@ -151,24 +151,8 @@ with lib.hm.gvariant;
       test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
     '';
     plugins = [
-      {
-        name = "pure";
-        src = pkgs.fetchFromGitHub {
-          owner = "pure-fish";
-          repo = "pure";
-          rev = "v4.8.1";
-          sha256 = "sha256-MnlqKRmMNVp6g9tet8sr5Vd8LmJAbZqLIGoDE5rlu8E=";
-        };
-      }
-      {
-        name = "z";
-        src = pkgs.fetchFromGitHub {
-          owner = "jethrokuan";
-          repo = "z";
-          rev = "master";
-          sha256 = "sha256-+FUBM7CodtZrYKqU542fQD+ZDGrd2438trKM0tIESs0=";
-        };
-      }
+      pkgs.fishPlugins.pure
+      pkgs.fishPlugins.z
       {
         name = "fish-abbreviation-tips";
         src = pkgs.fetchFromGitHub {
