@@ -149,6 +149,10 @@ with lib.hm.gvariant;
 
       # Integrate with iTerm2
       test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
+      if test -n "$SSH_CLIENT"
+        set -x PINENTRY_USER_DATA USE_CURSES=1
+      end
     '';
     plugins = [
       pkgs.fishPlugins.pure
