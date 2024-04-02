@@ -58,7 +58,22 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetS
 Eventually, the boot drive will fill up with older generations. This is particularly a problem when using a custom kernel version.
 To delete the older generations, run the following:
 
-```bash
+```console
 sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +5
 sudo /run/current-system/bin/switch-to-configuration switch
+```
+
+### Delete Home Manager generations
+
+These are not currently automatically removed.
+See https://github.com/nix-community/home-manager/issues/3450.
+
+```console
+home-manager expire-generations "-180 days"
+```
+
+### Run GC
+
+```console
+sudo nix-collect-garbage --delete-older-than 180d
 ```
