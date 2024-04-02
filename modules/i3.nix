@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.pathsToLink = [ "/libexec" ];
@@ -6,20 +6,15 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    dpi = 180;
 
-    desktopManager = { xterm.enable = false; };
+    desktopManager = { xterm.enable = true; };
 
     displayManager.defaultSession = "none+i3";
-    # displayManager.sessionCommands = ''
-    #   ${pkgs.xorg.xset}/bin/xset r rate 200 40
-    # '';
+    displayManager.lightdm.enable = true;
     displayManager.autoLogin = {
       enable = true;
       user = "sandydoo";
     };
-    displayManager.lightdm.enable = true;
-    # displayManager.lightdm.greeters.pantheon.enable = true;
 
     windowManager.i3.enable = true;
     windowManager.i3.package = pkgs.i3-gaps;
