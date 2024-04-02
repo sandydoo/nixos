@@ -242,7 +242,7 @@ with lib.hm.gvariant;
   services.gpg-agent.enable = true;
   services.gpg-agent.enableSshSupport = true;
   services.gpg-agent.enableExtraSocket = true;
-  services.gpg-agent.defaultCacheTll = 34560000;
+  services.gpg-agent.defaultCacheTtl = 34560000;
   services.gpg-agent.maxCacheTtl = 34560000;
   services.gpg-agent.defaultCacheTtlSsh = 34560000;
   services.gpg-agent.maxCacheTtlSsh = 34560000;
