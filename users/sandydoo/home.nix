@@ -183,6 +183,7 @@ with lib.hm.gvariant;
     };
     extraConfig = {
       alias = {
+        dft = "difftool";
         last = "log -1 HEAD";
         graph = "log --graph --format='%C(auto) %h %s'";
         p = "switch -";
@@ -196,8 +197,12 @@ with lib.hm.gvariant;
         editor = "nvim";
         quotepath = "off";
       };
+      diff.tool = "difftastic";
+      difftool.prompt = false;
+      difftool.difftastic.cmd = ''difft "$LOCAL" "$REMOTE'';
       init.defaultBranch = "main";
       merge.ff = "no";
+      pager.difftool = true;
       pull.ff = "only";
       push.default = "current";
       tag.gpgSign = true;
