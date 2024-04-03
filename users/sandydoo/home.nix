@@ -17,6 +17,9 @@ with lib.hm.gvariant;
 
     # Terminal
     vivid         # Set terminal colors with LS_COLORS
+
+    # For git difftool
+    difftastic
   ];
 
   # xsession.enable = true;
@@ -199,7 +202,7 @@ with lib.hm.gvariant;
       };
       diff.tool = "difftastic";
       difftool.prompt = false;
-      difftool.difftastic.cmd = ''difft "$LOCAL" "$REMOTE'';
+      difftool.difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
       init.defaultBranch = "main";
       merge.ff = "no";
       pager.difftool = true;
@@ -209,8 +212,6 @@ with lib.hm.gvariant;
     };
     ignores = [ ".DS_Store" ".nlsp-settings" ];
   };
-
-  programs.git.difftastic.enable = true;
 
   programs.vscode.enable = true;
   # Workaround for https://github.com/nix-community/home-manager/issues/2798
