@@ -161,9 +161,6 @@ with lib.hm.gvariant;
       { name = "pure";
         src = pkgs.fishPlugins.pure.src;
       }
-      { name = "zoxide";
-        src = pkgs.fishPlugins.z.src;
-      }
       {
         name = "fish-abbreviation-tips";
         src = pkgs.fetchFromGitHub {
