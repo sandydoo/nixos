@@ -1,17 +1,17 @@
 { pkgs, ... }:
 
 {
+  services.displayManager = {
+    defaultSession = "sway";
+    autoLogin = {
+      enable = true;
+      user = "sandydoo";
+    };
+  };
+
   services.xserver = {
     enable = true;
-
-    displayManager = {
-      defaultSession = "sway";
-      lightdm.enable = true;
-      autoLogin = {
-        enable = true;
-        user = "sandydoo";
-      };
-    };
+    displayManager.lightdm.enable = true;
   };
 
   programs.sway.enable = true;

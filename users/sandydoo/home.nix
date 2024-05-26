@@ -255,10 +255,7 @@ with lib.hm.gvariant;
 
   programs.bat.enable = true;
 
-  programs.eza = {
-    enable = true;
-    enableAliases = true;
-  };
+  programs.eza.enable = true;
 
   programs.zoxide = {
     enable = true;
