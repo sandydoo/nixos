@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, unstable, ... }:
+{ config, inputs, pkgs, lib, unstable, ... }:
 
 {
   boot.loader.timeout = 2;
@@ -31,22 +31,24 @@
 
   nix.package = unstable.nixVersions.latest;
 
-  # Stable: pinned stable channel
-  nix.registry.nixpkgs.flake = inputs.nixpkgs;
-  nix.registry.stable.flake = inputs.nixpkgs;
-  # Latest: pinned unstable channel
-  nix.registry.latest.flake = inputs.nix-unstable;
-  # Nightly: unpinned unstable
-  nix.registry.nightly.to = {
-    owner = "NixOS";
-    ref = "nixpkgs-unstable";
-    repo = "nixpkgs";
-    type = "github";
+  nix.registry= {
+    # Stable: pinned stable channel
+    nixpkgs.flake = inputs.nixpkgs;
+    stable.flake = inputs.nixpkgs;
+    # Latest: pinned unstable channel
+    latest.flake = inputs.nix-unstable;
+    # Nightly: unpinned unstable
+    nightly.to = {
+      owner = "NixOS";
+      ref = "nixpkgs-unstable";
+      repo = "nixpkgs";
+      type = "github";
+    };
   };
-  nix.nixPath = [
-    "nixpkgs=${pkgs.path}"
-    "stable=${pkgs.path}"
-    "latest=${unstable.path}"
+  nix.nixPath = with config.nix.registry; [
+    "nixpkgs=${nixpkgs.flake}"
+    "stable=${stable.flake}"
+    "latest=${latest.flake}"
   ];
 
   nix.settings.trusted-users = [ "root" "sandydoo" ];
