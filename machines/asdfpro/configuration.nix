@@ -12,12 +12,12 @@ let
   };
 
   pinentry-custom = pkgs.writeShellScriptBin "pinentry-custom" ''
-    pinentry=${lib.getBin pkgs.pinentry}/bin/pinentry
+    pinentry=${lib.getExe pkgs.pinentry-tty}
     case "$PINENTRY_USER_DATA" in
-    *USE_TTY*)  pinentry=${lib.getBin pkgs.pinentry}/bin/pinentry ;;
-    *USE_CURSES*) pinentry=${lib.getBin pkgs.pinentry-curses}/bin/pinentry ;;
+    *USE_TTY*)  pinentry=${lib.getExe pkgs.pinentry-tty} ;;
+    *USE_CURSES*) pinentry=${lib.getExe pkgs.pinentry-curses} ;;
     ${lib.optionalString pkgs.stdenv.isLinux ''
-    *USE_GNOME3*) pinentry=${lib.getBin pkgs.pinentry-gnome}/bin/pinentry ;;
+    *USE_GNOME3*) pinentry=${lib.getExe pkgs.pinentry-gnome} ;;
     ''}
     ${lib.optionalString pkgs.stdenv.isDarwin ''
     *USE_MAC*) pinentry=${lib.getBin pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac ;;
