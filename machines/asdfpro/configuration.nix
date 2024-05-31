@@ -63,7 +63,7 @@ in
     nix-direnv
     lorri
     nixpkgs-fmt
-    nixfmt
+    nixfmt-rfc-style
     cachix
 
     abduco
@@ -85,15 +85,12 @@ in
     pandoc
 
     gnupg
-    pinentry
-    pinentry_mac
     pinentry-custom
     blackbox
 
     cmus
     ncmpcpp
     spotifyd
-    spotify-tui
 
     xz
     lzip
@@ -124,10 +121,11 @@ in
     stylish-haskell
 
     # Elm
-    elmPackages.elm
-    elmPackages.elm-language-server
-    elmPackages.elm-test
-    elmPackages.elm-format
+    # Broken on darwin: https://github.com/NixOS/nixpkgs/pull/315141
+    # elmPackages.elm
+    # elmPackages.elm-language-server
+    # elmPackages.elm-test
+    # elmPackages.elm-format
 
     # Python
     python3
