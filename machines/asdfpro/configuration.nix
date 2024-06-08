@@ -154,6 +154,11 @@ in
     streamlink
   ];
 
+  environment.variables = {
+    EDITOR = "nvim";
+    PAGER = "bat";
+  };
+
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon = {
     enable = true;

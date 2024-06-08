@@ -71,7 +71,10 @@ with lib.hm.gvariant;
   # services.polybar.enable = true;
   # services.polybar.script = "polybar bar &";
 
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.variables = {
+    EDITOR = "nvim";
+    PAGER = "bat";
+  };
 
   # Disable this helper script on flake-based machines.
   # programs.command-not-found.enable = false;
