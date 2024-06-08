@@ -64,15 +64,16 @@
 
       darwinConfigurations.asdfPro =
         darwin.lib.darwinSystem (let
+          system = "aarch64-darwin";
           latest = _: _: {
             latest = import nix-unstable {
-              system = "aarch64-darwin";
+              inherit system;
               nixpkgs.config.allowUnfree = true;
               nixpkgs.config.allowBroken = true;
             };
           };
         in {
-          system = "aarch64-darwin";
+          inherit system;
 
           modules = [
             ({ ... }: {
