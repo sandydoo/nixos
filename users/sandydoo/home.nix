@@ -71,7 +71,7 @@ with lib.hm.gvariant;
   # services.polybar.enable = true;
   # services.polybar.script = "polybar bar &";
 
-  home.variables = {
+  home.sessionVariables = {
     EDITOR = "nvim";
     PAGER = "bat";
   };
