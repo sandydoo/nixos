@@ -10,6 +10,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly.inputs.nixpkgs.follows = "nix-unstable";
   };
 
   outputs = { self, nixpkgs, nix-unstable, home-manager, darwin, nix-darwin, vscode-server, ... }@inputs:
@@ -36,6 +37,9 @@
             system = "aarch64-linux";
             config.allowUnfree = true;
             config.allowBroken = true;
+            overlays = [
+              inputs.neovim-nightly.overlays.default
+            ];
           };
         };
       };

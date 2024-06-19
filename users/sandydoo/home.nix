@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, unstable, ... }:
 
 with lib.hm.gvariant;
 
@@ -11,7 +11,7 @@ with lib.hm.gvariant;
 
   home.packages = with pkgs; [
     # Editors
-    neovim
+    unstable.neovim
     kakoune
     helix
 

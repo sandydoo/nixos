@@ -89,12 +89,11 @@
   nixpkgs.overlays = [
     (import "${inputs.self}/overlays")
     (final: prev: { latest = unstable; })
-    inputs.neovim-nightly.overlays.default
   ];
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager.extraSpecialArgs = { inherit inputs; inherit unstable; };
   home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 
   users.mutableUsers = false;
