@@ -68,12 +68,14 @@
   nix.settings.max-jobs = "auto";
 
   nix.extraOptions = ''
-    keep-outputs = false
-    keep-derivations = false
-    log-lines = 30
-    show-trace = true
-    min-free = ${toString (1024 * 1024 * 1024)}
+    connect-timeout = 5
     experimental-features = nix-command flakes auto-allocate-uids
+    keep-derivations = false
+    keep-outputs = false
+    log-lines = 30
+    min-free = ${toString (1024 * 1024 * 1024)}
+    show-trace = true
+    warn-dirty = false
   '';
 
   nix.settings.auto-optimise-store = true;
