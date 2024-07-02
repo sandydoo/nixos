@@ -24,6 +24,7 @@
   hardware.opengl.driSupport = true;
   hardware.opengl.setLdLibraryPath = true;
 
+  networking.useNetworkd = lib.mkDefault true;
   networking.firewall.enable = lib.mkDefault true;
 
   # Select internationalisation properties.
