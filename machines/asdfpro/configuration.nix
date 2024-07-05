@@ -121,11 +121,10 @@ in
     stylish-haskell
 
     # Elm
-    # Broken on darwin: https://github.com/NixOS/nixpkgs/pull/315141
-    # elmPackages.elm
-    # elmPackages.elm-language-server
-    # elmPackages.elm-test
-    # elmPackages.elm-format
+    elmPackages.elm
+    elmPackages.elm-language-server
+    elmPackages.elm-test
+    elmPackages.elm-format
 
     # Python
     python3
