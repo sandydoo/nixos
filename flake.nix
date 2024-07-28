@@ -44,6 +44,30 @@
         };
       };
 
+      nixosConfigurations.nixos-vmware = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+
+        modules = [
+          ./machines/nixos-vmware/configuration.nix
+          ./users/sandydoo.nix
+          ./modules/sway.nix
+          ./modules/tailscale.nix
+          home-manager.nixosModules.home-manager
+        ];
+
+        specialArgs = inputs // {
+          inherit inputs;
+          unstable = import nix-unstable {
+            system = "aarch64-linux";
+            config.allowUnfree = true;
+            config.allowBroken = true;
+            overlays = [
+              inputs.neovim-nightly.overlays.default
+            ];
+          };
+        };
+      };
+
       nixosConfigurations.nixos-x86 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
