@@ -155,7 +155,6 @@ in
 
   environment.variables = {
     EDITOR = "nvim";
-    PAGER = "bat";
   };
 
   # Auto upgrade nix package and the daemon service.

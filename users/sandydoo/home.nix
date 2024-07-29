@@ -73,7 +73,6 @@ with lib.hm.gvariant;
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    PAGER = "bat";
   };
 
   # Disable this helper script on flake-based machines.
