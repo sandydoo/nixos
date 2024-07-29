@@ -62,6 +62,14 @@
 
   networking.firewall.enable = false;
 
+  nix.settings.trusted-public-keys = [
+    "nixos-cache:9YsPz3woJ7EFkfls5stZYLGp/7I7omym31LuQeRlHfU="
+  ];
+
+  nix.settings.substituters = [
+    "http://192.168.64.2:5000"
+  ];
+
   virtualisation.libvirtd.enable = false;
   virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
 

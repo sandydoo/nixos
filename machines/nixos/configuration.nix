@@ -65,6 +65,12 @@
   # Don’t require password for sudo.
   security.sudo.wheelNeedsPassword = false;
 
+  # Serve the store as a binary cache
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/lib/nix-serve/cache-private-key.pem";
+  };
+
   environment.systemPackages = with pkgs; [
     # VM
     # Graphics driver for QEMU guests
