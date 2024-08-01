@@ -5,7 +5,6 @@
   imports = [
     ./hardware-configuration.nix
     "${inputs.self}/modules/common.nix"
-    "${inputs.self}/modules/cachix.nix"
   ];
 
   boot.kernelParams = [ "video=Virtual-1:3024x1964@60" ];

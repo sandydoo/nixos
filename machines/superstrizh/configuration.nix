@@ -5,7 +5,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${inputs.self}/modules/common.nix"
-    "${inputs.self}/modules/cachix.nix"
   ];
 
   hardware.opengl.extraPackages = [ pkgs.intel-ocl ];
