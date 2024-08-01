@@ -5,7 +5,6 @@
   imports = [
     ./hardware-configuration.nix
     "${inputs.self}/modules/common.nix"
-    "${inputs.self}/modules/cachix.nix"
     "${inputs.self}/modules/vmware-guest.nix"
   ];
 
