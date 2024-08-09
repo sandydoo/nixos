@@ -50,7 +50,7 @@
         modules = [
           ./machines/nixos-vmware/configuration.nix
           ./users/sandydoo.nix
-          ./modules/sway.nix
+          ./modules/gnome.nix
           ./modules/tailscale.nix
           home-manager.nixosModules.home-manager
         ];

@@ -3,19 +3,24 @@
 {
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
-    displayManager.gdm.autoSuspend = false;
-    displayManager.defaultSession = "gnome";
-    displayManager.autoLogin = {
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+      autoSuspend = false;
+    };
+    desktopManager.gnome.enable = true;
+  };
+
+  services.displayManager = {
+    defaultSession = "gnome";
+    autoLogin = {
       enable = true;
       user = "sandydoo";
     };
-    desktopManager.gnome.enable = true;
   };
 
   # services.dbus.packages = [ pkgs.dconf ];
   # services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
 
-  programs.xwayland.enable = false;
+  programs.xwayland.enable = true;
 }
