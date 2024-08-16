@@ -26,35 +26,7 @@
   networking.useDHCP = false;
   networking.interfaces.ens160 = {
     useDHCP = true;
-    # ipv4.addresses = [
-    #   {
-    #     # Configured by the macOS host. See README.md for details.
-    #     address = "192.168.65.2";
-    #     prefixLength = 24;
-    #   }
-    # ];
-    # ipv4.routes = [
-    #   {
-    #     address = "0.0.0.0";
-    #     prefixLength = 0;
-    #     via = "192.168.65.1";
-    #   }
-    # ];
-    # ipv6.addresses = [
-    #   {
-    #     address = "fdc6:a11c:ce40:6c86:10cb:1e63:905d:2dd6";
-    #     prefixLength = 64;
-    #   }
-    # ];
-    # ipv6.routes = [
-    #   {
-    #     address = "::";
-    #     prefixLength = 0;
-    #     via = "fdc6:a11c:ce40:6c86:10cb:1e63:905d:2dd6";
-    #   }
-    # ];
   };
-  # networking.nameservers = [ "192.168.64.1" "fdc6:a11c:ce40:6c86:10cb:1e63:905d:2dd6" ];
 
   networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "ve-*" ];
