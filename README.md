@@ -1,14 +1,20 @@
 # NixOS Configs
 
+## NixOS machines
+
+```shell
+nixos-rebuild switch --use-remote-sudo
+```
+
 ## Nix Darwin machines
 
 There's a 2-step process to building a Nix Darwin machine from a flake:
 
-```bash
+```shell
 nix build ./#darwinConfigurations.asdfPro.system
 ```
 
-```bash
+```shell
 ./result/sw/bin/darwin-rebuild switch --flake ./
 ```
 
@@ -58,7 +64,7 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetS
 Eventually, the boot drive will fill up with older generations. This is particularly a problem when using a custom kernel version.
 To delete the older generations, run the following:
 
-```console
+```shell
 sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +5
 sudo /run/current-system/bin/switch-to-configuration switch
 ```
@@ -68,12 +74,12 @@ sudo /run/current-system/bin/switch-to-configuration switch
 These are not currently automatically removed.
 See https://github.com/nix-community/home-manager/issues/3450.
 
-```console
+```shell
 home-manager expire-generations "-180 days"
 ```
 
 ### Run GC
 
-```console
+```shell
 sudo nix-collect-garbage --delete-older-than 180d
 ```
