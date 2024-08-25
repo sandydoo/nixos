@@ -192,7 +192,10 @@ with lib.hm.gvariant;
         undo = "reset HEAD~";
         unstage = "reset HEAD --";
       };
-      branch.autoSetupRebase = "always";
+      branch = {
+        autoSetupMerge = "simple";
+        autoSetupRebase = "always";
+      };
       core = {
         editor = "nvim";
         quotepath = "off";
