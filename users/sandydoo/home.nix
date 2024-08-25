@@ -87,6 +87,7 @@ with lib.hm.gvariant;
     [global]
     strict_env = true
     warn_timeout = "1h"
+    hide_env_diff = true
   '';
 
   programs.kitty.enable = true;
