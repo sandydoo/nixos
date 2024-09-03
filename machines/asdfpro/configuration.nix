@@ -209,6 +209,19 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
+  nix.linux-builder = {
+    enable = false;
+    maxJobs = 4;
+    supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
+    config = { lib, ... }: {
+      # A small set of builder options are available
+      # virtualisation.darwin-builder.memorySize = 8 * 1024;
+
+      virtualisation.cores = 4;
+      virtualisation.memorySize = lib.mkForce (8 * 1024);
+    };
+  };
+
   programs.zsh.enable = true;
   programs.fish.enable = true;
   # Work around incorrect order in PATH. These paths need to come before
