@@ -100,7 +100,7 @@ in
     macfuse-stubs
 
     weechat
-    weechatScripts.weechat-matrix
+    # weechatScripts.weechat-matrix
     weechatScripts.weechat-go
     irssi
     tiny
@@ -168,7 +168,7 @@ in
   nix.package = pkgs.nixVersions.nix_2_23;
 
   # Stable: pinned stable channel
-  nix.registry.nixpkgs.flake = nixpkgs;
+  # nix.registry.nixpkgs.flake = nixpkgs;
   nix.registry.stable.flake = nixpkgs;
   # Latest: pinned unstable channel
   nix.registry.latest.flake = nix-unstable;
