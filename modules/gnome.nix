@@ -19,8 +19,15 @@
     };
   };
 
-  # services.dbus.packages = [ pkgs.dconf ];
-  # services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+  # Fix broken auto-login
+  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
+  environment.systemPackages = [
+    pkgs.gnome.gnome-tweaks
+  ];
+
+  programs.dconf.enable = true;
   programs.xwayland.enable = true;
 }
