@@ -246,7 +246,7 @@ with lib.hm.gvariant;
     no-autostart = true;
   };
 
-  services.gpg-agent.enable = true;
+  services.gpg-agent.enable = false;
   services.gpg-agent.enableSshSupport = true;
   services.gpg-agent.enableExtraSocket = true;
   services.gpg-agent.defaultCacheTtl = 34560000;
