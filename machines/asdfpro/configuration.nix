@@ -210,7 +210,7 @@ in
   nixpkgs.config.allowBroken = true;
 
   nix.linux-builder = {
-    enable = false;
+    enable = true;
     maxJobs = 4;
     supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
     config = { lib, ... }: {
