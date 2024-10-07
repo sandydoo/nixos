@@ -258,6 +258,9 @@ with lib.hm.gvariant;
   '';
 
   programs.bat.enable = true;
+  programs.bat.config = {
+    theme = "ansi";
+  };
 
   programs.eza.enable = true;
 
