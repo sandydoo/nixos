@@ -32,7 +32,7 @@
 
   nix.package = unstable.nixVersions.nix_2_23;
 
-  nix.registry= {
+  nix.registry = {
     # Stable: pinned stable channel
     nixpkgs.flake = inputs.nixpkgs;
     stable.flake = inputs.nixpkgs;
@@ -66,6 +66,7 @@
   nix.settings.max-jobs = "auto";
 
   nix.extraOptions = ''
+    always-allow-substitutes = true
     connect-timeout = 5
     experimental-features = nix-command flakes auto-allocate-uids
     keep-derivations = false
