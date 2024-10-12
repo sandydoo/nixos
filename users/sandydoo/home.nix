@@ -1,7 +1,8 @@
 { pkgs, lib, inputs, unstable, ... }:
 
-with lib.hm.gvariant;
-
+let
+  inherit (lib.hm.gvariant) mkUint32;
+in
 {
   imports = [
     inputs.vscode-server.homeModules.default
@@ -21,6 +22,12 @@ with lib.hm.gvariant;
     # For git difftool
     difftastic
   ];
+
+  dconf.settings = {
+    "org/gnome/desktop/session" = {
+      idle-delay = mkUint32 0;
+    };
+  };
 
   # xsession.enable = true;
   # xsession.initExtra = ''
@@ -63,7 +70,7 @@ with lib.hm.gvariant;
       "battery all".enable = false;
     };
   };
-  
+
   services.picom.enable = false;
   services.picom.settings = ''
     corner-radius: 15;
