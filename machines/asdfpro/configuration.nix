@@ -144,7 +144,8 @@ in
     latest.lua-language-server
 
     # JSON
-    nodePackages.vscode-langservers-extracted
+    # https://github.com/NixOS/nixpkgs/issues/335533
+    latest.nodePackages.vscode-langservers-extracted
 
     # Image manipulation
     imagemagick
