@@ -253,16 +253,17 @@ in
     no-autostart = true;
   };
 
-  services.gpg-agent.enable = false;
-  services.gpg-agent.enableSshSupport = true;
-  services.gpg-agent.enableExtraSocket = true;
-  services.gpg-agent.defaultCacheTtl = 34560000;
-  services.gpg-agent.maxCacheTtl = 34560000;
-  services.gpg-agent.defaultCacheTtlSsh = 34560000;
-  services.gpg-agent.maxCacheTtlSsh = 34560000;
-  services.gpg-agent.extraConfig = ''
-    allow-loopback-pinentry
-  '';
+  # Do not enable on VMs
+  # services.gpg-agent.enable = false;
+  # services.gpg-agent.enableSshSupport = true;
+  # services.gpg-agent.enableExtraSocket = true;
+  # services.gpg-agent.defaultCacheTtl = 34560000;
+  # services.gpg-agent.maxCacheTtl = 34560000;
+  # services.gpg-agent.defaultCacheTtlSsh = 34560000;
+  # services.gpg-agent.maxCacheTtlSsh = 34560000;
+  # services.gpg-agent.extraConfig = ''
+  #   allow-loopback-pinentry
+  # '';
 
   programs.bat.enable = true;
   programs.bat.config = {
