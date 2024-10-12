@@ -65,6 +65,7 @@ in
     nixpkgs-fmt
     nixfmt-rfc-style
     cachix
+    comma                   # Run programs without installing them
 
     abduco
     mosh
