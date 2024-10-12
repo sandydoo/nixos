@@ -11,7 +11,9 @@
   # The default mode "1" is not suppored by VMWare
   boot.loader.systemd-boot.consoleMode = "keep";
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # 6.11's oom-killer is very aggressive and kills nix-env.
+  # https://discourse.nixos.org/t/linux-6-11-tends-to-kill-long-running-nix-operations-under-pressure/52824
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
   boot.kernelParams = [ "mitigations=off" ];
 
   boot.kernel.sysctl = {
