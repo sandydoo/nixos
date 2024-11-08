@@ -71,6 +71,22 @@ in
     };
   };
 
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    settings = {
+      theme = "catppuccin-macchiato";
+      simplified_ui = true;
+      default_layout = "compact";
+      pane_frames = false;
+      ui = {
+        pane_frames.rounded_corners = true;
+        pane_frames.hide_session_name = true;
+      };
+    };
+  };
+
   services.picom.enable = false;
   services.picom.settings = ''
     corner-radius: 15;

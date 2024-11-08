@@ -67,4 +67,11 @@
       };
     };
   };
+
+  # Serve the store as a binary cache
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/lib/nix-serve/cache-private-key.pem";
+  };
+
 }

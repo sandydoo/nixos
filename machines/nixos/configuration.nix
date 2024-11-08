@@ -51,11 +51,13 @@
   # Don’t require password for sudo.
   security.sudo.wheelNeedsPassword = false;
 
-  # Serve the store as a binary cache
-  services.nix-serve = {
-    enable = true;
-    secretKeyFile = "/var/lib/nix-serve/cache-private-key.pem";
-  };
+  nix.settings.trusted-public-keys = [
+    "nixos-cache:OIPy+qp/9UefWhl5itNN7JtU9K3nEkV6Xnligacbp3I="
+  ];
+
+  nix.settings.substituters = [
+    "http://192.168.216.133:5000"
+  ];
 
   environment.systemPackages = with pkgs; [
     # VM
