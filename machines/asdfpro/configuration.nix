@@ -37,7 +37,7 @@ in
 
     starship
     tmux
-    latest.kakoune # Backport needed: https://github.com/NixOS/nixpkgs/pull/269884
+    kakoune
     kak-lsp
     neovim
     helix
