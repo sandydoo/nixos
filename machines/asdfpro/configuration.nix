@@ -215,8 +215,23 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
+  nix.distributedBuilds = true;
+  nix.settings.builders-use-substitutes = true;
+
+  nix.buildMachines = [{
+    hostName = "nixos-vmware";
+    sshUser = "builder";
+    sshKey = "/etc/nix/builder_ed25519";
+    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTMgcm9vdEBuaXhvcwo=";
+    maxJobs = 4;
+    protocol = "ssh-ng";
+    speedFactor = 1;
+    supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
+    systems = [ "aarch64-linux" "x86_64-linux" ];
+  }];
+
   nix.linux-builder = {
-    enable = true;
+    enable = false;
     maxJobs = 4;
     supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
     config = { lib, ... }: {
