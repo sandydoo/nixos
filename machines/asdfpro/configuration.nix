@@ -192,6 +192,10 @@ in
   # nix.useSandbox = false;
   # nix.sandboxPaths = [ "/System/Library/Frameworks" "/System/Library/PrivateFrameworks" "/usr/lib" "/usr/bin/env" "/private/tmp" "/private/var/tmp" ];
 
+  # Periodically run the store optimizer.
+  # auto-optimise-store is known to corrupt the store.
+  nix.optimise.automatic = true;
+
   nix.extraOptions = ''
     auto-optimise-store = false
     keep-derivations = false
