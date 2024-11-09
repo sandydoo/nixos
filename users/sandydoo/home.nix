@@ -72,14 +72,14 @@ in
   };
 
   programs.zellij = {
-    enable = true;
+    enable = false;
     enableBashIntegration = true;
     enableFishIntegration = true;
     settings = {
       theme = "catppuccin-macchiato";
+      # Remove arrows
       simplified_ui = true;
       default_layout = "compact";
-      pane_frames = false;
       ui = {
         pane_frames.rounded_corners = true;
         pane_frames.hide_session_name = true;
