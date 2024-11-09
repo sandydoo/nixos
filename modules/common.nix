@@ -13,7 +13,7 @@
 
   # 6.11's oom-killer is very aggressive and kills nix-env.
   # https://discourse.nixos.org/t/linux-6-11-tends-to-kill-long-running-nix-operations-under-pressure/52824
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
   boot.kernelParams = [ "mitigations=off" ];
 
   boot.kernel.sysctl = {
