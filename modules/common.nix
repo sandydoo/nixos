@@ -34,6 +34,10 @@
 
   nix.package = unstable.nixVersions.nix_2_23;
 
+  # Disable channels entirely.
+  # Requires removing all the channel files and symlinks manually.
+  # nix.channel.enable = false;
+
   nix.registry = {
     # Stable: pinned stable channel
     nixpkgs.flake = inputs.nixpkgs;
@@ -48,10 +52,12 @@
       type = "github";
     };
   };
-  nix.nixPath = with config.nix.registry; [
-    "nixpkgs=${nixpkgs.flake}"
-    "stable=${stable.flake}"
-    "latest=${latest.flake}"
+  nix.nixPath =
+    let inherit (config.nix) registry;
+    in [
+    "nixpkgs=${registry.nixpkgs.flake}"
+    "stable=${registry.stable.flake}"
+    "latest=${registry.latest.flake}"
   ];
 
   nix.settings.trusted-users = [ "root" "sandydoo" ];
