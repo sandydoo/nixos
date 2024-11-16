@@ -22,9 +22,7 @@
   };
 
   hardware.enableAllFirmware = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.setLdLibraryPath = true;
+  hardware.graphics.enable = true;
 
   networking.useNetworkd = lib.mkDefault false;
   networking.firewall.enable = lib.mkDefault true;

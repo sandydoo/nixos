@@ -5,10 +5,7 @@
   imports = [
     ./hardware-configuration.nix
     "${inputs.self}/modules/common.nix"
-    "${inputs.self}/modules/vmware-guest.nix"
   ];
-
-  disabledModules = [ "virtualisation/vmware-guest.nix" ];
 
   boot.kernelParams = [ "video=Virtual-1:3024x1964@60" ];
   boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
