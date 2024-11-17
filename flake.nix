@@ -107,6 +107,11 @@
               nixpkgs.config.allowBroken = true;
             };
           };
+          stable = _: _: {
+            stable = import inputs.nixpkgs-darwin {
+              inherit system;
+            };
+          };
         in {
           inherit system;
 
@@ -114,6 +119,7 @@
             ({ ... }: {
               nixpkgs.overlays = [
                 latest
+                stable
                 (import ./overlays)
                 (import ./overlays/darwin.nix)
               ];
