@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, lib, unstable, ... }:
+{ config, inputs, pkgs, lib, unstable, stable, ... }:
 
 {
   boot.loader.timeout = 2;
@@ -30,7 +30,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  nix.package = pkgs.nixVersions.nix_2_23.override { curl = pkgs.stable.curl; };
+  nix.package = pkgs.nixVersions.nix_2_23;
 
   # Disable channels entirely.
   # Requires removing all the channel files and symlinks manually.

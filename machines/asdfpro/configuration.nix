@@ -164,7 +164,7 @@ in
   };
   launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
 
-  nix.package = pkgs.nixVersions.nix_2_23.override { curl = pkgs.stable.curl; };
+  nix.package = pkgs.nixVersions.nix_2_23;
 
   # Stable: pinned stable channel
   # nix.registry.nixpkgs.flake = nixpkgs;

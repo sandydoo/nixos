@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
     nix-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -107,11 +107,6 @@
               nixpkgs.config.allowBroken = true;
             };
           };
-          stable = _: _: {
-            stable = import inputs.nixpkgs-darwin {
-              inherit system;
-            };
-          };
         in {
           inherit system;
 
@@ -119,7 +114,6 @@
             ({ ... }: {
               nixpkgs.overlays = [
                 latest
-                stable
                 (import ./overlays)
                 (import ./overlays/darwin.nix)
               ];
