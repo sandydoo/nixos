@@ -25,7 +25,7 @@
   systemd.services."autovt@tty1".enable = false;
 
   environment.systemPackages = [
-    pkgs.gnome.gnome-tweaks
+    pkgs.gnome-tweaks
   ];
 
   programs.dconf.enable = true;

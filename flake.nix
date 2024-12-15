@@ -1,12 +1,12 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
     nix-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:LnL7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly = {

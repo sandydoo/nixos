@@ -231,7 +231,10 @@ in
       merge.ff = "no";
       pager.difftool = true;
       pull.ff = "only";
-      push.default = "current";
+      push = {
+        autoSetupRemote = true;
+        default = "current";
+      };
       tag.gpgSign = true;
     };
     ignores = [ ".DS_Store" ".nlsp-settings" ];

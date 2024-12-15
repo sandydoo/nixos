@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, lib, unstable, ... }:
+{ config, inputs, pkgs, lib, unstable, stable, ... }:
 
 {
   boot.loader.timeout = 2;
@@ -22,9 +22,7 @@
   };
 
   hardware.enableAllFirmware = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.setLdLibraryPath = true;
+  hardware.graphics.enable = true;
 
   networking.useNetworkd = lib.mkDefault false;
   networking.firewall.enable = lib.mkDefault true;
@@ -32,7 +30,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  nix.package = unstable.nixVersions.nix_2_23;
+  nix.package = pkgs.nixVersions.nix_2_23;
 
   # Disable channels entirely.
   # Requires removing all the channel files and symlinks manually.

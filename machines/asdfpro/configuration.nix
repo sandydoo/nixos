@@ -100,9 +100,6 @@ in
 
     macfuse-stubs
 
-    weechat
-    # weechatScripts.weechat-matrix
-    weechatScripts.weechat-go
     irssi
     tiny
 
