@@ -154,6 +154,8 @@ in
 
   environment.variables = {
     EDITOR = "nvim";
+    # Fix ghostty shell integration: https://github.com/ghostty-org/ghostty/discussions/2832
+    XDG_DATA_DIRS = ["$GHOSTTY_SHELL_INTEGRATION_XDG_DIR"];
   };
 
   # Auto upgrade nix package and the daemon service.
