@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixpkgs, nix-unstable, ... }:
+{ config, pkgs, lib, inputs, nixpkgs, nix-unstable, unstable, isLinux, ... }:
 
 let
   typescript-language-server = pkgs.symlinkJoin {
@@ -27,6 +27,12 @@ let
   '';
 in
 {
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.extraSpecialArgs = { inherit inputs; inherit unstable; inherit isLinux; };
+  home-manager.users.sander = import "${inputs.self}/users/sandydoo/home.nix";
+  users.users.sander.home = "/Users/sander";
+
   environment.systemPackages = with pkgs; [
     git
     git-lfs

@@ -119,8 +119,21 @@
               ];
             })
             ./machines/asdfpro/configuration.nix
+            home-manager.darwinModules.home-manager
           ];
-          specialArgs = { inherit nix-unstable nixpkgs; };
+          specialArgs = { 
+            inherit inputs nix-unstable nixpkgs;
+            isLinux = false;
+            isDarwin = true;
+            unstable = import nix-unstable {
+              inherit system;
+              config.allowUnfree = true;
+              config.allowBroken = true;
+              overlays = [
+                inputs.neovim-nightly.overlays.default
+              ];
+            };
+          };
         });
     };
 }
