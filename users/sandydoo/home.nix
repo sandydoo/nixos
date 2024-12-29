@@ -113,7 +113,7 @@
       };
       tag.gpgSign = true;
     };
-    ignores = [ ".DS_Store" ".nlsp-settings" ];
+    ignores = [ (builtins.readFile ./git/gitignore) ];
   };
 
   programs.bat.enable = true;
