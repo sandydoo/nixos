@@ -21,12 +21,13 @@ in
 
   home.file.".hammerspoon/init.lua".source = ../hammerspoon/init.lua;
 
-  home.sessionVariablesExtra = ''
-    export VOLTA_HOME="$HOME/.volta"
-    export PATH="$VOLTA_HOME/bin:$PATH"
+  home.sessionVariables = {
+    VOLTA_HOME = "$HOME/.volta";
+  };
 
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-  '';
+  home.sessionPath = [
+    "$VOLTA_HOME/bin"
+  ];
 
   services.gpg-agent = {
     enable = true;
