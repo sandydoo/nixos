@@ -31,7 +31,6 @@ in
     tmux
     kakoune
     kak-lsp
-    neovim
     helix
     lazygit
 
@@ -39,7 +38,7 @@ in
 
     # Tools
     gnugrep
-    htop
+    btop
     procs
     bandwhich
     iperf3

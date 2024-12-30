@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, unstable, isLinux, ... }:
+{ pkgs, lib, inputs, isLinux, ... }:
 
 {
   imports = [
@@ -11,7 +11,7 @@
 
   home.packages = with pkgs; [
     # Editors
-    unstable.neovim
+    neovim
     kakoune
     helix
 
