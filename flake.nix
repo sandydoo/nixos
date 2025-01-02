@@ -40,6 +40,7 @@
 
         specialArgs = inputs // {
           inherit inputs;
+          isLinux = true;
           unstable = import nix-unstable {
             system = "aarch64-linux";
             config.allowUnfree = true;
@@ -64,6 +65,7 @@
 
         specialArgs = inputs // {
           inherit inputs;
+          isLinux = true;
           unstable = import nix-unstable {
             system = "aarch64-linux";
             config.allowUnfree = true;
@@ -89,6 +91,7 @@
 
         specialArgs = inputs // {
           inherit inputs;
+          isLinux = true;
           unstable = import nix-unstable {
             system = "x86_64-linux";
             config.allowUnfree = true;
@@ -124,7 +127,6 @@
           specialArgs = { 
             inherit inputs nix-unstable nixpkgs;
             isLinux = false;
-            isDarwin = true;
             unstable = import nix-unstable {
               inherit system;
               config.allowUnfree = true;

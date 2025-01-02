@@ -1,5 +1,4 @@
-
-{ pkgs, lib, inputs, unstable, ... }:
+{ pkgs, lib, ... }:
 
 let
   inherit (lib.hm.gvariant) mkUint32;
@@ -29,7 +28,7 @@ in
     xterm*faceName: monospace:pixelsize=18
   '';
 
-  home.file.".config/sway/config".source = ./sway;
+  home.file.".config/sway/config".source = ../sway;
 
   services.xscreensaver.enable = false;
   services.xscreensaver.settings.mode = "blank";
@@ -141,7 +140,7 @@ in
 
   programs.gpg.enable = true;
   programs.gpg.publicKeys = [
-    { source = ./hey-at-sandydoo.me.public.asc;
+    { source = ../hey-at-sandydoo.me.public.asc;
       trust = "ultimate";
     }
   ];

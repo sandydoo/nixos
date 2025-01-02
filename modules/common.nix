@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, lib, unstable, stable, ... }:
+{ config, inputs, pkgs, lib, unstable, stable, isLinux, ... }:
 
 {
   boot.loader.timeout = 2;
@@ -101,7 +101,7 @@
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs; inherit unstable; };
+  home-manager.extraSpecialArgs = { inherit inputs; inherit unstable; inherit isLinux; };
   home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 
   users.mutableUsers = false;
