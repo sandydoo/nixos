@@ -70,7 +70,7 @@
 
   # Serve the store as a binary cache
   services.nix-serve = {
-    enable = true;
+    enable = false;
     secretKeyFile = "/var/cache-priv-key.pem";
   };
 
