@@ -4,7 +4,7 @@ let
   pinentry-custom = pkgs.writeShellScriptBin "pinentry-custom" ''
     pinentry=${lib.getExe pkgs.pinentry-tty}
     case "$PINENTRY_USER_DATA" in
-    *USE_TTY*)  pinentry=${lib.getExe pkgs.pinentry-tty} ;;
+    *USE_TTY*) pinentry=${lib.getExe pkgs.pinentry-tty} ;;
     *USE_CURSES*) pinentry=${lib.getExe pkgs.pinentry-curses} ;;
     ${lib.optionalString pkgs.stdenv.isLinux ''
     *USE_GNOME3*) pinentry=${lib.getExe pkgs.pinentry-gnome} ;;
@@ -17,7 +17,10 @@ let
   '';
 in
 {
-  home.packages = [ pinentry-custom ];
+  home.packages = [
+    pinentry-custom
+    pkgs.macmon # Monitor macOS system stats
+  ];
 
   home.file.".hammerspoon/init.lua".source = ../hammerspoon/init.lua;
 
