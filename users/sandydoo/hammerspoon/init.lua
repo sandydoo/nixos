@@ -1,6 +1,6 @@
 -- Toggle Ghostty with alt-tab
 -- Handled by Ghostty now
-hs.hotkey.bind({"alt"}, "tab", function()
+hs.hotkey.bind({ "alt" }, "tab", function()
   if hs.application.frontmostApplication():name() == "Ghostty" then
     hs.application.frontmostApplication():hide()
   else
@@ -19,16 +19,16 @@ end
 -- Lock GPG keys when not using the laptop.
 local function lockGpgOnExit(event)
   local name = "?"
-  for key,val in pairs(pow) do
+  for key, val in pairs(pow) do
     if event == val then name = key end
   end
   log.f("caffeinate event %d => %s", event, name)
 
   if event == pow.screensDidSleep
-  or event == pow.systemWillSleep
-  or event == pow.systemWillPowerOff
-  or event == pow.sessionDidResignActive
-  or event == pow.screensDidLock
+      or event == pow.systemWillSleep
+      or event == pow.systemWillPowerOff
+      or event == pow.sessionDidResignActive
+      or event == pow.screensDidLock
   then
     log.i("sleeping…")
     local ok, status, type, exitCode = hs.execute("gpg-connect-agent reloadagent /bye", true)
@@ -38,3 +38,4 @@ local function lockGpgOnExit(event)
 end
 
 -- pow.new(lockGpgOnExit):start()
+
