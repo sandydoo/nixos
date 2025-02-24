@@ -84,7 +84,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 180d";
+    options = "--delete-older-than +10";
   };
 
   # Allow proprietary packages.
