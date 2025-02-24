@@ -185,6 +185,17 @@ in
   # auto-optimise-store is known to corrupt the store.
   nix.optimise.automatic = true;
 
+  # Enable garbage collection.
+  nix.gc = {
+    automatic = true;
+    interval = {
+      Weekday = 1;
+      Hour = 0;
+      Minute = 0;
+    };
+    options = "--delete-older-than +10";
+  };
+
   nix.extraOptions = ''
     auto-optimise-store = false
     keep-derivations = false
