@@ -26,6 +26,8 @@
 
   environment.systemPackages = [
     pkgs.gnome-tweaks
+    pkgs.wl-clipboard
+    pkgs.waypipe
   ];
 
   programs.dconf.enable = true;

@@ -39,6 +39,7 @@
         pane_frames.rounded_corners = true;
         pane_frames.hide_session_name = true;
       };
+      copy_command = if isLinux then "wl-copy" else "pb-copy";
     };
   };
 
