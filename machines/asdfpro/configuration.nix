@@ -193,7 +193,7 @@ in
       Hour = 0;
       Minute = 0;
     };
-    options = "--delete-older-than +10";
+    options = "--delete-older-than 30d";
   };
 
   nix.extraOptions = ''
