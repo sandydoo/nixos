@@ -156,7 +156,16 @@ in
   };
   launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
 
-  nix.package = pkgs.nixVersions.nix_2_25;
+  # Allow larger sandbox profiles
+  # https://github.com/NixOS/nix/pull/12570
+  nix.package = pkgs.nixVersions.nix_2_26.overrideAttrs (_: {
+    src = pkgs.fetchFromGitHub {
+      owner = "NixOS";
+      repo = "nix";
+      rev = "2.26-maintenance";
+      sha256 = "sha256-lac6GvOJN5J4pkheRtjn3UraxITYwKUoYPzilJQCM4w=";
+    };
+  });
 
   # Stable: pinned stable channel
   # nix.registry.nixpkgs.flake = nixpkgs;
@@ -176,10 +185,6 @@ in
     "stable=${config.nix.registry.stable.flake}"
     "latest=${config.nix.registry.latest.flake}"
   ];
-
-  # Do not enable sandboxing on macOS.
-  # nix.useSandbox = false;
-  # nix.sandboxPaths = [ "/System/Library/Frameworks" "/System/Library/PrivateFrameworks" "/usr/lib" "/usr/bin/env" "/private/tmp" "/private/var/tmp" ];
 
   # Periodically run the store optimizer.
   # auto-optimise-store is known to corrupt the store.
@@ -201,7 +206,12 @@ in
     keep-derivations = false
     keep-outputs = false
     experimental-features = nix-command flakes
+    darwin-log-sandbox-violations = true
   '';
+
+  #Try enabling sandboxing on macOS.
+  nix.settings.sandbox = "relaxed";
+
   nix.settings.trusted-users = [ "sander" ];
   nix.settings.substituters = [
     "https://nix-community.cachix.org?priority=41"
