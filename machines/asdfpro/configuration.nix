@@ -162,8 +162,8 @@ in
     src = pkgs.fetchFromGitHub {
       owner = "NixOS";
       repo = "nix";
-      rev = "2.26-maintenance";
-      sha256 = "sha256-lac6GvOJN5J4pkheRtjn3UraxITYwKUoYPzilJQCM4w=";
+      rev = "2.27.1";
+      hash = "sha256-rBPulEBpn4IiqkPsetuh7BRzT2iGCzZYnogTAsbrvhU=";
     };
   });
 
