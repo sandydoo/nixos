@@ -209,8 +209,9 @@ in
     darwin-log-sandbox-violations = true
   '';
 
-  #Try enabling sandboxing on macOS.
-  nix.settings.sandbox = "relaxed";
+  # Try enabling sandboxing on macOS.
+  # nix.settings.sandbox = "relaxed";
+  nix.settings.sandbox = false;
 
   nix.settings.trusted-users = [ "sander" ];
   nix.settings.substituters = [
