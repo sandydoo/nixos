@@ -159,6 +159,7 @@ in
   # Allow larger sandbox profiles
   # https://github.com/NixOS/nix/pull/12570
   nix.package = pkgs.nixVersions.nix_2_26.overrideAttrs (_: {
+    version = "2.27.1";
     src = pkgs.fetchFromGitHub {
       owner = "NixOS";
       repo = "nix";
