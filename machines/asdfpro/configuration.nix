@@ -156,17 +156,7 @@ in
   };
   launchd.daemons.nix-daemon.serviceConfig.SoftResourceLimits.NumberOfFiles = 1048576;
 
-  # Allow larger sandbox profiles
-  # https://github.com/NixOS/nix/pull/12570
-  nix.package = pkgs.nixVersions.nix_2_26.overrideAttrs (_: {
-    version = "2.27.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "NixOS";
-      repo = "nix";
-      rev = "2.27.1";
-      hash = "sha256-rBPulEBpn4IiqkPsetuh7BRzT2iGCzZYnogTAsbrvhU=";
-    };
-  });
+  nix.package = pkgs.nixVersions.nix_2_26;
 
   # Stable: pinned stable channel
   # nix.registry.nixpkgs.flake = nixpkgs;
