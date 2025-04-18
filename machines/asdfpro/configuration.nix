@@ -20,6 +20,8 @@ in
   users.users.sander.home = "/Users/sander";
 
   environment.systemPackages = with pkgs; [
+    home-manager
+
     git
     git-lfs
     gh
