@@ -58,6 +58,15 @@
     "latest=${registry.latest.flake}"
   ];
 
+  # Allow proprietary packages.
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
+  nixpkgs.config.allowUnsupported = true;
+  nixpkgs.overlays = [
+    (import "${inputs.self}/overlays")
+    (final: prev: { latest = unstable; })
+  ];
+
   nix.settings.trusted-users = [ "sandydoo" ];
   nix.settings.substituters = [
     "https://nix-community.cachix.org?priority=41"
@@ -86,15 +95,6 @@
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
-
-  # Allow proprietary packages.
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
-  nixpkgs.config.allowUnsupported = true;
-  nixpkgs.overlays = [
-    (import "${inputs.self}/overlays")
-    (final: prev: { latest = unstable; })
-  ];
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
