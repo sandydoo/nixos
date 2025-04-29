@@ -103,12 +103,13 @@
       darwinConfigurations.asdfPro =
         darwin.lib.darwinSystem (let
           system = "aarch64-darwin";
-          latest = _: _: {
-            latest = import nix-unstable {
-              inherit system;
-              nixpkgs.config.allowUnfree = true;
-              nixpkgs.config.allowBroken = true;
-            };
+          unstable = import nix-unstable {
+            inherit system;
+            config.allowUnfree = true;
+            config.allowBroken = true;
+            overlays = [
+              inputs.neovim-nightly.overlays.default
+            ];
           };
         in {
           inherit system;
@@ -116,7 +117,10 @@
           modules = [
             ({ ... }: {
               nixpkgs.overlays = [
-                latest
+                (_: _: {
+                  inherit unstable;
+                  latest = unstable;
+                })
                 (import ./overlays)
                 (import ./overlays/darwin.nix)
               ];
@@ -124,17 +128,10 @@
             ./machines/asdfpro/configuration.nix
             home-manager.darwinModules.home-manager
           ];
-          specialArgs = { 
+          specialArgs = {
             inherit inputs nix-unstable nixpkgs;
             isLinux = false;
-            unstable = import nix-unstable {
-              inherit system;
-              config.allowUnfree = true;
-              config.allowBroken = true;
-              overlays = [
-                inputs.neovim-nightly.overlays.default
-              ];
-            };
+            inherit unstable;
           };
         });
     };

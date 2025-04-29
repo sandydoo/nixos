@@ -20,6 +20,19 @@
 
     # For git difftool
     difftastic
+
+    # AI
+    latest.claude-code
+
+    # Node
+    volta
+
+    # Nix
+    nix-output-monitor
+
+    # Rust
+    cargo-outdated
+    cargo-sweep
   ];
 
   home.sessionVariables = {
