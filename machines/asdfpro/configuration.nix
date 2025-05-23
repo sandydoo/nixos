@@ -111,10 +111,10 @@ in
     stylish-haskell
 
     # Elm
-    elmPackages.elm
-    elmPackages.elm-language-server
-    elmPackages.elm-test
-    elmPackages.elm-format
+    # elmPackages.elm
+    # elmPackages.elm-language-server
+    # elmPackages.elm-test
+    # elmPackages.elm-format
 
     # Python
     python3
