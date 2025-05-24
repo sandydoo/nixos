@@ -11,8 +11,7 @@
     "virtio_gpu"
     "drm"
   ];
-  # boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -23,6 +22,7 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/48EA-A51E";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices =

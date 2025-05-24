@@ -7,8 +7,6 @@
     "${inputs.self}/modules/common.nix"
   ];
 
-  hardware.opengl.extraPackages = [ pkgs.intel-ocl ];
-
   networking.hostName = "nixos-x86";
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
