@@ -3,6 +3,7 @@
 {
   imports = [
     inputs.vscode-server.homeModules.default
+    inputs.nix-index-database.hmModules.nix-index
   ]
   ++ lib.optional isLinux ./systems/linux.nix
   ++ lib.optional (!isLinux) ./systems/darwin.nix;
@@ -58,9 +59,14 @@
 
   # Disable this helper script on flake-based machines.
   # programs.command-not-found.enable = false;
+
+  # Indexed search of files in nixpkgs
   programs.nix-index.enable = true;
   programs.nix-index.enableBashIntegration = true;
   programs.nix-index.enableFishIntegration = true;
+  # Integrate nix-index-database with comma.
+  # Allows directly running binaries by name without installing or setting up a shell.
+  programs.nix-index-database.comma.enable = true;
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
