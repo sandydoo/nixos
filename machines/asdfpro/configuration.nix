@@ -217,17 +217,31 @@ in
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
 
-  nix.buildMachines = [{
-    hostName = "nixos-vmware";
-    sshUser = "builder";
-    sshKey = "/etc/nix/builder_ed25519";
-    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTMgcm9vdEBuaXhvcwo=";
-    maxJobs = 4;
-    protocol = "ssh-ng";
-    speedFactor = 1;
-    supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
-    systems = [ "aarch64-linux" "x86_64-linux" ];
-  }];
+  nix.buildMachines = [
+    {
+      hostName = "nixos-vmware";
+      sshUser = "builder";
+      sshKey = "/etc/nix/builder_ed25519";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
+      maxJobs = 4;
+      protocol = "ssh-ng";
+      speedFactor = 1;
+      supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
+      systems = [ "aarch64-linux" "x86_64-linux" ];
+    }
+    {
+      hostName = "100.88.234.87";
+      sshUser = "builder";
+      sshKey = "/etc/nix/builder_ed25519";
+      # ssh-keyscan -t ed25519 <HOSTNAME> | grep "ssh-ed25519" | cut -d' ' -f2,3 | tr -d '\n' | base64 -w0
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUd1MGR6VUllbGs4SVdxS1Bab01XU1E2T2JUSXJMK0dIV2pRYXBtM1JnZmE=";
+      maxJobs = 4;
+      protocol = "ssh-ng";
+      speedFactor = 2;
+      supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
+      systems = [ "x86_64-linux" ];
+    }
+  ];
 
   nix.linux-builder = {
     enable = false;
