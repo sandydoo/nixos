@@ -148,6 +148,19 @@
     enableFishIntegration = true;
   };
 
+  programs.tmux.enable = true;
+  programs.tmux.aggressiveResize = false;
+  programs.tmux.plugins = with pkgs.tmuxPlugins; [
+    sensible
+    pain-control
+    resurrect
+    continuum
+    sidebar
+    prefix-highlight
+    tmux-thumbs
+  ];
+  programs.tmux.extraConfig = builtins.readFile ./tmux/tmux.conf;
+
   # Sync files between machines
   services.syncthing.enable = false;
 }
