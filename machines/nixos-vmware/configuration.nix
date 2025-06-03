@@ -5,6 +5,7 @@
   imports = [
     ./hardware-configuration.nix
     "${inputs.self}/modules/common.nix"
+    "${inputs.self}/modules/remote-builder.nix"
   ];
 
   boot.kernelParams = [ "video=Virtual-1:3024x1964@60" ];
@@ -70,12 +71,4 @@
     enable = true;
     secretKeyFile = "/var/lib/nix-serve/cache-private-key.pem";
   };
-
-  users.users.builder = {
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKY+NOCO6HAas0N9NTHSC6pD4m/5sIIdPvLGdRCk5R6h builder@localhost"
-    ];
-  };
-  nix.settings.trusted-users = [ "builder" ];
 }

@@ -220,7 +220,7 @@ in
   nix.buildMachines = [
     {
       hostName = "nixos-vmware";
-      sshUser = "builder";
+      sshUser = "remotebuilder";
       sshKey = "/etc/nix/builder_ed25519";
       publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
       maxJobs = 4;
@@ -231,7 +231,7 @@ in
     }
     {
       hostName = "100.88.234.87";
-      sshUser = "builder";
+      sshUser = "remotebuilder";
       sshKey = "/etc/nix/builder_ed25519";
       # ssh-keyscan -t ed25519 <HOSTNAME> | grep "ssh-ed25519" | cut -d' ' -f2,3 | tr -d '\n' | base64 -w0
       publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUd1MGR6VUllbGs4SVdxS1Bab01XU1E2T2JUSXJMK0dIV2pRYXBtM1JnZmE=";
