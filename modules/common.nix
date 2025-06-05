@@ -28,7 +28,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  nix.package = pkgs.nixVersions.nix_2_28;
+  nix.package = pkgs.nixVersions.nix_2_29;
 
   # Disable channels entirely.
   # Requires removing all the channel files and symlinks manually.

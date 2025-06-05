@@ -155,7 +155,7 @@ in
     tempDir = "/tmp";
   };
 
-  nix.package = pkgs.nixVersions.nix_2_28;
+  nix.package = pkgs.nixVersions.nix_2_29;
 
   # Stable: pinned stable channel
   # nix.registry.nixpkgs.flake = nixpkgs;
