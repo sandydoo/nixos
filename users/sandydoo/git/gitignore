@@ -62,7 +62,8 @@ tags
 # Persistent undo
 [._]*.un~
 
-
-
 # Direnv and nix-direnv
 .direnv/
+
+# Claude
+.claude
