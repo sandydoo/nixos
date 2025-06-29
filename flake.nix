@@ -102,7 +102,7 @@
         };
       };
 
-      darwinConfigurations.asdfPro =
+      darwinConfigurations.asdfpro =
         darwin.lib.darwinSystem (let
           system = "aarch64-darwin";
           unstable = import nix-unstable {

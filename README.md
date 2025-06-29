@@ -11,7 +11,7 @@ nixos-rebuild switch --use-remote-sudo
 There's a 2-step process to building a Nix Darwin machine from a flake:
 
 ```shell
-nix build ./#darwinConfigurations.asdfPro.system
+nix build ./#darwinConfigurations.asdfpro.system
 ```
 
 ```shell
