@@ -195,7 +195,7 @@ in
     auto-optimise-store = false
     keep-derivations = false
     keep-outputs = false
-    experimental-features = nix-command flakes
+    experimental-features = nix-command flakes configurable-impure-env
     darwin-log-sandbox-violations = true
   '';
 
