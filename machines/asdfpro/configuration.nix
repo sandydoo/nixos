@@ -199,6 +199,9 @@ in
     darwin-log-sandbox-violations = true
   '';
 
+  # Test MITM SSL certificate setups, like ZScaler, with mitmproxy.
+  # security.pki.certificateFiles = [ "/etc/ssl/mitmproxy-ca-cert.pem" ];
+
   # Try enabling sandboxing on macOS.
   # nix.settings.sandbox = "relaxed";
   nix.settings.sandbox = false;
