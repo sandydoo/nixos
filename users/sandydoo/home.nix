@@ -16,6 +16,9 @@
     kakoune
     helix
 
+    # Neovim
+    luarocks    # Lua package manager (required by lazy.nvim)
+
     # Terminal
     vivid         # Set terminal colors with LS_COLORS
 
