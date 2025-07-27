@@ -38,4 +38,3 @@ local function lockGpgOnExit(event)
 end
 
 -- pow.new(lockGpgOnExit):start()
-
