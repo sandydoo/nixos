@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, isLinux, ... }:
+{ pkgs, lib, inputs, isLinux, isDarwin, ... }:
 
 {
   imports = [
@@ -64,6 +64,54 @@
   # Disable this helper script on flake-based machines.
   # programs.command-not-found.enable = false;
 
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    forwardAgent = true;
+    includes = [
+      "./private/private.config"
+      "./private/cachix.config"
+    ] ++ lib.optionals isDarwin [
+      "~/.orbstack/ssh/config"
+    ];
+    extraConfig = ''
+      # macOS only
+      IgnoreUnknown UseKeychain
+      UseKeychain yes
+
+      # ServerAliveInterval 5
+      ExitOnForwardFailure no
+
+      SendEnv LANG LC_*
+      SendEnv COLORTERM truecolor
+      # Fall back to known supported terminfo entry
+      SetEnv TERM=xterm-256color
+    '';
+    matchBlocks = lib.mkMerge [
+      (lib.mkIf isDarwin {
+        "nixos-vmware" = {
+          hostname = "nixos-vmware";
+          user = "sandydoo";
+          forwardAgent = true;
+          extraOptions = {
+            "SetEnv" = "GPG_TTY=$(tty)";
+          };
+        };
+        "nixos-x86" = {
+          hostname = "nixos-x86";
+          user = "sandydoo";
+          forwardAgent = true;
+        };
+      })
+      {
+        "github" = {
+          hostname = "github.com";
+          user = "git";
+        };
+      }
+    ];
+  };
+
   # Indexed search of files in nixpkgs
   programs.nix-index.enable = true;
   programs.nix-index.enableBashIntegration = true;
@@ -101,8 +149,9 @@
     userName = "Sander";
     userEmail = "hey@sandydoo.me";
     signing = {
-      key = "D1A763BC84F34603";
+      format = "ssh"; # Use SSH key for signing
       signByDefault = true;
+      key = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me";
     };
     extraConfig = {
       alias = {
@@ -135,7 +184,9 @@
         autoSetupRemote = true;
         default = "current";
       };
-      tag.gpgSign = true;
+      gpg.ssh.allowedSignersFile = builtins.toString (pkgs.writeText "ssh-allowed-signers" ''
+        hey@sandydoo.me ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me
+      '');
     };
     ignores = [ (builtins.readFile ./git/gitignore) ];
   };

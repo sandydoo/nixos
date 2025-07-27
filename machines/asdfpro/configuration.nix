@@ -15,7 +15,7 @@ in
 {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs; inherit unstable; inherit isLinux; };
+  home-manager.extraSpecialArgs = { inherit inputs unstable isLinux; isDarwin = !isLinux; };
   home-manager.users.sander = import "${inputs.self}/users/sandydoo/home.nix";
   users.users.sander.home = "/Users/sander";
 

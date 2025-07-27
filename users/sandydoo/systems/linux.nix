@@ -142,37 +142,26 @@ in
   services.vscode-server.enableFHS = false;
   services.vscode-server.installPath = "$HOME/.vscode-server";
 
-  programs.gpg.enable = true;
-  programs.gpg.publicKeys = [
-    { source = ../hey-at-sandydoo.me.public.asc;
-      trust = "ultimate";
-    }
-  ];
+  programs.gpg = {
+    enable = true;
+    publicKeys = [
+      { source = ../hey-at-sandydoo.me.public.asc;
+        trust = "ultimate";
+      }
+    ];
+    settings = {
+      keyserver = "hkps://keys.openpgp.org";
+      # Use ASCII armored output instead of binary
+      armor = true;
+      # Show key IDs in 16-character format
+      keyid-format = "0xlong";
+      default-key = "F4869E8B85ED07AC611E2EAF171257C9C397032E";
 
-  programs.gpg.settings = {
-    keyserver = "hkps://keys.openpgp.org";
-    # Use ASCII armored output instead of binary
-    armor = true;
-    # Show key IDs in 16-character format
-    keyid-format = "0xlong";
-    default-key = "F4869E8B85ED07AC611E2EAF171257C9C397032E";
-
-    # Agent settings
-    use-agent = true;
-    no-autostart = true;
+      # Agent settings
+      use-agent = true;
+      no-autostart = true;
+    };
   };
-
-  # Do not enable on VMs
-  # services.gpg-agent.enable = false;
-  # services.gpg-agent.enableSshSupport = true;
-  # services.gpg-agent.enableExtraSocket = true;
-  # services.gpg-agent.defaultCacheTtl = 34560000;
-  # services.gpg-agent.maxCacheTtl = 34560000;
-  # services.gpg-agent.defaultCacheTtlSsh = 34560000;
-  # services.gpg-agent.maxCacheTtlSsh = 34560000;
-  # services.gpg-agent.extraConfig = ''
-  #   allow-loopback-pinentry
-  # '';
 
   home.stateVersion = "22.11";
 }
