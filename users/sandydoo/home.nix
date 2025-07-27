@@ -3,7 +3,7 @@
 {
   imports = [
     inputs.vscode-server.homeModules.default
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
   ]
   ++ lib.optional isLinux ./systems/linux.nix
   ++ lib.optional (!isLinux) ./systems/darwin.nix;
