@@ -150,18 +150,15 @@ in
   ];
 
   programs.gpg.settings = {
+    keyserver = "hkps://keys.openpgp.org";
     # Use ASCII armored output instead of binary
     armor = true;
-
     # Show key IDs in 16-character format
     keyid-format = "0xlong";
-
-    keyserver = "hkps://keys.openpgp.org";
-
-    use-agent = true;
-
     default-key = "F4869E8B85ED07AC611E2EAF171257C9C397032E";
 
+    # Agent settings
+    use-agent = true;
     no-autostart = true;
   };
 
