@@ -277,6 +277,18 @@ in
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  launchd.user.agents = {
+    "ssh-add" = {
+      script = ''
+        ssh-add --apple-load-keychain
+      '';
+      serviceConfig.RunAtLoad = true;
+    };
+  };
+
+  # Required by launchd.user.agents.
+  system.primaryUser = "sander";
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
