@@ -17,6 +17,7 @@
     helix
 
     # Neovim
+    lua         # Required by luarocks
     luarocks    # Lua package manager (required by lazy.nvim)
 
     # Terminal
