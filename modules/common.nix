@@ -11,7 +11,7 @@
   # The default mode "1" is not suppored by VMWare
   boot.loader.systemd-boot.consoleMode = "keep";
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_14;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
   boot.kernelParams = [ "mitigations=off" ];
 
   boot.kernel.sysctl = {
