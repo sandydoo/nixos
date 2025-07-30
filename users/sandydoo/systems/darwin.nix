@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, unstable, lib, ... }:
 
 let
   pinentry-custom = pkgs.writeShellScriptBin "pinentry-custom" ''
@@ -20,6 +20,9 @@ in
   home.packages = [
     pinentry-custom
     pkgs.macmon # Monitor macOS system stats
+
+    # Apple containers
+    unstable.container
   ];
 
   home.file.".hammerspoon/init.lua".source = ../hammerspoon/init.lua;
