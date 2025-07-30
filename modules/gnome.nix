@@ -1,23 +1,22 @@
 { config, pkgs, ... }:
 
 {
-  services.xserver = {
-    enable = true;
-    displayManager.gdm = {
+  services.xserver.enable = true;
+
+  services.displayManager = {
+    gdm = {
       enable = true;
       wayland = true;
       autoSuspend = false;
     };
-    desktopManager.gnome.enable = true;
-  };
-
-  services.displayManager = {
     defaultSession = "gnome";
     autoLogin = {
       enable = true;
       user = "sandydoo";
     };
   };
+
+  services.desktopManager.gnome.enable = true;
 
   # Fix broken auto-login
   # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
