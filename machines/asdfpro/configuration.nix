@@ -1,4 +1,14 @@
-{ config, pkgs, lib, inputs, nixpkgs, nix-unstable, unstable, isLinux, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  nixpkgs,
+  nix-unstable,
+  unstable,
+  isLinux,
+  ...
+}:
 
 let
   typescript-language-server = pkgs.symlinkJoin {
@@ -15,7 +25,10 @@ in
 {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs unstable isLinux; isDarwin = !isLinux; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs unstable isLinux;
+    isDarwin = !isLinux;
+  };
   home-manager.users.sander = import "${inputs.self}/users/sandydoo/home.nix";
   users.users.sander.home = "/Users/sander";
 
@@ -24,19 +37,6 @@ in
 
     git
     git-lfs
-    gh
-    act
-    difftastic
-    neofetch
-
-    starship
-    tmux
-    kakoune
-    kak-lsp
-    helix
-    lazygit
-
-    awscli
 
     # Tools
     gnugrep
@@ -55,15 +55,14 @@ in
     direnv
     nix-direnv
     lorri
-    nixpkgs-fmt
-    nixfmt-rfc-style
-    cachix
 
+    # SSH
     abduco
     mosh
     dtach
     eternal-terminal
 
+    # Tools
     bat
     broot
     eza
@@ -80,73 +79,28 @@ in
     gnupg
     blackbox
 
-    cmus
-    ncmpcpp
-    spotifyd
-
+    # Compression
     xz
     lzip
     p7zip
     par2cmdline
 
+    # Filesystem
     macfuse-stubs
-
-    irssi
-    tiny
-
-    cmatrix
-    pastel
-
-    # Nix
-    nil
-
-    # Haskell
-    cabal-install
-    stack
-    ghc
-    haskell-language-server
-    cabal2nix
-    ormolu
-    stylish-haskell
-
-    # Elm
-    # elmPackages.elm
-    # elmPackages.elm-language-server
-    # elmPackages.elm-test
-    # elmPackages.elm-format
 
     # Python
     python3
-
-    # Rust
-    rust-analyzer
-    zld
-    # mold
 
     # TypeScript
     nodejs
     nodePackages.typescript
     typescript-language-server
-
-    # Lua
-    latest.lua-language-server
-
-    # JSON
-    # https://github.com/NixOS/nixpkgs/issues/335533
-    latest.nodePackages.vscode-langservers-extracted
-
-    # Image manipulation
-    imagemagick
-
-    # Videos
-    yt-dlp
-    streamlink
   ];
 
   environment.variables = {
     EDITOR = "nvim";
     # Fix ghostty shell integration: https://github.com/ghostty-org/ghostty/discussions/2832
-    XDG_DATA_DIRS = ["$GHOSTTY_SHELL_INTEGRATION_XDG_DIR"];
+    XDG_DATA_DIRS = [ "$GHOSTTY_SHELL_INTEGRATION_XDG_DIR" ];
   };
 
   # Auto upgrade nix package and the daemon service.
@@ -229,8 +183,16 @@ in
       maxJobs = 4;
       protocol = "ssh-ng";
       speedFactor = 1;
-      supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
-      systems = [ "aarch64-linux" "x86_64-linux" ];
+      supportedFeatures = [
+        "kvm"
+        "benchmark"
+        "big-parallel"
+        "nixos-test"
+      ];
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
     }
     {
       hostName = "100.88.234.87";
@@ -241,7 +203,12 @@ in
       maxJobs = 4;
       protocol = "ssh-ng";
       speedFactor = 2;
-      supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
+      supportedFeatures = [
+        "kvm"
+        "benchmark"
+        "big-parallel"
+        "nixos-test"
+      ];
       systems = [ "x86_64-linux" ];
     }
   ];
@@ -249,14 +216,21 @@ in
   nix.linux-builder = {
     enable = false;
     maxJobs = 4;
-    supportedFeatures = [ "kvm" "benchmark" "big-parallel" "nixos-test" ];
-    config = { lib, ... }: {
-      # A small set of builder options are available
-      # virtualisation.darwin-builder.memorySize = 8 * 1024;
+    supportedFeatures = [
+      "kvm"
+      "benchmark"
+      "big-parallel"
+      "nixos-test"
+    ];
+    config =
+      { lib, ... }:
+      {
+        # A small set of builder options are available
+        # virtualisation.darwin-builder.memorySize = 8 * 1024;
 
-      virtualisation.cores = 4;
-      virtualisation.memorySize = lib.mkForce (8 * 1024);
-    };
+        virtualisation.cores = 4;
+        virtualisation.memorySize = lib.mkForce (8 * 1024);
+      };
   };
 
   programs.zsh.enable = true;

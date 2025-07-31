@@ -1,4 +1,11 @@
-{ pkgs, lib, inputs, isLinux, isDarwin, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  isLinux,
+  isDarwin,
+  ...
+}:
 
 {
   imports = [
@@ -14,17 +21,19 @@
     # Editors
     neovim
     kakoune
+    kak-lsp
     helix
 
     # Neovim
-    lua         # Required by luarocks
-    luarocks    # Lua package manager (required by lazy.nvim)
+    lua # Required by luarocks
+    luarocks # Lua package manager (required by lazy.nvim)
+    latest.lua-language-server
+
+    # To auto-install tree-sitter parsers
+    latest.tree-sitter
 
     # Terminal
-    vivid         # Set terminal colors with LS_COLORS
-
-    # For git difftool
-    difftastic
+    vivid # Set terminal colors with LS_COLORS
 
     # AI
     latest.claude-code
@@ -33,11 +42,66 @@
     volta
 
     # Nix
-    nix-output-monitor
+    nil # Nix language server
+    nixfmt-rfc-style # Nix formatter
+    nix-output-monitor # Monitor Nix build outputs
+
+    # Git
+    act
+    difftastic
+    gh
+    git-absorb # git commit --fixup, but automatic
+    lazygit
+
+    # Docker
+    lazydocker
+
+    # Cloud
+    awscli
+    cachix
+
+    # Tools
+    neofetch # Display system information
+
+    # Music
+    cmus
+    ncmpcpp
+    spotifyd
+
+    # Chats
+    irssi
+    tiny
+
+    # Misc
+    cmatrix # Terminal matrix
+    pastel # Color manipulation tool
+
+    # Haskell
+    cabal-install
+    stack
+    ghc
+    haskell-language-server
+    cabal2nix
 
     # Rust
     cargo-outdated
     cargo-sweep
+    rust-analyzer
+    zld
+
+    # Lua
+    latest.lua-language-server
+
+    # JSON
+    # https://github.com/NixOS/nixpkgs/issues/335533
+    latest.nodePackages.vscode-langservers-extracted
+
+    # Image manipulation
+    imagemagick
+
+    # Videos
+    yt-dlp
+    streamlink
   ];
 
   home.sessionVariables = {
@@ -71,7 +135,8 @@
     includes = [
       "./private/private.config"
       "./private/cachix.config"
-    ] ++ lib.optionals isDarwin [
+    ]
+    ++ lib.optionals isDarwin [
       "~/.orbstack/ssh/config"
     ];
     extraConfig = ''
@@ -184,9 +249,11 @@
         autoSetupRemote = true;
         default = "current";
       };
-      gpg.ssh.allowedSignersFile = builtins.toString (pkgs.writeText "ssh-allowed-signers" ''
-        hey@sandydoo.me ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me
-      '');
+      gpg.ssh.allowedSignersFile = builtins.toString (
+        pkgs.writeText "ssh-allowed-signers" ''
+          hey@sandydoo.me ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me
+        ''
+      );
     };
     ignores = [ (builtins.readFile ./git/gitignore) ];
   };

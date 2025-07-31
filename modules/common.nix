@@ -151,7 +151,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
-    cachix
 
     # Development
     binutils
@@ -178,11 +177,11 @@
 
     # Editors
     vim
+    neovim
     kakoune
 
     # Version control
     git
-    git-absorb              # git commit --fixup, but automatic
     gh                      # GitHub CLI
 
     # Crypto
@@ -195,7 +194,6 @@
 
     # Python
     python3
-    python3.pkgs.black      # Format python code
 
     # JavaScript
     nodejs
@@ -214,24 +212,6 @@
 
     # Shell
     shfmt                   # Format shell scripts
-
-    # Haskell
-    latest.stack
-    latest.cabal-install
-    latest.ghc
-    latest.hlint
-    latest.ormolu
-    latest.haskell-language-server
-
-    # Elm
-    elmPackages.elm
-    elmPackages.elm-language-server
-    elmPackages.elm-format
-
-    # Lua (for neovim configs)
-    latest.lua-language-server
-    # To auto-install tree-sitter parsers
-    latest.tree-sitter
 
     firefox
     ungoogled-chromium
