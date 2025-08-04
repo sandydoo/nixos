@@ -51,6 +51,7 @@
     difftastic
     gh
     git-absorb # git commit --fixup, but automatic
+    jjui
     lazygit
 
     # Docker
@@ -106,6 +107,22 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  programs.jujutsu = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Sander";
+        email = "hey@sandydoo.me";
+      };
+      # ui.diff-formatter = [
+      #   "difft"
+      #   "--color=always"
+      #   "$left"
+      #   "$right"
+      # ];
+    };
   };
 
   programs.zellij = {
