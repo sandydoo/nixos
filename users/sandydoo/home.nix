@@ -58,7 +58,7 @@
     lazydocker
 
     # Cloud
-    awscli
+    awscli2
     cachix
 
     # Tools
