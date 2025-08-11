@@ -147,10 +147,13 @@ in
 
   nix.extraOptions = ''
     auto-optimise-store = false
+    darwin-log-sandbox-violations = true # Log sandbox violations to /var/log/nix/sandbox.log
+    experimental-features = nix-command flakes configurable-impure-env
+    http-connections = 75 # This also controls the thread pool size when querying caches
     keep-derivations = false
     keep-outputs = false
-    experimental-features = nix-command flakes configurable-impure-env
-    darwin-log-sandbox-violations = true
+    log-lines = 50 # Number of lines to show when builds fail
+    warn-dirty = false # Don't warn about dirty git trees
   '';
 
   # Test MITM SSL certificate setups, like ZScaler, with mitmproxy.
