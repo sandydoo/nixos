@@ -63,6 +63,7 @@
 
     # Tools
     neofetch # Display system information
+    delta # Pager
 
     # Music
     cmus
@@ -115,6 +116,22 @@
       user = {
         name = "Sander";
         email = "hey@sandydoo.me";
+      };
+      git.write-change-id-header = true; # Experimental feature to write the change-id to the commit header
+      aliases = {
+        # Move bookmark up to the current commit
+        tug = [
+          "bookmark"
+          "move"
+          "--from"
+          "heads(::@- & bookmarks())"
+          "--to"
+          "@-"
+        ];
+      };
+      ui = {
+        default-command = "status";
+        pager = "delta";
       };
       # ui.diff-formatter = [
       #   "difft"
