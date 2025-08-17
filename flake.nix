@@ -33,9 +33,6 @@
     {
       self,
       nixpkgs,
-      nix-unstable,
-      home-manager,
-      darwin,
       ...
     }@inputs:
     let
@@ -54,7 +51,7 @@
       mkSystem = import ./lib/mkSystem.nix { inherit nixpkgs overlays inputs; };
     in
     {
-      formatter = forEachSystem (system: nix-unstable.legacyPackages.${system}.nixfmt-rfc-style);
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       devShells = forEachSystem (system: {
         default = inputs.devenv.lib.mkShell {

@@ -8,7 +8,7 @@ name:
 {
   system,
   user,
-  realUser ? null,
+  realUser ? null, # For macOS, use realUser if provided, otherwise use user
   modules ? [ ],
 }:
 let
@@ -20,7 +20,6 @@ let
   ];
   isLinux = !isDarwin;
 
-  # For Darwin, use realUser if provided, otherwise use user
   systemUser = if isDarwin && realUser != null then realUser else user;
 
   unstable = import inputs.nix-unstable {
@@ -65,19 +64,16 @@ if isDarwin then
     inherit specialArgs system;
 
     modules = baseModules ++ [
-      (
-        { ... }:
-        {
-          nixpkgs.overlays = [
-            (_: _: {
-              inherit unstable;
-              latest = unstable;
-            })
-            overlays.default
-            overlays.darwin
-          ];
-        }
-      )
+      {
+        nixpkgs.overlays = [
+          (_: _: {
+            inherit unstable;
+            latest = unstable;
+          })
+          overlays.default
+          overlays.darwin
+        ];
+      }
       inputs.home-manager.darwinModules.home-manager
     ];
 
