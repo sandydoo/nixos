@@ -44,27 +44,22 @@
     {
       formatter = forEachSystem (system: nix-unstable.legacyPackages.${system}.nixfmt-rfc-style);
 
-      devShells = forEachSystem (
-        system:
-        let
+      devShells = forEachSystem (system: {
+        default = inputs.devenv.lib.mkShell {
+          inherit inputs;
           pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          default = inputs.devenv.lib.mkShell {
-            inherit inputs pkgs;
-            modules = [
-              (
-                { ... }:
-                {
-                  git-hooks.hooks = {
-                    nixfmt-rfc-style.enable = true;
-                  };
-                }
-              )
-            ];
-          };
-        }
-      );
+          modules = [
+            (
+              { ... }:
+              {
+                git-hooks.hooks = {
+                  nixfmt-rfc-style.enable = true;
+                };
+              }
+            )
+          ];
+        };
+      });
 
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
