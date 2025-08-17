@@ -20,14 +20,51 @@
         hercules-ci-effects.follows = "";
       };
     };
+    devenv.url = "github:cachix/devenv";
+    git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
-  outputs = { self, nixpkgs, nix-unstable, home-manager, darwin, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nix-unstable,
+      home-manager,
+      darwin,
+      ...
+    }@inputs:
     let
-      forEachSystem = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ];
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+      forEachSystem = nixpkgs.lib.genAttrs systems;
     in
     {
-      formatter = forEachSystem (system: nix-unstable.legacyPackages.${system}.nixfmt);
+      formatter = forEachSystem (system: nix-unstable.legacyPackages.${system}.nixfmt-rfc-style);
+
+      devShells = forEachSystem (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = inputs.devenv.lib.mkShell {
+            inherit inputs pkgs;
+            modules = [
+              (
+                { ... }:
+                {
+                  git-hooks.hooks = {
+                    nixfmt-rfc-style.enable = true;
+                  };
+                }
+              )
+            ];
+          };
+        }
+      );
 
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
@@ -102,8 +139,8 @@
         };
       };
 
-      darwinConfigurations.asdfpro =
-        darwin.lib.darwinSystem (let
+      darwinConfigurations.asdfpro = darwin.lib.darwinSystem (
+        let
           system = "aarch64-darwin";
           unstable = import nix-unstable {
             inherit system;
@@ -113,20 +150,24 @@
               inputs.neovim-nightly.overlays.default
             ];
           };
-        in {
+        in
+        {
           inherit system;
 
           modules = [
-            ({ ... }: {
-              nixpkgs.overlays = [
-                (_: _: {
-                  inherit unstable;
-                  latest = unstable;
-                })
-                (import ./overlays)
-                (import ./overlays/darwin.nix)
-              ];
-            })
+            (
+              { ... }:
+              {
+                nixpkgs.overlays = [
+                  (_: _: {
+                    inherit unstable;
+                    latest = unstable;
+                  })
+                  (import ./overlays)
+                  (import ./overlays/darwin.nix)
+                ];
+              }
+            )
             ./machines/asdfpro/configuration.nix
             home-manager.darwinModules.home-manager
           ];
@@ -135,6 +176,7 @@
             isLinux = false;
             inherit unstable;
           };
-        });
+        }
+      );
     };
 }
