@@ -13,7 +13,7 @@
     inputs.nix-index-database.homeModules.nix-index
   ]
   ++ lib.optional isLinux ./systems/linux.nix
-  ++ lib.optional (!isLinux) ./systems/darwin.nix;
+  ++ lib.optional (isDarwin) ./systems/darwin.nix;
 
   programs.home-manager.enable = true;
 

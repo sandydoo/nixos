@@ -1,11 +1,21 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  isLinux,
+  systemUser,
+  ...
+}:
 
 {
-  users.users.sandydoo = {
+  users.users.${systemUser} = {
     isNormalUser = true;
-    home = "/home/sandydoo";
+    home = if isLinux then "/home/${systemUser}" else "/Users/${systemUser}";
     description = "Sander";
-    extraGroups = [ "wheel" "docker" "libvirtd" "postgres" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+      "libvirtd"
+      "postgres"
+    ];
     shell = pkgs.fish;
     hashedPassword = "$6$0v8AhbJr0C8TH5Dq$dsxXIZGLgoL2thXhBBPlCiiSiWKo.MZxIHX.9j71ZeHwQcm.rdXQZXtP.acuXXD4A7ifUexMuIzCkUNG5LUWO1";
     openssh.authorizedKeys.keys = [

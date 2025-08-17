@@ -12,6 +12,8 @@ name:
   modules ? [ ],
 }:
 let
+  inherit (nixpkgs) lib;
+
   isDarwin = builtins.elem system [
     "aarch64-darwin"
     "x86_64-darwin"
@@ -31,7 +33,14 @@ let
   };
 
   specialArgs = inputs // {
-    inherit inputs isLinux unstable;
+    inherit
+      inputs
+      unstable
+      isDarwin
+      isLinux
+      user
+      systemUser
+      ;
   };
 
   homeManagerModule =
@@ -39,26 +48,15 @@ let
     {
       home-manager.useUserPackages = true;
       home-manager.useGlobalPkgs = true;
-      home-manager.extraSpecialArgs = {
-        inherit inputs unstable isLinux;
-        isDarwin = !isLinux;
-      };
+      home-manager.extraSpecialArgs = specialArgs;
       home-manager.users.${systemUser} = import ../users/${user}/home.nix;
-    }
-    // (
-      if isDarwin then
-        {
-          users.users.${systemUser}.home = "/Users/${systemUser}";
-        }
-      else
-        { }
-    );
+    };
 
   baseModules = [
     ../machines/${name}/configuration.nix
+    homeManagerModule
   ]
-  ++ (if isLinux then [ ../users/${user}.nix ] else [ ])
-  ++ [ homeManagerModule ]
+  ++ lib.optionals isLinux [ ../users/${user}.nix ]
   ++ modules;
 
 in
@@ -90,6 +88,5 @@ else
 
     modules = baseModules ++ [
       inputs.home-manager.nixosModules.home-manager
-      inputs.vscode-server.nixosModule
     ];
   }

@@ -1,12 +1,8 @@
 {
   config,
   pkgs,
-  lib,
   inputs,
-  nixpkgs,
-  nix-unstable,
-  unstable,
-  isLinux,
+  systemUser,
   ...
 }:
 
@@ -23,6 +19,8 @@ let
 
 in
 {
+  users.users.${systemUser}.home = "/Users/${systemUser}";
+
   environment.systemPackages = with pkgs; [
     home-manager
 
