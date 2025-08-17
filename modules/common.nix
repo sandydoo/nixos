@@ -105,14 +105,6 @@
     options = "--delete-older-than 30d";
   };
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = {
-    inherit inputs unstable isLinux;
-    isDarwin = !isLinux;
-  };
-  home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
-
   users.mutableUsers = false;
 
   services.dnsmasq = {
