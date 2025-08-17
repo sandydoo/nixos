@@ -63,9 +63,5 @@
     # VM
     # Graphics driver for QEMU guests
     virglrenderer
-
-    (writeShellScriptBin "xrandr-auto" ''
-      xrandr --output Virtual-1 --auto
-    '')
   ];
 }

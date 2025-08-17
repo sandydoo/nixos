@@ -33,7 +33,10 @@
   networking.firewall.enable = false;
 
   virtualisation.libvirtd.enable = false;
-  virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
+  virtualisation.libvirtd.allowedBridges = [
+    "br0"
+    "virbr0"
+  ];
 
   # Don’t require password for sudo.
   security.sudo.wheelNeedsPassword = false;
@@ -41,10 +44,6 @@
   environment.systemPackages = with pkgs; [
     # VM
     virglrenderer
-
-    (writeShellScriptBin "xrandr-auto" ''
-      xrandr --output Virtual-1 --auto
-    '')
   ];
 
   services.datadog-agent = {

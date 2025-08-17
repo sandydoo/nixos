@@ -1,4 +1,13 @@
-{ config, inputs, pkgs, lib, unstable, stable, isLinux, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  unstable,
+  stable,
+  isLinux,
+  ...
+}:
 
 {
   boot.loader.timeout = 2;
@@ -49,12 +58,14 @@
     };
   };
   nix.nixPath =
-    let inherit (config.nix) registry;
-    in [
-    "nixpkgs=${registry.nixpkgs.flake}"
-    "stable=${registry.stable.flake}"
-    "latest=${registry.latest.flake}"
-  ];
+    let
+      inherit (config.nix) registry;
+    in
+    [
+      "nixpkgs=${registry.nixpkgs.flake}"
+      "stable=${registry.stable.flake}"
+      "latest=${registry.latest.flake}"
+    ];
 
   # Allow proprietary packages.
   nixpkgs.config.allowUnfree = true;
@@ -96,7 +107,10 @@
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.extraSpecialArgs = { inherit inputs unstable isLinux; isDarwin = !isLinux; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs unstable isLinux;
+    isDarwin = !isLinux;
+  };
   home-manager.users.sandydoo = import "${inputs.self}/users/sandydoo/home.nix";
 
   users.mutableUsers = false;
@@ -104,7 +118,10 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      server = [ "1.1.1.1" "1.0.0.1" ];
+      server = [
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
       listen-address = "127.0.0.1";
       bind-interfaces = true;
       address = [
@@ -158,16 +175,16 @@
     strace
 
     # Tools
-    fd                      # Find files
-    jq                      # Handle JSON
-    ripgrep                 # Replace grep
+    fd # Find files
+    jq # Handle JSON
+    ripgrep # Replace grep
     killall
-    xclip                   # Copy to clipboard
+    xclip # Copy to clipboard
     neofetch
-    duf                     # Disk usage
+    duf # Disk usage
     gparted
     ncdu
-    comma                   # Run programs without installing them
+    comma # Run programs without installing them
 
     # Graphics
     glxinfo
@@ -182,7 +199,7 @@
 
     # Version control
     git
-    gh                      # GitHub CLI
+    gh # GitHub CLI
 
     # Crypto
     gnupg
@@ -211,7 +228,7 @@
     nix-output-monitor
 
     # Shell
-    shfmt                   # Format shell scripts
+    shfmt # Format shell scripts
 
     firefox
     ungoogled-chromium
@@ -231,10 +248,6 @@
 
     # Clipboard
     gtkmm3
-
-    (writeShellScriptBin "xrandr-auto" ''
-      xrandr --output Virtual-1 --auto
-    '')
   ];
 
   # Let 'nixos-version --json' know about the Git revision
@@ -249,4 +262,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
 }
-
