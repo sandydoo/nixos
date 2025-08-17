@@ -1,10 +1,6 @@
 {
-  config,
   pkgs,
   inputs,
-  unstable,
-  nixpkgs,
-  nix-unstable,
   ...
 }:
 
@@ -24,10 +20,10 @@
 
   networking.hosts = {
     "127.0.0.2" = [
-      "superstrizh"
-      "test.superstrizh"
-      "api.superstrizh"
-      "app.superstrizh"
+      "nixos-x86"
+      "test.nixos-x86"
+      "api.nixos-x86"
+      "app.nixos-x86"
     ];
   };
 
@@ -63,32 +59,6 @@
     "kvm"
     "nixos-test"
   ];
-
-  # services.xserver = {
-  #   enable = true;
-  #   layout = "us";
-  #   desktopManager.gnome.enable = true;
-  #   displayManager = {
-  #     gdm.enable = true;
-  #     autoLogin = {
-  #       enable = true;
-  #       user = "sandydoo";
-  #     };
-  #   };
-  #   # desktopManager.xterm.enable = false;
-
-  #   # displayManager.defaultSession = "none+i3";
-  #   # displayManager.autoLogin = {
-  #   #   enable = false;
-  #   #   user = "sandydoo";
-  #   # };
-  #   # displayManager.lightdm.enable = true;
-  #   # # displayManager.lightdm.greeters.pantheon.enable = true;
-
-  #   # windowManager.i3.enable = true;
-  #   # windowManager.i3.package = pkgs.i3-gaps;
-  #   # windowManager.i3.extraPackages = with pkgs; [ dmenu i3status ];
-  # };
 
   # Serve the store as a binary cache
   services.nix-serve = {

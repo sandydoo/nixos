@@ -3,14 +3,19 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     darwin.url = "github:LnL7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+
+    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+
     neovim-nightly = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
@@ -19,6 +24,7 @@
         hercules-ci-effects.follows = "";
       };
     };
+
     devenv.url = "github:cachix/devenv";
     git-hooks.url = "github:cachix/git-hooks.nix";
   };
@@ -55,14 +61,11 @@
           inherit inputs;
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
-            (
-              { ... }:
-              {
-                git-hooks.hooks = {
-                  nixfmt-rfc-style.enable = true;
-                };
-              }
-            )
+            {
+              git-hooks.hooks = {
+                nixfmt-rfc-style.enable = true;
+              };
+            }
           ];
         };
       });
@@ -85,7 +88,7 @@
         ];
       };
 
-      nixosConfigurations.nixos-x86 = mkSystem "superstrizh" {
+      nixosConfigurations.nixos-x86 = mkSystem "nixos-x86" {
         system = "x86_64-linux";
         user = "sandydoo";
         modules = [
