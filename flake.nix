@@ -97,6 +97,7 @@
       darwinConfigurations.asdfpro = mkSystem "asdfpro" {
         system = "aarch64-darwin";
         user = "sandydoo";
+        realUser = "sander";
         modules = [ ];
       };
     };
