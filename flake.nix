@@ -14,7 +14,6 @@
     neovim-nightly = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs = {
-        nixpkgs.follows = "nix-unstable";
         flake-compat.follows = "";
         git-hooks.follows = "";
         hercules-ci-effects.follows = "";
@@ -40,6 +39,13 @@
         "aarch64-darwin"
       ];
       forEachSystem = nixpkgs.lib.genAttrs systems;
+
+      overlays = {
+        default = import ./overlays;
+        darwin = import ./overlays/darwin.nix;
+      };
+
+      mkSystem = import ./lib/mkSystem.nix { inherit nixpkgs overlays inputs; };
     in
     {
       formatter = forEachSystem (system: nix-unstable.legacyPackages.${system}.nixfmt-rfc-style);
@@ -61,117 +67,37 @@
         };
       });
 
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = mkSystem "nixos" {
         system = "aarch64-linux";
-
+        user = "sandydoo";
         modules = [
-          ./machines/nixos/configuration.nix
-          ./users/sandydoo.nix
           ./modules/sway.nix
           ./modules/tailscale.nix
-          home-manager.nixosModules.home-manager
         ];
-
-        specialArgs = inputs // {
-          inherit inputs;
-          isLinux = true;
-          unstable = import nix-unstable {
-            system = "aarch64-linux";
-            config.allowUnfree = true;
-            config.allowBroken = true;
-            overlays = [
-              inputs.neovim-nightly.overlays.default
-            ];
-          };
-        };
       };
 
-      nixosConfigurations.nixos-vmware = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos-vmware = mkSystem "nixos-vmware" {
         system = "aarch64-linux";
-
+        user = "sandydoo";
         modules = [
-          ./machines/nixos-vmware/configuration.nix
-          ./users/sandydoo.nix
           ./modules/gnome.nix
           ./modules/tailscale.nix
-          home-manager.nixosModules.home-manager
         ];
-
-        specialArgs = inputs // {
-          inherit inputs;
-          isLinux = true;
-          unstable = import nix-unstable {
-            system = "aarch64-linux";
-            config.allowUnfree = true;
-            config.allowBroken = true;
-            overlays = [
-              inputs.neovim-nightly.overlays.default
-            ];
-          };
-        };
       };
 
-      nixosConfigurations.nixos-x86 = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos-x86 = mkSystem "superstrizh" {
         system = "x86_64-linux";
-
+        user = "sandydoo";
         modules = [
-          inputs.vscode-server.nixosModule
-          ./machines/superstrizh/configuration.nix
-          ./users/sandydoo.nix
           ./modules/i3.nix
           ./modules/tailscale.nix
-          home-manager.nixosModules.home-manager
         ];
-
-        specialArgs = inputs // {
-          inherit inputs;
-          isLinux = true;
-          unstable = import nix-unstable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-            config.allowBroken = true;
-          };
-        };
       };
 
-      darwinConfigurations.asdfpro = darwin.lib.darwinSystem (
-        let
-          system = "aarch64-darwin";
-          unstable = import nix-unstable {
-            inherit system;
-            config.allowUnfree = true;
-            config.allowBroken = true;
-            overlays = [
-              inputs.neovim-nightly.overlays.default
-            ];
-          };
-        in
-        {
-          inherit system;
-
-          modules = [
-            (
-              { ... }:
-              {
-                nixpkgs.overlays = [
-                  (_: _: {
-                    inherit unstable;
-                    latest = unstable;
-                  })
-                  (import ./overlays)
-                  (import ./overlays/darwin.nix)
-                ];
-              }
-            )
-            ./machines/asdfpro/configuration.nix
-            home-manager.darwinModules.home-manager
-          ];
-          specialArgs = {
-            inherit inputs nix-unstable nixpkgs;
-            isLinux = false;
-            inherit unstable;
-          };
-        }
-      );
+      darwinConfigurations.asdfpro = mkSystem "asdfpro" {
+        system = "aarch64-darwin";
+        user = "sandydoo";
+        modules = [ ];
+      };
     };
 }

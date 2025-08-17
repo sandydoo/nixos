@@ -285,9 +285,7 @@
         "git-hooks": [],
         "hercules-ci-effects": [],
         "neovim-src": "neovim-src",
-        "nixpkgs": [
-          "nix-unstable"
-        ],
+        "nixpkgs": "nixpkgs_3",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -443,6 +441,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1755268003,
+        "narHash": "sha256-nNaeJjo861wFR0tjHDyCnHs1rbRtrMgxAKMoig9Sj/w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "32f313e49e42f715491e1ea7b306a87c16fe0388",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1755186698,
         "narHash": "sha256-wNO3+Ks2jZJ4nTHMuks+cxAiVBGNuEBXsT29Bz6HASo=",
         "owner": "NixOS",
@@ -466,7 +480,7 @@
         "neovim-nightly": "neovim-nightly",
         "nix-index-database": "nix-index-database",
         "nix-unstable": "nix-unstable",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "vscode-server": "vscode-server"
       }
