@@ -1,4 +1,12 @@
-{ config, pkgs, inputs, unstable, nixpkgs, nix-unstable, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  unstable,
+  nixpkgs,
+  nix-unstable,
+  ...
+}:
 
 {
   imports = [
@@ -9,10 +17,18 @@
   ];
 
   networking.hostName = "nixos-x86";
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   networking.hosts = {
-    "127.0.0.2" = [ "superstrizh" "test.superstrizh" "api.superstrizh" "app.superstrizh" ];
+    "127.0.0.2" = [
+      "superstrizh"
+      "test.superstrizh"
+      "api.superstrizh"
+      "app.superstrizh"
+    ];
   };
 
   networking.nat.enable = true;
@@ -33,13 +49,20 @@
   virtualisation.vmware.guest.headless = false;
 
   virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
+  virtualisation.libvirtd.allowedBridges = [
+    "br0"
+    "virbr0"
+  ];
   programs.dconf.enable = true;
 
   # Don’t require password for sudo.
   security.sudo.wheelNeedsPassword = false;
 
-  nix.settings.system-features = [ "big-parallel" "kvm" "nixos-test" ];
+  nix.settings.system-features = [
+    "big-parallel"
+    "kvm"
+    "nixos-test"
+  ];
 
   # services.xserver = {
   #   enable = true;

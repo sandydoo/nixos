@@ -42,7 +42,10 @@
   networking.firewall.enable = false;
 
   virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.allowedBridges = [ "br0" "virbr0" ];
+  virtualisation.libvirtd.allowedBridges = [
+    "br0"
+    "virbr0"
+  ];
 
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;

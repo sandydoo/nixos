@@ -117,7 +117,8 @@ in
       end
     '';
     plugins = [
-      { name = "pure";
+      {
+        name = "pure";
         src = pkgs.fishPlugins.pure.src;
       }
       {
@@ -135,8 +136,9 @@ in
   programs.vscode.enable = true;
   # Workaround for https://github.com/nix-community/home-manager/issues/2798
   programs.vscode.mutableExtensionsDir = false;
-  programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions;
-    [ ms-vscode-remote.remote-ssh ];
+  programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
+    ms-vscode-remote.remote-ssh
+  ];
 
   services.vscode-server.enable = true;
   services.vscode-server.enableFHS = false;
@@ -145,7 +147,8 @@ in
   programs.gpg = {
     enable = true;
     publicKeys = [
-      { source = ../hey-at-sandydoo.me.public.asc;
+      {
+        source = ../hey-at-sandydoo.me.public.asc;
         trust = "ultimate";
       }
     ];
