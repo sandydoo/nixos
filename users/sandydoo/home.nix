@@ -37,6 +37,7 @@
 
     # AI
     latest.claude-code
+    latest.amp-cli
 
     # Node
     volta
