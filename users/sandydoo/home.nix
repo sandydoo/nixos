@@ -90,7 +90,6 @@
     cargo-outdated
     cargo-sweep
     rust-analyzer
-    zld
 
     # Lua
     latest.lua-language-server
