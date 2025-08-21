@@ -4,7 +4,7 @@
     createHome = false;
     group = "remotebuilder";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKY+NOCO6HAas0N9NTHSC6pD4m/5sIIdPvLGdRCk5R6h remotebuilder@localhost"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFkIlj+aHsr4zs3mCmnpdQNpc6YYYcXioW+RMdO80pF/ builder@localhost"
     ];
   };
 
