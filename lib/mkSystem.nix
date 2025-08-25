@@ -28,6 +28,7 @@ let
     config.allowBroken = true;
     overlays = [
       inputs.neovim-nightly.overlays.default
+      inputs.claude-code.overlays.default
     ];
   };
 
