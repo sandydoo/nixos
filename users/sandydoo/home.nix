@@ -61,6 +61,7 @@
     # Cloud
     awscli2
     cachix
+    _1password-cli
 
     # Tools
     neofetch # Display system information
