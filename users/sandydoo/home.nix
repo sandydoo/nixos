@@ -232,6 +232,7 @@
   programs.starship.enable = true;
   programs.starship.settings = {
     add_newline = true;
+    command_timeout = 2000; # in milliseconds
 
     character = {
       success_symbol = "[➜](bold green)";
