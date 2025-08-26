@@ -64,7 +64,7 @@
     _1password-cli
 
     # Tools
-    neofetch # Display system information
+    fastfetch # Display system information
     delta # Pager
 
     # Music

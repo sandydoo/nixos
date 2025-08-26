@@ -172,7 +172,6 @@
     ripgrep # Replace grep
     killall
     xclip # Copy to clipboard
-    neofetch
     duf # Disk usage
     gparted
     ncdu
