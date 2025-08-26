@@ -246,7 +246,7 @@ in
   launchd.user.agents = {
     "ssh-add" = {
       script = ''
-        ssh-add --apple-load-keychain -A
+        ssh-add --apple-load-keychain --apple-use-keychain
       '';
       serviceConfig.RunAtLoad = true;
     };
