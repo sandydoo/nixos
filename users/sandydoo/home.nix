@@ -180,6 +180,7 @@
           user = "sandydoo";
           forwardAgent = true;
           extraOptions = {
+            # DEPRECATED: no longer used
             "SetEnv" = "GPG_TTY=$(tty)";
           };
         };
