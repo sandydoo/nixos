@@ -165,8 +165,7 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
-    forwardAgent = true;
+    enableDefaultConfig = false;
     includes = [
       "./private/private.config"
       "./private/cachix.config"
@@ -174,19 +173,6 @@
     ++ lib.optionals isDarwin [
       "~/.orbstack/ssh/config"
     ];
-    extraConfig = ''
-      # macOS only
-      IgnoreUnknown UseKeychain
-      UseKeychain yes
-
-      # ServerAliveInterval 5
-      ExitOnForwardFailure no
-
-      SendEnv LANG LC_*
-      SendEnv COLORTERM truecolor
-      # Fall back to known supported terminfo entry
-      SetEnv TERM=xterm-256color
-    '';
     matchBlocks = lib.mkMerge [
       (lib.mkIf isDarwin {
         "nixos-vmware" = {
@@ -207,6 +193,28 @@
         "github" = {
           hostname = "github.com";
           user = "git";
+        };
+
+        "*" = {
+          addKeysToAgent = "yes";
+          forwardAgent = false;
+          compression = false;
+          sendEnv = [
+            "LANG"
+            "LC_*"
+            "COLORTERM"
+          ];
+          setEnv = {
+            # Fall back to known supported terminfo entry
+            "TERM" = "xterm-256color";
+          };
+          extraOptions = {
+            # macOS only
+            "IgnoreUnknown" = "UseKeychain";
+            "UseKeychain" = "yes";
+
+            "ExitOnForwardFailure" = "no";
+          };
         };
       }
     ];
