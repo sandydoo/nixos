@@ -66,6 +66,8 @@
     # Tools
     fastfetch # Display system information
     delta # Pager
+    ripgrep # Search tool
+    ast-grep # Search tool for code
 
     # Music
     cmus

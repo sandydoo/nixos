@@ -60,7 +60,6 @@ in
     fd
     fzf
     jq
-    ripgrep
     tldr
 
     pandoc
