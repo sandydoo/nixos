@@ -24,10 +24,6 @@
     kak-lsp
     helix
 
-    # git
-    git
-    git-lfs
-
     # Neovim
     lua # Required by luarocks
     luarocks # Lua package manager (required by lazy.nvim)
@@ -52,13 +48,16 @@
     # Nix
     nil # Nix language server
     nixfmt-rfc-style # Nix formatter
+    nix-prefetch
     nix-output-monitor # Monitor Nix build outputs
 
     # Git
+    git
+    git-lfs
+    git-absorb # git commit --fixup, but automatic
+    gh
     act
     difftastic
-    gh
-    git-absorb # git commit --fixup, but automatic
     jjui
     lazygit
 
@@ -95,9 +94,10 @@
     eza
     duf
     du-dust
-    fd
-    fzf
-    jq
+    fd # Find files
+    fzf # Search files
+    jq # Handle JSON
+    yq # Handle YAML
     tldr
 
     # SSH

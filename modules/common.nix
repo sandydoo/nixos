@@ -167,15 +167,11 @@
     strace
 
     # Tools
-    fd # Find files
-    jq # Handle JSON
-    ripgrep # Replace grep
     killall
     xclip # Copy to clipboard
     duf # Disk usage
     gparted
     ncdu
-    comma # Run programs without installing them
 
     # Graphics
     glxinfo
@@ -183,54 +179,13 @@
     clinfo
     # renderdoc
 
-    # Editors
-    vim
-    neovim
-    kakoune
-
-    # Version control
-    git
-    gh # GitHub CLI
-
     # Crypto
-    gnupg
     pinentry-curses
-
-    # C
-    gnumake
-    gcc
-
-    # Python
-    python3
-
-    # JavaScript
-    nodejs
-    nodePackages.npm
-    nodePackages.yarn
-    nodePackages.vscode-json-languageserver
-
-    # TypeScript
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-
-    # Nix
-    nil
-    nix-prefetch
-    nix-output-monitor
-
-    # Shell
-    shfmt # Format shell scripts
 
     firefox
     ungoogled-chromium
 
-    # Send files
-    croc
-
     # Networking
-    mtr
-    iperf3
-    dogdns
     openssl
     dnsutils
     nftables
