@@ -56,7 +56,6 @@ Reduce the lease time for DHCP leases. The default is 86400 seconds (24 hours). 
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist bootpd -dict DHCPLeaseTimeSecs -int 600
 ```
 
-
 ## Maintenance
 
 ### Delete older generations
@@ -72,7 +71,7 @@ sudo /run/current-system/bin/switch-to-configuration switch
 ### Delete Home Manager generations
 
 These are not currently automatically removed.
-See https://github.com/nix-community/home-manager/issues/3450.
+See <https://github.com/nix-community/home-manager/issues/3450>.
 
 ```shell
 home-manager expire-generations "-180 days"
