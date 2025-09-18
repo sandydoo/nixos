@@ -24,6 +24,10 @@
     kak-lsp
     helix
 
+    # git
+    git
+    git-lfs
+
     # Neovim
     lua # Required by luarocks
     luarocks # Lua package manager (required by lazy.nvim)
@@ -40,6 +44,9 @@
     latest.amp-cli
 
     # Node
+    nodejs
+    nodePackages.typescript
+    typescript-language-server
     volta
 
     # Nix
@@ -64,15 +71,51 @@
     _1password-cli
 
     # Tools
+    direnv # Auto-load .envrc files
     fastfetch # Display system information
     delta # Pager
+    gnugrep
     ripgrep # Search tool
     ast-grep # Search tool for code
+    btop
+    procs
+    bandwhich
+    iperf3
+    nmap
+    netcat
+    mkcert
+    rsync
+    rclone
+    croc
+    watchman
+    entr
 
-    # Music
-    cmus
-    ncmpcpp
-    spotifyd
+    bat
+    broot
+    eza
+    duf
+    du-dust
+    fd
+    fzf
+    jq
+    tldr
+
+    # SSH
+    mosh
+    eternal-terminal
+
+    # Encryption
+    gnupg # Commit signing (no longer used, switched to SSH keys)
+    blackbox # Encrypt files in git repos
+
+    # Compression
+    xz
+    lzip
+    p7zip
+    par2cmdline
+
+    # Filesystem
+    macfuse-stubs
 
     # Chats
     irssi
@@ -81,6 +124,9 @@
     # Misc
     cmatrix # Terminal matrix
     pastel # Color manipulation tool
+
+    # Python
+    python3
 
     # Haskell
     cabal-install
@@ -103,6 +149,9 @@
 
     # Image manipulation
     imagemagick
+
+    # Docs
+    pandoc
 
     # Videos
     yt-dlp
@@ -225,20 +274,19 @@
 
   # Indexed search of files in nixpkgs
   programs.nix-index.enable = true;
-  programs.nix-index.enableBashIntegration = true;
-  programs.nix-index.enableFishIntegration = true;
   # Integrate nix-index-database with comma.
   # Allows directly running binaries by name without installing or setting up a shell.
   programs.nix-index-database.comma.enable = true;
 
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-  home.file.".config/direnv/direnv.toml".text = ''
-    [global]
-    strict_env = true
-    warn_timeout = "1h"
-    hide_env_diff = true
-  '';
+  programs.direnv.enable = false;
+  programs.direnv.nix-direnv.enable = false;
+  programs.direnv.config = {
+    global = {
+      strict_env = true;
+      warn_timeout = "1h";
+      hide_env_diff = true;
+    };
+  };
 
   programs.starship.enable = true;
   programs.starship.settings = {
@@ -255,6 +303,57 @@
   };
 
   programs.bash.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAbbrs = {
+      "l" = "exa -lh --git --all";
+      "ls" = "exa";
+      "la" = "exa -a";
+      "ll" = "exa -lh";
+      "lt" = "exa --tree";
+      "git:undo" = "git reset HEAD~";
+      "rm" = "rm -i";
+      "lla" = "exa -la";
+      "find" = "fd";
+      "git:staged" = "git diff --staged";
+      "t" = "todo.sh";
+      "e" = "nvim";
+    };
+    shellAliases = {
+      "zed-app" = "/Applications/Zed.app/Contents/MacOS/zed";
+      "zed" = "/Applications/Zed.app/Contents/MacOS/cli";
+      "tailscale" = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
+    };
+    interactiveShellInit = ''
+      set fish_greeting
+
+      # Integrate with iTerm2
+      test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
+
+      # Added by OrbStack: command-line tools and integration
+      # This won't be added again if you remove it.
+      source ~/.orbstack/shell/init.fish 2>/dev/null || :
+    '';
+    plugins = [
+      {
+        name = "z";
+        src = pkgs.fishPlugins.z.src;
+      }
+      {
+        name = "pure";
+        src = pkgs.fishPlugins.pure;
+      }
+      {
+        name = "fish-abbreviation-tips";
+        src = pkgs.fetchFromGitHub {
+          owner = "gazorby";
+          repo = "fish-abbreviation-tips";
+          rev = "v0.7.0";
+          sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
+        };
+      }
+    ];
+  };
 
   programs.git = {
     enable = true;

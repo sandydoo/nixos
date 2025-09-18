@@ -104,35 +104,6 @@ in
     };
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set -x LS_COLORS (vivid generate gruvbox-light)
-
-      # Integrate with iTerm2
-      test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
-
-      if test -n "$SSH_CLIENT"
-        set -x PINENTRY_USER_DATA USE_CURSES=1
-      end
-    '';
-    plugins = [
-      {
-        name = "pure";
-        src = pkgs.fishPlugins.pure.src;
-      }
-      {
-        name = "fish-abbreviation-tips";
-        src = pkgs.fetchFromGitHub {
-          owner = "gazorby";
-          repo = "fish-abbreviation-tips";
-          rev = "v0.7.0";
-          sha256 = "sha256-F1t81VliD+v6WEWqj1c1ehFBXzqLyumx5vV46s/FZRU=";
-        };
-      }
-    ];
-  };
-
   programs.vscode.enable = true;
   # Workaround for https://github.com/nix-community/home-manager/issues/2798
   programs.vscode.mutableExtensionsDir = false;

@@ -23,66 +23,6 @@ in
 
   environment.systemPackages = with pkgs; [
     home-manager
-
-    git
-    git-lfs
-
-    # Tools
-    gnugrep
-    btop
-    procs
-    bandwhich
-    iperf3
-    nmap
-    netcat
-    mkcert
-    rsync
-    rclone
-    croc
-    watchman
-    entr
-    direnv
-    nix-direnv
-    lorri
-
-    # SSH
-    abduco
-    mosh
-    dtach
-    eternal-terminal
-
-    # Tools
-    bat
-    broot
-    eza
-    duf
-    du-dust
-    fd
-    fzf
-    jq
-    tldr
-
-    pandoc
-
-    gnupg
-    blackbox
-
-    # Compression
-    xz
-    lzip
-    p7zip
-    par2cmdline
-
-    # Filesystem
-    macfuse-stubs
-
-    # Python
-    python3
-
-    # TypeScript
-    nodejs
-    nodePackages.typescript
-    typescript-language-server
   ];
 
   environment.variables = {
@@ -238,7 +178,8 @@ in
     set -x PINENTRY_USER_DATA "USE_MAC=1"
   '';
 
-  programs.nix-index.enable = true;
+  # Support projects that use lorri
+  services.lorri.enable = true;
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
