@@ -28,6 +28,9 @@ in
 
     # Apple containers
     unstable.container
+
+    # Filesystem
+    macfuse-stubs
   ];
 
   home.file.".hammerspoon/init.lua".source = ../hammerspoon/init.lua;

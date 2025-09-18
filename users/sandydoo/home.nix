@@ -114,9 +114,6 @@
     p7zip
     par2cmdline
 
-    # Filesystem
-    macfuse-stubs
-
     # Chats
     irssi
     tiny
