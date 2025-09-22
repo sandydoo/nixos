@@ -333,10 +333,6 @@
     '';
     plugins = [
       {
-        name = "z";
-        src = pkgs.fishPlugins.z.src;
-      }
-      {
         name = "fish-abbreviation-tips";
         src = pkgs.fetchFromGitHub {
           owner = "gazorby";
