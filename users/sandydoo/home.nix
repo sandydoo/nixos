@@ -338,7 +338,7 @@
       }
       {
         name = "pure";
-        src = pkgs.fishPlugins.pure;
+        src = pkgs.fishPlugins.pure.overrideAttrs { doCheck = false; };
       }
       {
         name = "fish-abbreviation-tips";
