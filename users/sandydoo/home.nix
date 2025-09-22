@@ -337,10 +337,6 @@
         src = pkgs.fishPlugins.z.src;
       }
       {
-        name = "pure";
-        src = pkgs.fishPlugins.pure.overrideAttrs { doCheck = false; };
-      }
-      {
         name = "fish-abbreviation-tips";
         src = pkgs.fetchFromGitHub {
           owner = "gazorby";
