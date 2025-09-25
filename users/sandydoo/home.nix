@@ -321,7 +321,7 @@
       "t" = "todo.sh";
       "e" = "nvim";
     };
-    shellAliases = {
+    shellAliases = lib.mkIf isDarwin {
       "zed-app" = "/Applications/Zed.app/Contents/MacOS/zed";
       "zed" = "/Applications/Zed.app/Contents/MacOS/cli";
       "tailscale" = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
