@@ -275,8 +275,8 @@
   # Allows directly running binaries by name without installing or setting up a shell.
   programs.nix-index-database.comma.enable = true;
 
-  programs.direnv.enable = false;
-  programs.direnv.nix-direnv.enable = false;
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
   programs.direnv.config = {
     global = {
       strict_env = true;
