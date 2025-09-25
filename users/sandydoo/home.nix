@@ -166,6 +166,11 @@
         name = "Sander";
         email = "hey@sandydoo.me";
       };
+      signing = {
+        behavior = "own";
+        backend = "ssh";
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me";
+      };
       git.write-change-id-header = true; # Experimental feature to write the change-id to the commit header
       aliases = {
         # Move bookmark up to the current commit
