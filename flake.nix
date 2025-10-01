@@ -27,7 +27,7 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
-    devenv.url = "github:cachix/devenv";
+    devenv.url = "github:cachix/devenv/latest";
     git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
