@@ -3,7 +3,7 @@
 ## NixOS machines
 
 ```shell
-nixos-rebuild switch --use-remote-sudo
+nixos-rebuild switch --sudo
 ```
 
 ## Nix Darwin machines
