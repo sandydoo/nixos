@@ -1,4 +1,9 @@
 {
+  nixConfig = {
+    extra-substituters = [ "https://devenv.cachix.org/" ];
+    extra-trusted-public-keys = [ "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -64,6 +69,7 @@
               git-hooks.hooks = {
                 nixfmt-rfc-style.enable = true;
               };
+              cachix.pull = [ "devenv" ];
             }
           ];
         };
