@@ -31,6 +31,7 @@
 
     # To auto-install tree-sitter parsers
     latest.tree-sitter
+    gnumake # To build telescope-fzf
 
     # Terminal
     vivid # Set terminal colors with LS_COLORS
