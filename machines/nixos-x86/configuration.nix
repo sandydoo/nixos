@@ -70,7 +70,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Graphics
-    renderdoc
+    # renderdoc
 
     # VM
     xorg.xf86videovmware
