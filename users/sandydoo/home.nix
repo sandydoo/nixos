@@ -423,6 +423,10 @@
   ];
   programs.tmux.extraConfig = builtins.readFile ./tmux/tmux.conf;
 
+  # Tmux themes
+  xdg.configFile."tmux/flexoki-light.tmuxtheme".source = ./tmux/flexoki-light.tmuxtheme;
+  xdg.configFile."tmux/flexoki-dark.tmuxtheme".source = ./tmux/flexoki-dark.tmuxtheme;
+
   # Sync files between machines
   services.syncthing.enable = false;
 }
