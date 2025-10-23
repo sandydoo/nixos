@@ -33,6 +33,22 @@
 
   networking.useNetworkd = lib.mkDefault false;
   networking.firewall.enable = lib.mkDefault true;
+  networking.nameservers = [
+    "1.1.1.1#one.one.one.one"
+    "1.0.0.1#one.one.one.one"
+    "8.8.8.8#eight.eight.eight.eight"
+  ];
+  networking.hosts = {
+    "127.0.0.1" = [
+      "nixos"
+      "cachix"
+      "cachix.internal"
+    ];
+  };
+  # Use networkd
+  systemd.network.enable = true;
+
+  services.resolved.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -106,23 +122,6 @@
   };
 
   users.mutableUsers = false;
-
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      server = [
-        "1.1.1.1"
-        "1.0.0.1"
-      ];
-      listen-address = "127.0.0.1";
-      bind-interfaces = true;
-      address = [
-        "/nixos/127.0.0.1"
-        "/cachix/127.0.0.1"
-        "/cachix.internal/127.0.0.1"
-      ];
-    };
-  };
 
   services.openssh = {
     enable = true;
