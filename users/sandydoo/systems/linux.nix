@@ -4,8 +4,7 @@ let
   inherit (lib.hm.gvariant) mkUint32;
 in
 {
-  home.packages = with pkgs; [
-    ghostty
+  home.packages = [
   ];
 
   dconf.settings = {
@@ -63,37 +62,7 @@ in
   # services.polybar.enable = true;
   # services.polybar.script = "polybar bar &";
 
-  programs.kitty.enable = true;
-  programs.alacritty.enable = true;
-  programs.alacritty.settings = {
-    import = [ "/etc/nixos/alacritty/ayu_dark.yaml" ];
-    window = {
-      padding.x = 5;
-      padding.y = 5;
-    };
-
-    # font = {
-    #   normal = {
-    #     family = "";
-    #     style = "Regular";
-    #   };
-    #   bold = {
-    #     family = "IBM Plex Mono";
-    #     style = "Bold";
-    #   };
-    #   italic = {
-    #     family = "IBM Plex Mono";
-    #     style = "Italic";
-    #   };
-    #   bold_italic = {
-    #     family = "IBM Plex Mono";
-    #     style = "Bold Italic";
-    #   };
-    #   size = 8.0;
-    # };
-
-    live_config_reload = true;
-  };
+  programs.ghostty.enable = true;
 
   programs.firefox = {
     enable = true;
