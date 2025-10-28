@@ -21,14 +21,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs = {
-        flake-compat.follows = "";
-        git-hooks.follows = "";
-        hercules-ci-effects.follows = "";
-      };
-    };
+    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
