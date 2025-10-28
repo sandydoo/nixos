@@ -351,14 +351,12 @@
 
   programs.git = {
     enable = true;
-    userName = "Sander";
-    userEmail = "hey@sandydoo.me";
     signing = {
       format = "ssh"; # Use SSH key for signing
       signByDefault = true;
       key = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me";
     };
-    extraConfig = {
+    settings = {
       alias = {
         dft = "difftool";
         last = "log -1 HEAD";
@@ -379,8 +377,15 @@
       };
       credential.helper = lib.optionalString (!isLinux) "osxkeychain";
       diff.tool = "difftastic";
-      difftool.prompt = false;
-      difftool.difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
+      difftool = {
+        prompt = false;
+        difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
+      };
+      gpg.ssh.allowedSignersFile = builtins.toString (
+        pkgs.writeText "ssh-allowed-signers" ''
+          hey@sandydoo.me ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me
+        ''
+      );
       init.defaultBranch = "main";
       merge.ff = "no";
       pager.difftool = true;
@@ -389,11 +394,10 @@
         autoSetupRemote = true;
         default = "current";
       };
-      gpg.ssh.allowedSignersFile = builtins.toString (
-        pkgs.writeText "ssh-allowed-signers" ''
-          hey@sandydoo.me ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO18rhoNZWQZeudtRFBZvJXLkHEshSaEFFt2llG5OeHk hey@sandydoo.me
-        ''
-      );
+      user = {
+        name = "Sander";
+        email = "hey@sandydoo.me";
+      };
     };
     ignores = [ (builtins.readFile ./git/gitignore) ];
   };
