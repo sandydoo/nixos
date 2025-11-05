@@ -173,7 +173,7 @@
     ncdu
 
     # Graphics
-    glxinfo
+    mesa-demos # glxinfo
     ocl-icd
     clinfo
     # renderdoc

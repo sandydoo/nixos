@@ -14,7 +14,6 @@
     displayManager.lightdm.enable = true;
 
     windowManager.i3.enable = true;
-    windowManager.i3.package = pkgs.i3-gaps;
     windowManager.i3.extraPackages = with pkgs; [
       dmenu
       i3status
