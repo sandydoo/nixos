@@ -31,7 +31,9 @@
   hardware.enableAllFirmware = true;
   hardware.graphics.enable = true;
 
-  networking.useNetworkd = lib.mkDefault false;
+  # Use networkd
+  systemd.network.enable = lib.mkDefault true;
+  networking.useNetworkd = lib.mkDefault true;
   networking.firewall.enable = lib.mkDefault true;
   networking.nameservers = [
     "1.1.1.1#one.one.one.one"
@@ -45,8 +47,6 @@
       "cachix.internal"
     ];
   };
-  # Use networkd
-  systemd.network.enable = true;
 
   services.resolved.enable = true;
 

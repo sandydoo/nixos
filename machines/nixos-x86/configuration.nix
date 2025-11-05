@@ -31,13 +31,6 @@
   networking.nat.internalInterfaces = [ "ve-*" ];
   networking.nat.externalInterface = "ens33";
 
-  # Bridge for VMs
-  networking.bridges = {
-    # br0.interfaces = ["ens33"] ;
-    # virbr0.interfaces = [];
-  };
-  # networking.interfaces.virbr0.useDHCP = true;
-
   # Disable the firewall for now.
   networking.firewall.enable = false;
 
