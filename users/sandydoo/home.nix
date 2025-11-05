@@ -21,7 +21,7 @@
     # Editors
     neovim
     kakoune
-    kak-lsp
+    kakoune-lsp
     helix
 
     # Neovim
@@ -93,7 +93,7 @@
     broot
     eza
     duf
-    du-dust
+    dust
     fd # Find files
     fzf # Search files
     jq # Handle JSON
