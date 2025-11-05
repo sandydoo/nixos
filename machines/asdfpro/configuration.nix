@@ -74,7 +74,6 @@ in
   };
 
   nix.extraOptions = ''
-    auto-optimise-store = false
     darwin-log-sandbox-violations = true # Log sandbox violations to /var/log/nix/sandbox.log
     experimental-features = nix-command flakes configurable-impure-env
     http-connections = 75 # This also controls the thread pool size when querying caches
