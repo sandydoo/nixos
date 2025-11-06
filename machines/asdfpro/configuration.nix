@@ -81,10 +81,13 @@ in
     keep-outputs = false
     log-lines = 50 # Number of lines to show when builds fail
     warn-dirty = false # Don't warn about dirty git trees
+    # Pass custom certs to the daemon
+    # ssl-cert-file = /etc/nix/macos-keychain.crt
   '';
 
   # Test MITM SSL certificate setups, like ZScaler, with mitmproxy.
   # security.pki.certificateFiles = [ "/etc/ssl/mitmproxy-ca-cert.pem" ];
+  # security.pki.installCACerts = true;
 
   # Try enabling sandboxing on macOS.
   # nix.settings.sandbox = "relaxed";
