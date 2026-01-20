@@ -51,7 +51,7 @@
       mkSystem = import ./lib/mkSystem.nix { inherit nixpkgs overlays inputs; };
     in
     {
-      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt);
 
       devShells = forEachSystem (system: {
         default = inputs.devenv.lib.mkShell {
@@ -60,7 +60,7 @@
           modules = [
             {
               git-hooks.hooks = {
-                nixfmt-rfc-style.enable = true;
+                nixfmt.enable = true;
               };
               cachix.pull = [ "devenv" ];
             }

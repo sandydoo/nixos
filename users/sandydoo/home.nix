@@ -48,7 +48,7 @@
 
     # Nix
     nil # Nix language server
-    nixfmt-rfc-style # Nix formatter
+    nixfmt # Nix formatter
     nix-prefetch
     nix-output-monitor # Monitor Nix build outputs
 
