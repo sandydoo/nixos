@@ -107,7 +107,6 @@
 
     # Encryption
     gnupg # Commit signing (no longer used, switched to SSH keys)
-    blackbox # Encrypt files in git repos
 
     # Compression
     xz
