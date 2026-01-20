@@ -130,7 +130,7 @@
     settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "no";
     settings.StreamLocalBindUnlink = "yes";
-    settings.AcceptEnv = "COLORTERM";
+    settings.AcceptEnv = [ "COLORTERM" ];
   };
 
   programs.ssh.extraConfig = ''
