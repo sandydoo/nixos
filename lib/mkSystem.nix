@@ -29,6 +29,7 @@ let
     overlays = [
       inputs.neovim-nightly.overlays.default
       inputs.claude-code.overlays.default
+      inputs.codex-cli.overlays.default
     ];
   };
 

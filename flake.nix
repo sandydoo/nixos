@@ -24,6 +24,7 @@
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     claude-code.url = "github:sadjow/claude-code-nix";
+    codex-cli.url = "github:sadjow/codex-cli-nix";
 
     devenv.url = "github:cachix/devenv";
     git-hooks.url = "github:cachix/git-hooks.nix";
