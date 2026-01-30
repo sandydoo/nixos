@@ -38,6 +38,7 @@
 
     # AI
     latest.claude-code
+    latest.codex
     latest.amp-cli
 
     # Node
