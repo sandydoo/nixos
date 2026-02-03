@@ -40,6 +40,7 @@
     latest.claude-code
     latest.codex
     latest.amp-cli
+    latest.opencode
 
     # Node
     nodejs
