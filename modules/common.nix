@@ -142,6 +142,12 @@
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.network.wait-online.enable = false;
 
+  # Enable systemd-oomd for proactive OOM handling based on memory pressure.
+  systemd.oomd.enable = true;
+  systemd.oomd.enableRootSlice = true;
+  systemd.oomd.enableSystemSlice = true;
+  systemd.oomd.enableUserSlices = true;
+
   # Use restart instead of stop/start for network services.
   systemd.services.systemd-networkd.stopIfChanged = false;
   systemd.services.systemd-resolved.stopIfChanged = false;
