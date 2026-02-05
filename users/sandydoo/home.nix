@@ -433,6 +433,14 @@
   xdg.configFile."tmux/flexoki-light.tmuxtheme".source = ./tmux/flexoki-light.tmuxtheme;
   xdg.configFile."tmux/flexoki-dark.tmuxtheme".source = ./tmux/flexoki-dark.tmuxtheme;
 
+  # Opencode config
+  xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
+    "$schema" = "https://opencode.ai/config.json";
+    tui = {
+      scroll_acceleration.enabled = true;
+    };
+  };
+
   # Sync files between machines
   services.syncthing.enable = false;
 }
