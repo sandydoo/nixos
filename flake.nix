@@ -100,7 +100,9 @@
         system = "aarch64-darwin";
         user = "sandydoo";
         realUser = "sander";
-        modules = [ ];
+        modules = [
+          ./modules/darwin/blackhole.nix
+        ];
       };
     };
 }

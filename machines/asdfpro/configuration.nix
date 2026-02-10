@@ -25,6 +25,8 @@ in
     home-manager
   ];
 
+  services.blackhole.enable = true;
+
   environment.variables = {
     EDITOR = "nvim";
     # Fix ghostty shell integration: https://github.com/ghostty-org/ghostty/discussions/2832
