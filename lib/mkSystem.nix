@@ -20,6 +20,26 @@ let
   ];
   isLinux = !isDarwin;
 
+  nixpkgsInput = if isDarwin then inputs.nixpkgs-darwin else nixpkgs;
+
+  nixpkgsPatches = import ../patches/nixpkgs.nix {
+    inherit (nixpkgs.legacyPackages.${system}) fetchpatch;
+  };
+
+  allPatches =
+    nixpkgsPatches.common
+    ++ (if isDarwin then nixpkgsPatches.darwin else nixpkgsPatches.linux);
+
+  patchedNixpkgs =
+    if allPatches == [ ] then
+      nixpkgsInput
+    else
+      nixpkgs.legacyPackages.${system}.applyPatches {
+        name = "nixpkgs-patched";
+        src = nixpkgsInput;
+        patches = allPatches;
+      };
+
   systemUser = if isDarwin && realUser != null then realUser else user;
 
   unstable = import inputs.nix-unstable {
@@ -67,6 +87,7 @@ if isDarwin then
 
     modules = baseModules ++ [
       {
+        nixpkgs.source = patchedNixpkgs;
         nixpkgs.overlays = [
           (_: _: {
             inherit unstable;
@@ -85,6 +106,7 @@ else
     inherit specialArgs system;
 
     modules = baseModules ++ [
+      { nixpkgs.source = patchedNixpkgs; }
       inputs.home-manager.nixosModules.home-manager
     ];
   }
