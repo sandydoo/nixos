@@ -100,7 +100,7 @@
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
-  nix.settings.max-jobs = "auto";
+  nix.settings.max-jobs = lib.mkDefault "auto";
 
   nix.extraOptions = ''
     always-allow-substitutes = true
