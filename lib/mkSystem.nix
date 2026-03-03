@@ -105,8 +105,11 @@ else
   nixpkgs.lib.nixosSystem {
     inherit specialArgs system;
 
-    modules = baseModules ++ [
-      { nixpkgs.flake.source = patchedNixpkgs; }
-      inputs.home-manager.nixosModules.home-manager
-    ];
+    modules = baseModules
+      ++ lib.optional (allPatches != [ ]) {
+        nixpkgs.flake.source = lib.mkForce patchedNixpkgs;
+      }
+      ++ [
+        inputs.home-manager.nixosModules.home-manager
+      ];
   }
