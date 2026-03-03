@@ -106,7 +106,7 @@ else
     inherit specialArgs system;
 
     modules = baseModules ++ [
-      { nixpkgs.source = patchedNixpkgs; }
+      { nixpkgs.flake.source = patchedNixpkgs; }
       inputs.home-manager.nixosModules.home-manager
     ];
   }
