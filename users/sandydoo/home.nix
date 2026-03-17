@@ -330,6 +330,8 @@
     };
     interactiveShellInit = ''
       set fish_greeting
+    ''
+    ++ lib.optionalString isDarwin ''
 
       # Integrate with iTerm2
       test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
@@ -337,6 +339,9 @@
       # Added by OrbStack: command-line tools and integration
       # This won't be added again if you remove it.
       source ~/.orbstack/shell/init.fish 2>/dev/null || :
+
+      # Add Obsidian CLI
+      fish_add_path /Applications/Obsidian.app/Contents/MacOS
     '';
     plugins = [
       {
