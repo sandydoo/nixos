@@ -333,7 +333,7 @@
     interactiveShellInit = ''
       set fish_greeting
     ''
-    ++ lib.optionalString isDarwin ''
+    + lib.optionalString isDarwin ''
 
       # Integrate with iTerm2
       test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
