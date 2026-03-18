@@ -221,8 +221,6 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    serverAliveInterval = 60;
-    serverAliveCountMax = 3;
     includes = [
       "./private/private.config"
       "./private/cachix.config"
@@ -257,6 +255,8 @@
           addKeysToAgent = "yes";
           forwardAgent = false;
           compression = false;
+          serverAliveInterval = 60;
+          serverAliveCountMax = 3;
           sendEnv = [
             "LANG"
             "LC_*"
