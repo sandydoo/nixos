@@ -131,6 +131,8 @@
     settings.PermitRootLogin = "no";
     settings.StreamLocalBindUnlink = "yes";
     settings.AcceptEnv = [ "COLORTERM" ];
+    settings.ClientAliveInterval = 60;
+    settings.ClientAliveCountMax = 3;
   };
 
   programs.ssh.extraConfig = ''

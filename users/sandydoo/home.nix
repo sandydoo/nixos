@@ -221,6 +221,8 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+    serverAliveInterval = 60;
+    serverAliveCountMax = 3;
     includes = [
       "./private/private.config"
       "./private/cachix.config"
