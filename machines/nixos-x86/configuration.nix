@@ -69,7 +69,7 @@
     # renderdoc
 
     # VM
-    xorg.xf86videovmware
+    xf86-video-vmware
     virt-manager
   ];
 }
