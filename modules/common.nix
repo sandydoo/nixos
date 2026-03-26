@@ -61,7 +61,6 @@
 
   nix.registry = {
     # Stable: pinned stable channel
-    nixpkgs.flake = inputs.nixpkgs;
     stable.flake = inputs.nixpkgs;
     # Latest: pinned unstable channel
     latest.flake = inputs.nix-unstable;
@@ -73,15 +72,10 @@
       type = "github";
     };
   };
-  nix.nixPath =
-    let
-      inherit (config.nix) registry;
-    in
-    [
-      "nixpkgs=${registry.nixpkgs.flake}"
-      "stable=${registry.stable.flake}"
-      "latest=${registry.latest.flake}"
-    ];
+  nix.nixPath = [
+    "stable=flake:stable"
+    "latest=flake:latest"
+  ];
 
   # Allow proprietary packages.
   nixpkgs.config.allowUnfree = true;
