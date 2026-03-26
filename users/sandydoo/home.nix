@@ -55,10 +55,8 @@
     nix-output-monitor # Monitor Nix build outputs
 
     # Git
-    git
     git-lfs
     git-absorb # git commit --fixup, but automatic
-    gh
     act
     difftastic
     jjui
@@ -409,6 +407,21 @@
       };
     };
     ignores = [ (builtins.readFile ./git/gitignore) ];
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
+    settings = {
+      # What protocol to use when performing git operations. Supported values: ssh, https
+      git_protocol = "https";
+      # When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
+      prompt = "enabled";
+      # Aliases allow you to create nicknames for gh commands
+      aliases = {
+        co = "pr checkout";
+      };
+    };
   };
 
   programs.bat.enable = true;
