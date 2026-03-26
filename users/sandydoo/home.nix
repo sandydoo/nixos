@@ -89,7 +89,7 @@
     rsync
     rclone
     croc
-    watchman
+    # watchman # fails to build temporarily
     entr
 
     bat
