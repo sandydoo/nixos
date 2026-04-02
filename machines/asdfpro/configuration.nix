@@ -23,6 +23,7 @@ in
 
   environment.systemPackages = with pkgs; [
     home-manager
+    anki-bin
   ];
 
   services.blackhole.enable = true;
