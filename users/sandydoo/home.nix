@@ -44,7 +44,7 @@
 
     # Node
     nodejs
-    nodePackages.typescript
+    typescript
     typescript-language-server
     volta
 
@@ -142,7 +142,7 @@
 
     # JSON
     # https://github.com/NixOS/nixpkgs/issues/335533
-    latest.nodePackages.vscode-langservers-extracted
+    latest.vscode-langservers-extracted
 
     # Image manipulation
     imagemagick
