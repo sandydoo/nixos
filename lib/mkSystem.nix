@@ -42,7 +42,7 @@ let
 
   systemUser = if isDarwin && realUser != null then realUser else user;
 
-  unstable = import inputs.nix-unstable {
+  unstable = import inputs.nixpkgs-unstable {
     inherit system;
     config.allowUnfree = true;
     config.allowBroken = true;

@@ -63,7 +63,7 @@
     # Stable: pinned stable channel
     stable.flake = inputs.nixpkgs;
     # Latest: pinned unstable channel
-    latest.flake = inputs.nix-unstable;
+    latest.flake = inputs.nixpkgs-unstable;
     # Nightly: unpinned unstable
     nightly.to = {
       owner = "NixOS";

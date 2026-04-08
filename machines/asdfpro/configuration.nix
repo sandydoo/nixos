@@ -46,7 +46,7 @@ in
   # nix.registry.nixpkgs.flake = nixpkgs;
   nix.registry.stable.flake = inputs.nixpkgs;
   # Latest: pinned unstable channel
-  nix.registry.latest.flake = inputs.nix-unstable;
+  nix.registry.latest.flake = inputs.nixpkgs-unstable;
   # Nightly: unpinned unstable
   nix.registry.nightly.to = {
     owner = "NixOS";
