@@ -198,7 +198,6 @@ in
     "xdr-boost" = {
       serviceConfig = {
         ProgramArguments = [ "${pkgs.xdr-boost}/bin/xdr-boost" ];
-        RunAtLoad = true;
         KeepAlive = true;
         ProcessType = "Interactive";
       };
