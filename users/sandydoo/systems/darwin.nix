@@ -25,6 +25,7 @@ in
   home.packages = [
     pinentry-custom
     pkgs.macmon # Monitor macOS system stats
+    pkgs.xdr-boost # Boost XDR display brightness to 1600 nits
 
     # Apple containers
     unstable.container

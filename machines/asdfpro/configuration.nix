@@ -195,6 +195,14 @@ in
       '';
       serviceConfig.RunAtLoad = true;
     };
+    "xdr-boost" = {
+      serviceConfig = {
+        ProgramArguments = [ "${pkgs.xdr-boost}/bin/xdr-boost" ];
+        RunAtLoad = true;
+        KeepAlive = true;
+        ProcessType = "Interactive";
+      };
+    };
   };
 
   # Required by launchd.user.agents.
