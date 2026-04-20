@@ -37,7 +37,7 @@
     vivid # Set terminal colors with LS_COLORS
 
     # AI
-    latest.claude-code-bun
+    latest.claude-code
     latest.codex
     latest.amp-cli
     latest.opencode
