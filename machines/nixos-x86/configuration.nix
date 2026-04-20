@@ -1,16 +1,12 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    "${inputs.self}/machines/hardware/vmware-x86_64.nix"
     "${inputs.self}/modules/common.nix"
     "${inputs.self}/modules/remote-builder.nix"
+    "${inputs.self}/modules/vmware-guest.nix"
   ];
 
   networking.hostName = "nixos-x86";
@@ -28,25 +24,10 @@
     ];
   };
 
-  networking.nat.enable = true;
-  networking.nat.internalInterfaces = [ "ve-*" ];
   networking.nat.externalInterface = "ens33";
 
-  # Disable the firewall for now.
-  networking.firewall.enable = false;
-
-  virtualisation.vmware.guest.enable = true;
-  virtualisation.vmware.guest.headless = false;
-
   virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.allowedBridges = [
-    "br0"
-    "virbr0"
-  ];
   programs.dconf.enable = true;
-
-  # Don’t require password for sudo.
-  security.sudo.wheelNeedsPassword = false;
 
   nix.settings.system-features = [
     "big-parallel"
@@ -62,12 +43,7 @@
     secretKeyFile = "/var/cache-priv-key.pem";
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Graphics
-    # renderdoc
-
     # VM
     xf86-video-vmware
     virt-manager

@@ -117,6 +117,9 @@
 
   users.mutableUsers = false;
 
+  # Don’t require password for sudo.
+  security.sudo.wheelNeedsPassword = false;
+
   services.openssh = {
     enable = true;
     allowSFTP = true;

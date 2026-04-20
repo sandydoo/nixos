@@ -3,7 +3,7 @@
 {
   # Include the results of the hardware scan.
   imports = [
-    ./hardware-configuration.nix
+    "${inputs.self}/machines/hardware/qemu-aarch64.nix"
     "${inputs.self}/modules/common.nix"
   ];
 
