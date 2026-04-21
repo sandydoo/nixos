@@ -11,18 +11,11 @@
 
   boot.initrd.availableKernelModules = [
     "virtio_pci"
-    "virtio_blk"
-    "virtio_scsi"
-    "virtio_net"
-    "virtio_console"
-    "virtiofs"
+    "xhci_pci"
+    "usb_storage"
     "usbhid"
-    "sr_mod"
   ];
-  boot.initrd.kernelModules = [
-    "virtio_gpu"
-    "drm"
-  ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
