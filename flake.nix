@@ -87,6 +87,15 @@
         ];
       };
 
+      nixosConfigurations.nixos-utm = mkSystem "nixos-utm" {
+        system = "aarch64-linux";
+        user = "sandydoo";
+        modules = [
+          ./modules/gnome.nix
+          ./modules/tailscale.nix
+        ];
+      };
+
       nixosConfigurations.nixos-x86 = mkSystem "nixos-x86" {
         system = "x86_64-linux";
         user = "sandydoo";
