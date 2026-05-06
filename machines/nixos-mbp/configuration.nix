@@ -14,14 +14,12 @@
 
   networking.hostName = "nixos-mbp";
 
-  # Broadcom BCM4331 Wi-Fi (MacBook Pro 9,2).
-  # The mainline `b43` driver supports BCM4331 with the redistributable
-  # firmware enabled by `enableB43Firmware`.
-  # If `b43` proves unstable, switch to the proprietary `wl` driver:
-  #   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-  #   boot.kernelModules = [ "wl" ];
-  #   boot.blacklistedKernelModules = [ "b43" "bcma" "ssb" ];
-  networking.enableB43Firmware = true;
+  # Broadcom BCM4360 Wi-Fi (PHY type AC, 802.11ac).
+  # `b43` does not support this PHY ("FOUND UNSUPPORTED PHY ... Type 11 (AC)").
+  # Use the proprietary `wl` driver from broadcom_sta.
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot.kernelModules = [ "wl" ];
+  boot.blacklistedKernelModules = [ "b43" "bcma" "ssb" "brcmsmac" "brcmfmac" ];
   hardware.enableRedistributableFirmware = true;
 
   # facetimehd out-of-tree module fails to build on kernel 7.x
