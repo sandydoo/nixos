@@ -30,6 +30,12 @@
 
     devenv.url = "github:cachix/devenv";
     git-hooks.url = "github:cachix/git-hooks.nix";
+
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
+
+    dank-material-shell.url = "github:AvengeMedia/DankMaterialShell";
+    dank-material-shell.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -102,8 +108,11 @@
         system = "x86_64-linux";
         user = "sandydoo";
         modules = [
-          ./modules/gnome.nix
+          ./modules/niri.nix
           ./modules/tailscale.nix
+        ];
+        homeModules = [
+          ./modules/niri-home.nix
         ];
       };
 

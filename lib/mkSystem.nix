@@ -10,6 +10,7 @@ name:
   user,
   realUser ? null, # For macOS, use realUser if provided, otherwise use user
   modules ? [ ],
+  homeModules ? [ ],
 }:
 let
   inherit (nixpkgs) lib;
@@ -70,7 +71,9 @@ let
       home-manager.useUserPackages = true;
       home-manager.useGlobalPkgs = true;
       home-manager.extraSpecialArgs = specialArgs;
-      home-manager.users.${systemUser} = import ../users/${user}/home.nix;
+      home-manager.users.${systemUser} = {
+        imports = [ (import ../users/${user}/home.nix) ] ++ homeModules;
+      };
     };
 
   baseModules = [
