@@ -4,7 +4,7 @@
   imports = [
     "${inputs.self}/machines/hardware/macbook-pro-11-1.nix"
     "${inputs.self}/modules/common.nix"
-    "${inputs.self}/modules/applesmc-bclm.nix"
+    "${inputs.self}/modules/applesmc/bclm.nix"
 
     inputs.nixos-hardware.nixosModules.apple-macbook-pro-11-1
   ];
@@ -36,27 +36,10 @@
 
   time.timeZone = "Europe/Madrid";
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   services.applesmc-bclm = {
     enable = true;
     limit = 80;
   };
 
   system.stateVersion = lib.mkForce "25.11";
-
-  # Disable GPG on this host: gpg 2.4+ keyboxd default breaks HM
-  # publicKeys import during activation, and this machine has no
-  # signing/encryption use case yet.
-  home-manager.users.sandydoo = { lib, ... }: {
-    programs.gpg.enable = lib.mkForce false;
-    programs.gpg.publicKeys = lib.mkForce [ ];
-  };
 }

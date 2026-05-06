@@ -108,11 +108,15 @@
         system = "x86_64-linux";
         user = "sandydoo";
         modules = [
-          ./modules/niri.nix
+          ./modules/desktop-base.nix
+          ./modules/niri
           ./modules/tailscale.nix
         ];
         homeModules = [
-          ./modules/niri-home.nix
+          ./modules/niri/home.nix
+          ./modules/dank-material-shell/home.nix
+          ./modules/applesmc/kbd-backlight-home.nix
+          ./modules/no-gpg-home.nix
         ];
       };
 
