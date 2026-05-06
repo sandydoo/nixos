@@ -8,6 +8,10 @@
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
+  services.accounts-daemon.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.printing.enable = true;
+
   services.greetd = {
     enable = true;
     settings = {
@@ -27,6 +31,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    cups-pk-helper
     wl-clipboard
     waypipe
     wdisplays
