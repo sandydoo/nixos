@@ -4,6 +4,7 @@
   services.accounts-daemon.enable = true;
   services.power-profiles-daemon.enable = true;
   services.printing.enable = true;
+  services.upower.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
