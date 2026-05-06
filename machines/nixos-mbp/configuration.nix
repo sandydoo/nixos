@@ -2,15 +2,11 @@
 
 {
   imports = [
-    "${inputs.self}/machines/hardware/macbook-pro-9-2.nix"
+    "${inputs.self}/machines/hardware/macbook-pro-11-1.nix"
     "${inputs.self}/modules/common.nix"
     "${inputs.self}/modules/applesmc-bclm.nix"
 
-    # nixos-hardware does not ship a 9-2 profile.
-    # Pull in the generic Apple MacBook Pro defaults
-    # (Intel CPU microcode, laptop power management).
-    inputs.nixos-hardware.nixosModules.apple-macbook-pro
-    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+    inputs.nixos-hardware.nixosModules.apple-macbook-pro-11-1
   ];
 
   networking.hostName = "nixos-mbp";
@@ -21,7 +17,6 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
   boot.kernelModules = [ "wl" ];
   boot.blacklistedKernelModules = [ "b43" "bcma" "ssb" "brcmsmac" "brcmfmac" ];
-  hardware.enableRedistributableFirmware = true;
 
   # broadcom-sta is unmaintained and has known WiFi-packet RCEs
   # (CVE-2019-9501, CVE-2019-9502). No alternative driver supports
