@@ -9,7 +9,7 @@
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command = "${lib.getExe pkgs.greetd.tuigreet} --time --cmd sway";
+      default_session.command = "${lib.getExe pkgs.tuigreet} --time --cmd sway";
       initial_session = {
         command = "sway";
         user = "sandydoo";

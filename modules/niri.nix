@@ -9,7 +9,7 @@
     enable = true;
     settings = {
       default_session.command =
-        "${lib.getExe pkgs.greetd.tuigreet} --time --cmd niri-session";
+        "${lib.getExe pkgs.tuigreet} --time --cmd niri-session";
       initial_session = {
         command = "niri-session";
         user = user;
