@@ -8,6 +8,6 @@
 
   programs.dank-material-shell.enable = true;
   programs.dank-material-shell.systemd.enable = true;
-  programs.dank-material-shell.niri.enableKeybinds = false;
-  programs.dank-material-shell.niri.includes.enable = true;
+  programs.dank-material-shell.niri.enableKeybinds = true;
+  programs.dank-material-shell.niri.includes.enable = false;
 }
