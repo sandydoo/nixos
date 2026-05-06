@@ -1,11 +1,9 @@
 { config, pkgs, lib, inputs, user, ... }:
 
 {
-  programs.niri.enable = true;
-  programs.xwayland.enable = true;
+  imports = [ inputs.niri.nixosModules.niri ];
 
-  security.polkit.enable = true;
-  programs.dconf.enable = true;
+  programs.niri.enable = true;
 
   services.greetd = {
     enable = true;
@@ -17,13 +15,6 @@
         user = user;
       };
     };
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
   };
 
   fonts.packages = with pkgs; [
