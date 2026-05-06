@@ -4,6 +4,7 @@
   imports = [
     "${inputs.self}/machines/hardware/macbook-pro-9-2.nix"
     "${inputs.self}/modules/common.nix"
+    "${inputs.self}/modules/applesmc-bclm.nix"
 
     # nixos-hardware does not ship a 9-2 profile.
     # Pull in the generic Apple MacBook Pro defaults
@@ -47,6 +48,11 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  services.applesmc-bclm = {
+    enable = true;
+    limit = 80;
   };
 
   system.stateVersion = lib.mkForce "25.11";

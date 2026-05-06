@@ -1,4 +1,6 @@
 final: prev: {
+  bclm = final.callPackage ../pkgs/bclm { };
+
   streamlink = prev.streamlink.overridePythonAttrs (old: {
     disabledTests =
       (old.disabledTests or [ ])
