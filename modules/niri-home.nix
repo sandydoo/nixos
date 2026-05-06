@@ -2,7 +2,6 @@
 
 {
   imports = [
-    inputs.niri.homeModules.niri
     inputs.dank-material-shell.homeModules.dank-material-shell
     inputs.dank-material-shell.homeModules.niri
   ];
