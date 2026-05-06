@@ -22,6 +22,12 @@
   boot.blacklistedKernelModules = [ "b43" "bcma" "ssb" "brcmsmac" "brcmfmac" ];
   hardware.enableRedistributableFirmware = true;
 
+  # broadcom-sta is unmaintained and has known WiFi-packet RCEs
+  # (CVE-2019-9501, CVE-2019-9502). No alternative driver supports
+  # the BCM4360 in this MacBook on Linux.
+  nixpkgs.config.allowInsecurePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "broadcom-sta" ];
+
   # facetimehd out-of-tree module fails to build on kernel 7.x
   # (struct vb2_ops .wait_prepare/.wait_finish removed upstream).
   # Apple iSight webcam unsupported until upstream patch lands.
