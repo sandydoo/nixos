@@ -50,4 +50,12 @@
   };
 
   system.stateVersion = lib.mkForce "25.11";
+
+  # Disable GPG on this host: gpg 2.4+ keyboxd default breaks HM
+  # publicKeys import during activation, and this machine has no
+  # signing/encryption use case yet.
+  home-manager.users.sandydoo = { lib, ... }: {
+    programs.gpg.enable = lib.mkForce false;
+    programs.gpg.publicKeys = lib.mkForce [ ];
+  };
 }
