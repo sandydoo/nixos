@@ -18,6 +18,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -89,6 +91,15 @@
 
       nixosConfigurations.nixos-utm = mkSystem "nixos-utm" {
         system = "aarch64-linux";
+        user = "sandydoo";
+        modules = [
+          ./modules/gnome.nix
+          ./modules/tailscale.nix
+        ];
+      };
+
+      nixosConfigurations.nixos-mbp = mkSystem "nixos-mbp" {
+        system = "x86_64-linux";
         user = "sandydoo";
         modules = [
           ./modules/gnome.nix
