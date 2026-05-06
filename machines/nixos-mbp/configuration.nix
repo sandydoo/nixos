@@ -24,6 +24,11 @@
   networking.enableB43Firmware = true;
   hardware.enableRedistributableFirmware = true;
 
+  # facetimehd out-of-tree module fails to build on kernel 7.x
+  # (struct vb2_ops .wait_prepare/.wait_finish removed upstream).
+  # Apple iSight webcam unsupported until upstream patch lands.
+  hardware.facetimehd.enable = lib.mkForce false;
+
   # NetworkManager handles Wi-Fi roaming better on a laptop than networkd.
   networking.networkmanager.enable = true;
   networking.useNetworkd = lib.mkForce false;
