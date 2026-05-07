@@ -15,6 +15,7 @@
   boot.initrd.availableKernelModules = [
     "ata_piix"
     "mptspi"
+    "nvme"
     "uhci_hcd"
     "ehci_pci"
     "sd_mod"
