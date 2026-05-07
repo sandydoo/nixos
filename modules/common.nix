@@ -132,6 +132,13 @@
     settings.ClientAliveCountMax = 3;
   };
 
+  # Keep sshd responsive when nix-daemon saturates CPU/IO during builds.
+  systemd.services.sshd.serviceConfig = {
+    CPUWeight = 1000;
+    IOWeight = 1000;
+    Nice = -10;
+  };
+
   programs.ssh.extraConfig = ''
     SendEnv LANG LC_*
     SendEnv COLORTERM
