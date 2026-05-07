@@ -5,6 +5,8 @@
 
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
+  niri-flake.cache.enable = false;
+
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
