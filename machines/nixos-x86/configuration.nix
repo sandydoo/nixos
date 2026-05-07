@@ -34,7 +34,7 @@
     "kvm"
     "nixos-test"
   ];
-  nix.settings.max-jobs = 3;
+  nix.settings.max-jobs = 2;
   nix.settings.cores = 2;
 
   # Serve the store as a binary cache
