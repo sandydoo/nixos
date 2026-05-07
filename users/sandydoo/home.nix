@@ -59,6 +59,7 @@
     git-absorb # git commit --fixup, but automatic
     act
     difftastic
+    hunk
     jjui
     lazygit
 
