@@ -298,12 +298,42 @@
     add_newline = true;
     command_timeout = 2000; # in milliseconds
 
-    character = {
-      success_symbol = "[➜](bold green)";
+    character.success_symbol = "[➜](bold green)";
+
+    aws.disabled = true;
+    package.disabled = true;
+    rust.disabled = true;
+
+    # Show only the virtualenv name. Hide Python version/symbol.
+    python = {
+      symbol = "";
+      format = "[(\\($virtualenv\\) )]($style)";
+      style = "yellow bold";
     };
 
-    aws = {
-      disabled = true;
+    # Shorter nix-shell indicator. Drop $name and $state (pure/impure).
+    nix_shell = {
+      format = "via [$symbol]($style) ";
+      symbol = "❄️ ";
+      heuristic = false;
+    };
+
+    git_branch.disabled = true;
+    git_commit.disabled = true;
+    git_state.disabled = true;
+    git_status.disabled = true;
+    git_metrics.disabled = true;
+
+    custom.jj = {
+      description = "Jujutsu change id and bookmarks";
+      when = "jj root --quiet";
+      symbol = "jj ";
+      style = "bold purple";
+      format = "on [$symbol$output]($style) ";
+      command = ''
+        jj log -r @ -n 1 --no-graph --ignore-working-copy --color never \
+          -T 'change_id.shortest(8) ++ if(bookmarks, " " ++ bookmarks.join(","))' 2>/dev/null
+      '';
     };
   };
 
