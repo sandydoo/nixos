@@ -85,6 +85,9 @@ in
   # services.polybar.script = "polybar bar &";
 
   programs.ghostty.enable = true;
+  # Keep Ghostty running so D-Bus activation gives instant new-window launches.
+  # See https://ghostty.org/docs/linux/systemd
+  programs.ghostty.settings.quit-after-last-window-closed = false;
 
   programs.firefox = {
     enable = true;
