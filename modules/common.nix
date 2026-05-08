@@ -108,7 +108,10 @@
     warn-dirty = false
   '';
 
-  nix.settings.auto-optimise-store = true;
+  # Periodically run the store optimizer.
+  # auto-optimise-store is known to corrupt the store.
+  nix.optimise.automatic = true;
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -158,8 +161,6 @@
   systemd.services.systemd-networkd.stopIfChanged = false;
   systemd.services.systemd-resolved.stopIfChanged = false;
 
-  services.lorri.enable = true;
-
   services.eternal-terminal.enable = true;
   programs.mosh.enable = true;
   programs.fish.enable = true;
@@ -171,40 +172,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     home-manager
-
-    # Development
-    binutils
-    gdb
-    strace
-
-    # Tools
-    killall
-    xclip # Copy to clipboard
-    duf # Disk usage
-    gparted
-    ncdu
-
-    # Graphics
-    mesa-demos # glxinfo
-    ocl-icd
-    clinfo
-    # renderdoc
-
-    # Crypto
-    pinentry-curses
-
-    firefox
-    ungoogled-chromium
-
-    # Networking
-    openssl
-    dnsutils
-    nftables
-    openvpn
-    wireguard-tools
-
-    # Clipboard
-    gtkmm3
   ];
 
   # Let 'nixos-version --json' know about the Git revision

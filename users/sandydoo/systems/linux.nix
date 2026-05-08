@@ -4,7 +4,29 @@ let
   inherit (lib.hm.gvariant) mkUint32;
 in
 {
-  home.packages = [
+  home.packages = with pkgs; [
+    # Development
+    binutils
+    gdb
+    strace
+
+    # Tools
+    killall
+    gparted
+    ncdu
+
+    # Graphics
+    mesa-demos # glxinfo
+    clinfo
+
+    # Browsers
+    ungoogled-chromium
+
+    # Networking
+    openssl
+    dnsutils
+    nftables
+    wireguard-tools
   ];
 
   dconf.settings = {
