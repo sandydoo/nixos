@@ -85,9 +85,16 @@ in
   # services.polybar.script = "polybar bar &";
 
   programs.ghostty.enable = true;
-  # Keep Ghostty running so D-Bus activation gives instant new-window launches.
-  # See https://ghostty.org/docs/linux/systemd
-  programs.ghostty.settings.quit-after-last-window-closed = false;
+  programs.ghostty.settings = {
+    # Keep Ghostty running so D-Bus activation gives instant new-window launches.
+    # See https://ghostty.org/docs/linux/systemd
+    quit-after-last-window-closed = false;
+    # Ctrl+C copies only when text is selected; otherwise passes through as SIGINT.
+    keybind = [
+      "performable:ctrl+c=copy_to_clipboard"
+      "ctrl+v=paste_from_clipboard"
+    ];
+  };
 
   programs.firefox = {
     enable = true;
