@@ -99,7 +99,7 @@
   nix.extraOptions = ''
     always-allow-substitutes = true
     connect-timeout = 5
-    experimental-features = nix-command flakes auto-allocate-uids
+    extra-experimental-features = nix-command flakes auto-allocate-uids
     keep-derivations = false
     keep-outputs = false
     log-lines = 30

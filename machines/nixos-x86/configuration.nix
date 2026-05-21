@@ -29,13 +29,21 @@
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
-  nix.settings.system-features = [
-    "big-parallel"
-    "kvm"
-    "nixos-test"
-  ];
-  nix.settings.max-jobs = 2;
-  nix.settings.cores = 2;
+  nix.settings = {
+    auto-allocate-uids = true;
+    use-cgroups = true;
+    cores = 2;
+    max-jobs = 2;
+    system-features = [
+      "big-parallel"
+      "kvm"
+      "nixos-test"
+      "uid-range" # for nspawn containers
+    ];
+  };
+  nix.extraOptions = ''
+    extra-experimental-features = cgroups
+  '';
 
   # Serve the store as a binary cache
   services.nix-serve = {
