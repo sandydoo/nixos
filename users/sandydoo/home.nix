@@ -227,51 +227,45 @@
     ++ lib.optionals isDarwin [
       "~/.orbstack/ssh/config"
     ];
-    matchBlocks = lib.mkMerge [
+    settings = lib.mkMerge [
       (lib.mkIf isDarwin {
         "nixos-vmware" = {
-          hostname = "nixos-vmware";
-          user = "sandydoo";
-          forwardAgent = true;
-          extraOptions = {
-            # DEPRECATED: no longer used
-            "SetEnv" = "GPG_TTY=$(tty)";
-          };
+          HostName = "nixos-vmware";
+          User = "sandydoo";
+          ForwardAgent = true;
         };
         "nixos-x86" = {
-          hostname = "nixos-x86";
-          user = "sandydoo";
-          forwardAgent = true;
+          HostName = "nixos-x86";
+          User = "sandydoo";
+          ForwardAgent = true;
         };
       })
       {
         "github" = {
-          hostname = "github.com";
-          user = "git";
+          HostName = "github.com";
+          User = "git";
         };
 
         "*" = {
-          addKeysToAgent = "yes";
-          forwardAgent = false;
-          compression = false;
-          serverAliveInterval = 60;
-          serverAliveCountMax = 3;
-          sendEnv = [
+          AddKeysToAgent = "yes";
+          ForwardAgent = false;
+          Compression = false;
+          ServerAliveInterval = 60;
+          ServerAliveCountMax = 3;
+          SendEnv = [
             "LANG"
             "LC_*"
             "COLORTERM"
           ];
-          setEnv = {
+          SetEnv = {
             # Fall back to known supported terminfo entry
-            "TERM" = "xterm-256color";
+            TERM = "xterm-256color";
           };
-          extraOptions = {
-            # macOS only
-            "IgnoreUnknown" = "UseKeychain";
-            "UseKeychain" = "yes";
+          # macOS only
+          IgnoreUnknown = "UseKeychain";
+          UseKeychain = "yes";
 
-            "ExitOnForwardFailure" = "no";
-          };
+          ExitOnForwardFailure = "no";
         };
       }
     ];
