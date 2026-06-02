@@ -2,7 +2,7 @@
   lib,
   stdenvNoCC,
   fetchurl,
-  autoPatchelfHook,
+  buildFHSEnv,
 }:
 
 let
@@ -27,29 +27,33 @@ let
     };
   };
 
-  source = sources.${stdenvNoCC.hostPlatform.system} or (throw "hunk: unsupported platform ${stdenvNoCC.hostPlatform.system}");
-in
-stdenvNoCC.mkDerivation {
-  pname = "hunk";
-  inherit version;
+  source =
+    sources.${stdenvNoCC.hostPlatform.system}
+      or (throw "hunk: unsupported platform ${stdenvNoCC.hostPlatform.system}");
 
-  src = fetchurl {
-    url = "https://github.com/modem-dev/hunk/releases/download/v${version}/${source.asset}.tar.gz";
-    inherit (source) hash;
+  hunk-unwrapped = stdenvNoCC.mkDerivation {
+    pname = "hunk-unwrapped";
+    inherit version;
+
+    src = fetchurl {
+      url = "https://github.com/modem-dev/hunk/releases/download/v${version}/${source.asset}.tar.gz";
+      inherit (source) hash;
+    };
+
+    sourceRoot = source.asset;
+
+    dontConfigure = true;
+    dontBuild = true;
+    dontFixup = true;
+
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 hunk $out/bin/hunk
+      runHook postInstall
+    '';
+
+    meta.mainProgram = "hunk";
   };
-
-  sourceRoot = source.asset;
-
-  nativeBuildInputs = lib.optionals stdenvNoCC.hostPlatform.isLinux [ autoPatchelfHook ];
-
-  dontConfigure = true;
-  dontBuild = true;
-
-  installPhase = ''
-    runHook preInstall
-    install -Dm755 hunk $out/bin/hunk
-    runHook postInstall
-  '';
 
   meta = {
     description = "Review-first terminal diff viewer for agentic coders";
@@ -59,4 +63,16 @@ stdenvNoCC.mkDerivation {
     platforms = lib.attrNames sources;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
-}
+in
+# The release artifact is a Bun runtime with the application appended as a trailer.
+if stdenvNoCC.hostPlatform.isLinux then
+  buildFHSEnv {
+    name = "hunk";
+    runScript = lib.getExe hunk-unwrapped;
+    targetPkgs = pkgs: [ pkgs.stdenv.cc.cc.lib ];
+    inherit meta;
+  }
+else
+  hunk-unwrapped.overrideAttrs (old: {
+    inherit meta;
+  })
