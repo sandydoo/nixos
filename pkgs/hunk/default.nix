@@ -3,6 +3,7 @@
   stdenvNoCC,
   fetchurl,
   buildFHSEnv,
+  testers,
 }:
 
 let
@@ -63,16 +64,22 @@ let
     platforms = lib.attrNames sources;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
+
+  passthru.tests.version = testers.testVersion {
+    package = hunk;
+    inherit version;
+  };
+
+  # The release artifact is a Bun runtime with the application appended as a trailer.
+  hunk =
+    if stdenvNoCC.hostPlatform.isLinux then
+      buildFHSEnv {
+        name = "hunk";
+        runScript = lib.getExe hunk-unwrapped;
+        targetPkgs = pkgs: [ pkgs.stdenv.cc.cc.lib ];
+        inherit meta passthru;
+      }
+    else
+      hunk-unwrapped.overrideAttrs { inherit meta passthru; };
 in
-# The release artifact is a Bun runtime with the application appended as a trailer.
-if stdenvNoCC.hostPlatform.isLinux then
-  buildFHSEnv {
-    name = "hunk";
-    runScript = lib.getExe hunk-unwrapped;
-    targetPkgs = pkgs: [ pkgs.stdenv.cc.cc.lib ];
-    inherit meta;
-  }
-else
-  hunk-unwrapped.overrideAttrs (old: {
-    inherit meta;
-  })
+hunk
