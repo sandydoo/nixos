@@ -3,10 +3,10 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    "${inputs.self}/machines/hardware/vmware-x86_64.nix"
+    "${inputs.self}/machines/hardware/hyperv-x86_64.nix"
     "${inputs.self}/modules/common.nix"
     "${inputs.self}/modules/remote-builder.nix"
-    "${inputs.self}/modules/vmware-guest.nix"
+    "${inputs.self}/modules/hyperv-guest.nix"
   ];
 
   networking.hostName = "nixos-x86";
@@ -24,7 +24,7 @@
     ];
   };
 
-  networking.nat.externalInterface = "ens33";
+  networking.nat.externalInterface = "eth0";
 
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
@@ -53,7 +53,6 @@
 
   environment.systemPackages = with pkgs; [
     # VM
-    xf86-video-vmware
     virt-manager
   ];
 }
