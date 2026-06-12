@@ -134,7 +134,6 @@ in
 
       # Agent settings
       use-agent = true;
-      no-autostart = true;
     };
   };
 
