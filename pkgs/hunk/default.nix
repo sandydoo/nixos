@@ -50,6 +50,9 @@ let
     installPhase = ''
       runHook preInstall
       install -Dm755 hunk $out/bin/hunk
+      # hunk resolves its bundled review skill by walking up ancestor dirs of
+      # the binary looking for skills/hunk-review/SKILL.md.
+      cp -r skills $out/skills
       runHook postInstall
     '';
 
