@@ -63,10 +63,10 @@
         darwin = import ./overlays/darwin.nix;
       };
 
-      mkSystem = import ./lib/mkSystem.nix { inherit inputs overlays ; };
+      mkSystem = import ./lib/mkSystem.nix { inherit inputs overlays; };
     in
     {
-      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt);
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
       devShells = forEachSystem (system: {
         default = inputs.devenv.lib.mkShell {

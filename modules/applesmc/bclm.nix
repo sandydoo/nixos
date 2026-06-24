@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.services.applesmc-bclm;
@@ -23,7 +28,10 @@ in
       wantedBy = [ "multi-user.target" ];
       after = [ "sysinit.target" ];
 
-      path = [ pkgs.kmod pkgs.bclm ];
+      path = [
+        pkgs.kmod
+        pkgs.bclm
+      ];
 
       serviceConfig = {
         Type = "oneshot";

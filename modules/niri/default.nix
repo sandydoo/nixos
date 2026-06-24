@@ -1,4 +1,11 @@
-{ config, pkgs, lib, inputs, user, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  user,
+  ...
+}:
 
 {
   imports = [ inputs.niri.nixosModules.niri ];
@@ -13,8 +20,7 @@
   services.greetd = {
     enable = true;
     settings = {
-      default_session.command =
-        "${lib.getExe pkgs.tuigreet} --time --cmd niri-session";
+      default_session.command = "${lib.getExe pkgs.tuigreet} --time --cmd niri-session";
       initial_session = {
         command = "niri-session";
         user = user;
