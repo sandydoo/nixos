@@ -1,7 +1,6 @@
 {
-  nixpkgs,
-  overlays,
   inputs,
+  overlays,
 }:
 
 name:
@@ -13,7 +12,7 @@ name:
   homeModules ? [ ],
 }:
 let
-  inherit (nixpkgs) lib;
+  inherit (inputs.nixpkgs) lib;
 
   isDarwin = builtins.elem system [
     "aarch64-darwin"
@@ -21,21 +20,20 @@ let
   ];
   isLinux = !isDarwin;
 
-  nixpkgsInput = if isDarwin then inputs.nixpkgs-darwin else nixpkgs;
+  nixpkgsInput = if isDarwin then inputs.nixpkgs-darwin else inputs.nixpkgs;
 
   nixpkgsPatches = import ../patches/nixpkgs.nix {
-    inherit (nixpkgs.legacyPackages.${system}) fetchpatch;
+    inherit (inputs.nixpkgs.legacyPackages.${system}) fetchpatch;
   };
 
   allPatches =
-    nixpkgsPatches.common
-    ++ (if isDarwin then nixpkgsPatches.darwin else nixpkgsPatches.linux);
+    nixpkgsPatches.common ++ (if isDarwin then nixpkgsPatches.darwin else nixpkgsPatches.linux);
 
   patchedNixpkgs =
     if allPatches == [ ] then
       nixpkgsInput
     else
-      nixpkgs.legacyPackages.${system}.applyPatches {
+      inputs.nixpkgs.legacyPackages.${system}.applyPatches {
         name = "nixpkgs-patched";
         src = nixpkgsInput;
         patches = allPatches;
@@ -60,8 +58,8 @@ let
       unstable
       isDarwin
       isLinux
-      user
       systemUser
+      user
       ;
   };
 
@@ -105,12 +103,13 @@ if isDarwin then
 
   }
 else
-  nixpkgs.lib.nixosSystem {
+  inputs.nixpkgs.lib.nixosSystem {
     inherit specialArgs system;
 
-    modules = baseModules
+    modules =
+      baseModules
       ++ lib.optional (allPatches != [ ]) {
-        nixpkgs.flake.source = lib.mkForce patchedNixpkgs;
+        inputs.nixpkgs.flake.source = lib.mkForce patchedNixpkgs;
       }
       ++ [
         inputs.home-manager.nixosModules.home-manager
