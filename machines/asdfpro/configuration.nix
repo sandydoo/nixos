@@ -131,11 +131,11 @@ in
       ];
     }
     {
-      hostName = "100.88.234.87";
+      hostName = "nixos-x86";
       sshUser = "remotebuilder";
       sshKey = "/etc/nix/builder_ed25519";
       # ssh-keyscan -t ed25519 <HOSTNAME> | grep "ssh-ed25519" | cut -d' ' -f2,3 | tr -d '\n' | base64 -w0
-      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUd1MGR6VUllbGs4SVdxS1Bab01XU1E2T2JUSXJMK0dIV2pRYXBtM1JnZmE=";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxibjJJV0J6cFNJazhoSmZIKy9LdXprdVVrekFxYVRoZ2F3SWx1MHFGTlU=";
       maxJobs = 4;
       protocol = "ssh-ng";
       speedFactor = 2;
