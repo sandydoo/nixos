@@ -162,6 +162,10 @@
   systemd.services.systemd-resolved.stopIfChanged = false;
 
   services.eternal-terminal.enable = true;
+  services.eternal-terminal.port = 2022;
+  # The nixos module doesn't expose the port by default.
+  networking.firewall.allowedTCPPorts = [ config.services.eternal-terminal.port ];
+
   programs.mosh.enable = true;
   programs.fish.enable = true;
   programs._1password.enable = true;
