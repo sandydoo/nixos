@@ -26,8 +26,10 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
+    systems-linux.url = "github:nix-systems/default-linux";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
     vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+    vscode-server.inputs.flake-utils.inputs.systems.follows = "systems-linux";
 
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 

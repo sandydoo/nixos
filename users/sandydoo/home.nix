@@ -9,7 +9,6 @@
 
 {
   imports = [
-    inputs.vscode-server.homeModules.default
     inputs.nix-index-database.homeModules.nix-index
     inputs.pi.homeModules.default
   ]
