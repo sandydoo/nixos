@@ -11,6 +11,7 @@
   imports = [
     inputs.vscode-server.homeModules.default
     inputs.nix-index-database.homeModules.nix-index
+    inputs.pi.homeModules.default
   ]
   ++ lib.optional isLinux ./systems/linux.nix
   ++ lib.optional (isDarwin) ./systems/darwin.nix;
@@ -44,7 +45,9 @@
 
     # Node
     nodejs
-    typescript
+    # hiPrio to win the buildEnv collision with typescript bundled inside
+    # pi-coding-agent's lib/node_modules.
+    (lib.hiPrio typescript)
     typescript-language-server
     volta
 
@@ -477,6 +480,9 @@
   # Tmux themes
   xdg.configFile."tmux/flexoki-light.tmuxtheme".source = ./tmux/flexoki-light.tmuxtheme;
   xdg.configFile."tmux/flexoki-dark.tmuxtheme".source = ./tmux/flexoki-dark.tmuxtheme;
+
+  # Pi — terminal coding agent
+  programs.pi.coding-agent.enable = true;
 
   # Opencode config
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {

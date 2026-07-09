@@ -42,6 +42,9 @@
 
     dank-material-shell.url = "github:AvengeMedia/DankMaterialShell";
     dank-material-shell.inputs.nixpkgs.follows = "nixpkgs";
+
+    pi.url = "github:lukasl-dev/pi.nix";
+    pi.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
