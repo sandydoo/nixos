@@ -7,7 +7,7 @@ name:
 {
   system,
   user,
-  realUser ? null, # For macOS, use realUser if provided, otherwise use user
+  nixUser ? user, # Use another /users config
   modules ? [ ],
   homeModules ? [ ],
 }:
@@ -39,8 +39,6 @@ let
         patches = allPatches;
       };
 
-  systemUser = if isDarwin && realUser != null then realUser else user;
-
   unstable = import inputs.nixpkgs-unstable {
     inherit system;
     config.allowUnfree = true;
@@ -58,8 +56,8 @@ let
       unstable
       isDarwin
       isLinux
-      systemUser
       user
+      nixUser
       ;
   };
 
@@ -69,8 +67,8 @@ let
       home-manager.useUserPackages = true;
       home-manager.useGlobalPkgs = true;
       home-manager.extraSpecialArgs = specialArgs;
-      home-manager.users.${systemUser} = {
-        imports = [ (import ../users/${user}/home.nix) ] ++ homeModules;
+      home-manager.users.${user} = {
+        imports = [ (import ../users/${nixUser}/home.nix) ] ++ homeModules;
       };
     };
 

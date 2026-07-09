@@ -140,8 +140,16 @@
 
       darwinConfigurations.asdfpro = mkSystem "asdfpro" {
         system = "aarch64-darwin";
+        user = "sander";
+        nixUser = "sandydoo";
+        modules = [
+          ./modules/darwin/blackhole.nix
+        ];
+      };
+
+      darwinConfigurations.asdfpro5 = mkSystem "asdfpro" {
+        system = "aarch64-darwin";
         user = "sandydoo";
-        realUser = "sander";
         modules = [
           ./modules/darwin/blackhole.nix
         ];

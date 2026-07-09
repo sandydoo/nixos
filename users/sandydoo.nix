@@ -1,14 +1,14 @@
 {
   pkgs,
   isLinux,
-  systemUser,
+  user,
   ...
 }:
 
 {
-  users.users.${systemUser} = {
+  users.users.${user} = {
     isNormalUser = true;
-    home = if isLinux then "/home/${systemUser}" else "/Users/${systemUser}";
+    home = if isLinux then "/home/${user}" else "/Users/${user}";
     description = "Sander";
     extraGroups = [
       "wheel"

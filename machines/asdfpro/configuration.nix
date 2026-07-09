@@ -2,7 +2,7 @@
   config,
   pkgs,
   inputs,
-  systemUser,
+  user,
   ...
 }:
 
@@ -19,7 +19,7 @@ let
 
 in
 {
-  users.users.${systemUser}.home = "/Users/${systemUser}";
+  users.users.${user}.home = "/Users/${user}";
 
   environment.systemPackages = with pkgs; [
     home-manager
@@ -96,7 +96,7 @@ in
   # nix.settings.sandbox = "relaxed";
   nix.settings.sandbox = false;
 
-  nix.settings.trusted-users = [ "sander" ];
+  nix.settings.trusted-users = [ "${user}" ];
   nix.settings.substituters = [
     "https://nix-community.cachix.org?priority=41"
   ];
@@ -205,7 +205,7 @@ in
   };
 
   # Required by launchd.user.agents.
-  system.primaryUser = "sander";
+  system.primaryUser = user;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
