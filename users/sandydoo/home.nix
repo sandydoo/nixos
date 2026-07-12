@@ -40,7 +40,7 @@
     latest.claude-code
     latest.codex
     latest.amp-cli
-    latest.opencode
+    # latest.opencode
 
     # Node
     nodejs
@@ -155,7 +155,7 @@
 
     # Videos
     yt-dlp
-    streamlink
+    # streamlink
   ];
 
   home.sessionVariables = {
@@ -481,7 +481,15 @@
   xdg.configFile."tmux/flexoki-dark.tmuxtheme".source = ./tmux/flexoki-dark.tmuxtheme;
 
   # Pi — terminal coding agent
-  programs.pi.coding-agent.enable = true;
+  programs.pi.coding-agent = {
+    enable = true;
+    # `canvas` (a dev-only dependency of packages/ai) fails to compile in the
+    # Darwin sandbox: node-gyp's python crashes with a libffi trampoline
+    # assertion. Nothing at runtime needs the install scripts, so skip them.
+    package = inputs.pi.packages.${pkgs.stdenv.hostPlatform.system}.coding-agent.overrideAttrs {
+      npmRebuildFlags = [ "--ignore-scripts" ];
+    };
+  };
 
   # Opencode config
   xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
