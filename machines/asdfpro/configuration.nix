@@ -186,7 +186,10 @@ in
   # Support projects that use lorri
   services.lorri.enable = true;
 
-  security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
 
   launchd.user.agents = {
     "ssh-add" = {
