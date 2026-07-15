@@ -26,15 +26,12 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    systems-linux.url = "github:nix-systems/default-linux";
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
-    vscode-server.inputs.flake-utils.inputs.systems.follows = "systems-linux";
-
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     claude-code.url = "github:sadjow/claude-code-nix";
     codex-cli.url = "github:sadjow/codex-cli-nix";
+    pi.url = "github:lukasl-dev/pi.nix";
+    pi.inputs.nixpkgs.follows = "nixpkgs";
 
     devenv.url = "github:cachix/devenv";
     git-hooks.url = "github:cachix/git-hooks.nix";
@@ -45,8 +42,10 @@
     dank-material-shell.url = "github:AvengeMedia/DankMaterialShell";
     dank-material-shell.inputs.nixpkgs.follows = "nixpkgs";
 
-    pi.url = "github:lukasl-dev/pi.nix";
-    pi.inputs.nixpkgs.follows = "nixpkgs";
+    systems-linux.url = "github:nix-systems/default-linux";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
+    vscode-server.inputs.flake-utils.inputs.systems.follows = "systems-linux";
   };
 
   outputs =
