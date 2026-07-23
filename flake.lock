@@ -67,11 +67,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1784672208,
-        "narHash": "sha256-uH2AjIbB9EZFfwMknJWUjj9znAweykBpymgY4YWlEwo=",
+        "lastModified": 1784758749,
+        "narHash": "sha256-rNwvRrqedbd6jspIckIb5brLrAWmdOMqhqxLORTVx8Q=",
         "owner": "sadjow",
         "repo": "claude-code-nix",
-        "rev": "98c8ee457e35aeb051585bea46a0d5366f03b46b",
+        "rev": "1343337ba7dbc8b72bbe4d0f7084e95acc46570c",
         "type": "github"
       },
       "original": {
@@ -125,11 +125,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784691333,
-        "narHash": "sha256-e9j+rFQMyQ4BsREr+W6LiqO4a3Ofu574U33iEHwHjFU=",
+        "lastModified": 1784741320,
+        "narHash": "sha256-Krc45GFHul8CX82hP1jqM/RzW5qVpX6trGUN5aOyQQs=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "fe561f2b5d42c6718cc91c12556b6651eb55c23b",
+        "rev": "75eac83b475a98773897de4bfeb7ffba0ae8f4e8",
         "type": "github"
       },
       "original": {
@@ -189,11 +189,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1784696310,
-        "narHash": "sha256-EeZH7UbjqoJHHrN1DkV32DxZ8OMGh/2kla94lpO17eE=",
+        "lastModified": 1784758116,
+        "narHash": "sha256-vcjRSkJHM5/2rLmtCZBhms/WDJpyPNXW9Gi6xeSfc/Y=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "ef185b5a38445777194bc8469fc1cdebd99e7dbc",
+        "rev": "9767a1f458fbd99b487dbb600a130917d4cd2b13",
         "type": "github"
       },
       "original": {
@@ -435,11 +435,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784690067,
-        "narHash": "sha256-t86pRs7IPs3RTMPueWvvdcxyTFrctHAv2Jl7jnjsSf8=",
+        "lastModified": 1784789275,
+        "narHash": "sha256-cgRTWuG+u1tBPhm01JrId2k0Bni09phVJ1Q0BZlRd7M=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6d8d61567802997f9ec3086b2a837e3ef31fac16",
+        "rev": "3b0e6bbd65869af1beadf5963a99befc179d209f",
         "type": "github"
       },
       "original": {
@@ -471,11 +471,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1784678864,
-        "narHash": "sha256-2yBy9vI9BsEH8AoHiXiz87X12o1eMcwG5eJ9LXRauik=",
+        "lastModified": 1784764969,
+        "narHash": "sha256-45gcNga+PZrBi+8tUPEpKuAFeRISfmPByTCvVtNPV9A=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "8911d6c91c4e4f4dac8e1d763f426717313e1353",
+        "rev": "7a28482555fa1deaaa70674308038aad2130b025",
         "type": "github"
       },
       "original": {
@@ -487,11 +487,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1784675793,
-        "narHash": "sha256-hgLSI+4tQGHXM1iZsyON+1PKRVrMkRPz/LGhtT3bOkI=",
+        "lastModified": 1784762885,
+        "narHash": "sha256-zbMJygqXyogX1GgvaBY0YszNDe/WQXrlcnvBwtvy8Qw=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "a277c08d98e999ff6a59ec1bcd39d7de374c8579",
+        "rev": "6ecf226e44c3976e6a2c473eef1ee938215e1ed4",
         "type": "github"
       },
       "original": {
@@ -649,11 +649,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1784310968,
-        "narHash": "sha256-rkSPTePrKqs4dg+i7ZFCq93+HrClac6oSwXX927SVjA=",
+        "lastModified": 1784723954,
+        "narHash": "sha256-1CfD8ZUjCkTgjsneLZ/lxCHhgDfqxxE7/GX0MmsgiqA=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "779c32a00155994c86cde8213a8dd4df139d4355",
+        "rev": "a017f5b72210026af5b3ac5949f08d94380a6fbd",
         "type": "github"
       },
       "original": {
@@ -832,11 +832,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1784532650,
-        "narHash": "sha256-50kpr8hJKmsd6J+0KKS1WRXp1JRw9nLDHFA4fi/QQ6o=",
+        "lastModified": 1784769694,
+        "narHash": "sha256-3kURAdYyiNxB+jTOrgJ5OLhe73vXXJNOjd4wWCABvsU=",
         "owner": "lukasl-dev",
         "repo": "pi.nix",
-        "rev": "1ee5a66c7ae8b33051b90aa92016d976dfbb729c",
+        "rev": "3f97ab609322d3d57025bc6c334aab665d96d477",
         "type": "github"
       },
       "original": {
