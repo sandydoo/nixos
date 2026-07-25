@@ -67,11 +67,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1784914161,
-        "narHash": "sha256-xncQGg/L7hVuTq15GWcyc7M236fU9dH4v0R5Bzl5hzg=",
+        "lastModified": 1784948311,
+        "narHash": "sha256-zXmyx6HuIjH0RQPV4VjVAXQttLyLDk55x9c3NmDke8c=",
         "owner": "sadjow",
         "repo": "claude-code-nix",
-        "rev": "fc2b0e376dec752577cd8419992e6c510e7c5463",
+        "rev": "0d3cd1d6260b6f0ed232224c274c565407446fa1",
         "type": "github"
       },
       "original": {
@@ -125,11 +125,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784916746,
-        "narHash": "sha256-mkLQ5CeqXYpXqsBknA7+87Aed8HsIJfXc8M6cnnoGA0=",
+        "lastModified": 1784936204,
+        "narHash": "sha256-XNbDvIaPzqqIpgJynqSADAj7Yf8KlGJTo5S/fQJUBxs=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "fa094db1278765bf033c0ff10cdb4b12475fec7e",
+        "rev": "8bb7396362357650a80dcc8d81407095c91c7dcf",
         "type": "github"
       },
       "original": {
@@ -141,11 +141,11 @@
     "dank-qml-common": {
       "flake": false,
       "locked": {
-        "lastModified": 1784916690,
-        "narHash": "sha256-KZQjJRLRecUHSY8leyW+bWozsrpqKA9wzkQaL/TkYT0=",
+        "lastModified": 1784935106,
+        "narHash": "sha256-aVgOBRynme6XNKYCZlf/oCjPDZFwddyUQPRRkEupC3c=",
         "owner": "AvengeMedia",
         "repo": "dank-qml-common",
-        "rev": "9cc787912db7886051ce2b23bfd82a832d13c009",
+        "rev": "a172b39841d8f42bac46ac133b76cade1fae91b4",
         "type": "github"
       },
       "original": {
@@ -189,11 +189,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1784849577,
-        "narHash": "sha256-vVJl1B6vuVkpmkGYxSaHHpjwCZCP59OsXlSo4bQontk=",
+        "lastModified": 1784996826,
+        "narHash": "sha256-jFMS+ioEstFq5ZR1/BO5kh0vXuayogWSd42SreeAryU=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "fc06618ba2099eaec355764f3ec5c395d45cec7c",
+        "rev": "020f2e22c3e3169b299fd34ca0271ee6366aec43",
         "type": "github"
       },
       "original": {
@@ -471,11 +471,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1784851387,
-        "narHash": "sha256-Ai3xkqq/2SoWrP8VnKyKFu2NQdWc/+P9F2zNKX6IxuY=",
+        "lastModified": 1784937789,
+        "narHash": "sha256-OapoKXc31FbcfzT8Cehs3By0HnhgzZxnI42MCRXx6/8=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "a82bcd88f4b4ed8251287540a2af7b685e3648c2",
+        "rev": "0f46eaeeea58c396929ed4d04ed46282e1e0e33f",
         "type": "github"
       },
       "original": {
@@ -487,11 +487,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1784842034,
-        "narHash": "sha256-zWBB4azI2GZ8/4svrEzpp664ffrDCWngNyUMog0LyVo=",
+        "lastModified": 1784934442,
+        "narHash": "sha256-cMhWsQgVQjkeXc7gvCWIb7YEkGFY/L5GS2MlcHQU7N0=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "f95bd7393584e96152e1a2f68736c634ed8de614",
+        "rev": "63c84e4c1a0224b478c9e7ed48d483d0d749a540",
         "type": "github"
       },
       "original": {
@@ -779,11 +779,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1784555310,
-        "narHash": "sha256-/FCliTPgiuV1owejZFNx3Ch9irdvkOfOFl+HHZ+DrtM=",
+        "lastModified": 1784783405,
+        "narHash": "sha256-4IHyyLgLBdKefkljdKod4IMn023pQiDXAWJA187cmdY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "421eebfd0ec7bccd4abe826ce62d7e6e83129493",
+        "rev": "7525d999cd850b9a488817abc89c75dc733acf17",
         "type": "github"
       },
       "original": {
@@ -832,11 +832,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1784769694,
-        "narHash": "sha256-3kURAdYyiNxB+jTOrgJ5OLhe73vXXJNOjd4wWCABvsU=",
+        "lastModified": 1784984457,
+        "narHash": "sha256-y7jv+RTP0TkcJaDm7/D2xIFF9JDWKc6g5L3X3EUu3Eo=",
         "owner": "lukasl-dev",
         "repo": "pi.nix",
-        "rev": "3f97ab609322d3d57025bc6c334aab665d96d477",
+        "rev": "fd2c62853f66a5803dae621769570f1165e59b80",
         "type": "github"
       },
       "original": {
