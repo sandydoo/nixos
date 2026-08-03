@@ -96,6 +96,8 @@ in
   # nix.settings.sandbox = "relaxed";
   nix.settings.sandbox = false;
 
+  nix.settings.connect-timeout = 1;
+
   nix.settings.trusted-users = [ "${user}" ];
   nix.settings.substituters = [
     "https://nix-community.cachix.org?priority=41"
