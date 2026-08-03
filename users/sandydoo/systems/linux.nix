@@ -1,9 +1,16 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 let
   inherit (lib.hm.gvariant) mkUint32;
 in
 {
+  imports = [ inputs.vscode-server.homeModules.default ];
+
   home.packages = with pkgs; [
     # Development
     binutils
