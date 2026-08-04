@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   inputs,
@@ -271,6 +272,13 @@
         };
       }
     ];
+  };
+
+  # Unified CLI for nixos-rebuild, darwin-rebuild and nix flake update.
+  # `nh os switch` / `nh darwin switch`, add `-u` to update inputs first.
+  programs.nh = {
+    enable = true;
+    flake = "${config.home.homeDirectory}/code/nixos";
   };
 
   # Indexed search of files in nixpkgs
