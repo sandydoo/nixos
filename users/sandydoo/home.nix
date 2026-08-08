@@ -38,10 +38,11 @@
     vivid # Set terminal colors with LS_COLORS
 
     # AI
+    latest.amp-cli
     latest.claude-code
     latest.codex
-    latest.amp-cli
-    # latest.opencode
+    latest.opencode
+    oh-my-pi
 
     # Node
     nodejs

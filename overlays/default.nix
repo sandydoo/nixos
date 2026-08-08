@@ -1,5 +1,6 @@
 final: prev: {
   hunk = final.callPackage ../pkgs/hunk { };
+  oh-my-pi = final.callPackage ../pkgs/oh-my-pi { };
 
   streamlink = prev.streamlink.overridePythonAttrs (old: {
     disabledTests =
