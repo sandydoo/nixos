@@ -121,16 +121,23 @@ in
       maxJobs = 4;
       protocol = "ssh-ng";
       speedFactor = 1;
+      # No kmv/nixos-test here because vmware doesn't support nested virt.
       supportedFeatures = [
-        "kvm"
         "benchmark"
         "big-parallel"
-        "nixos-test"
       ];
-      systems = [
-        "aarch64-linux"
-        "x86_64-linux"
-      ];
+      systems = [ "aarch64-linux" ];
+    }
+    {
+      hostName = "nixos-vmware";
+      sshUser = "remotebuilder";
+      sshKey = "/etc/nix/builder_ed25519";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
+      maxJobs = 2;
+      protocol = "ssh-ng";
+      speedFactor = 1;
+      supportedFeatures = [ "big-parallel" ];
+      systems = [ "x86_64-linux" ];
     }
     {
       hostName = "nixos-x86";
