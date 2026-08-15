@@ -44,6 +44,8 @@
     latest.opencode
     oh-my-pi
 
+    latest.herdr
+
     # Node
     nodejs
     # hiPrio to win the buildEnv collision with typescript bundled inside
@@ -132,7 +134,6 @@
 
     # Haskell
     cabal-install
-    stack
     ghc
     haskell-language-server
     cabal2nix
