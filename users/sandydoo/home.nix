@@ -165,6 +165,15 @@
     EDITOR = "nvim";
   };
 
+  # Neovim config (LazyVim). Linked out-of-store so it stays writable and
+  # lazy.nvim can update lazy-lock.json in place. Edit files in
+  # users/sandydoo/nvim directly; no rebuild needed for config changes.
+  # `force` lets activation replace a pre-existing hand-made symlink.
+  xdg.configFile."nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/nixos/users/sandydoo/nvim";
+    force = true;
+  };
+
   programs.jujutsu = {
     enable = true;
     settings = {
