@@ -81,8 +81,8 @@
   nixpkgs.config.allowBroken = true;
   nixpkgs.config.allowUnsupported = true;
   nixpkgs.overlays = [
-    (import "${inputs.self}/overlays")
     (final: prev: { latest = unstable; })
+    (import "${inputs.self}/overlays")
   ];
 
   nix.settings.trusted-users = [ "sandydoo" ];

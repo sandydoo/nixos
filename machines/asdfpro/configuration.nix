@@ -7,6 +7,8 @@
 }:
 
 {
+  imports = [ ./builders ];
+
   users.users.${user}.home = "/Users/${user}";
 
   environment.systemPackages = with pkgs; [
@@ -96,75 +98,6 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
-
-  nix.distributedBuilds = true;
-  nix.settings.builders-use-substitutes = true;
-
-  nix.buildMachines = [
-    {
-      hostName = "nixos-vmware";
-      sshUser = "remotebuilder";
-      sshKey = "/etc/nix/builder_ed25519";
-      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
-      maxJobs = 4;
-      protocol = "ssh-ng";
-      speedFactor = 1;
-      # No kmv/nixos-test here because vmware doesn't support nested virt.
-      supportedFeatures = [
-        "benchmark"
-        "big-parallel"
-      ];
-      systems = [ "aarch64-linux" ];
-    }
-    {
-      hostName = "nixos-vmware";
-      sshUser = "remotebuilder";
-      sshKey = "/etc/nix/builder_ed25519";
-      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
-      maxJobs = 2;
-      protocol = "ssh-ng";
-      speedFactor = 1;
-      supportedFeatures = [ "big-parallel" ];
-      systems = [ "x86_64-linux" ];
-    }
-    {
-      hostName = "nixos-x86";
-      sshUser = "remotebuilder";
-      sshKey = "/etc/nix/builder_ed25519";
-      # ssh-keyscan -t ed25519 <HOSTNAME> | grep "ssh-ed25519" | cut -d' ' -f2,3 | tr -d '\n' | base64 -w0
-      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUxibjJJV0J6cFNJazhoSmZIKy9LdXprdVVrekFxYVRoZ2F3SWx1MHFGTlU=";
-      maxJobs = 4;
-      protocol = "ssh-ng";
-      speedFactor = 2;
-      supportedFeatures = [
-        "kvm"
-        "benchmark"
-        "big-parallel"
-        "nixos-test"
-      ];
-      systems = [ "x86_64-linux" ];
-    }
-  ];
-
-  nix.linux-builder = {
-    enable = false;
-    maxJobs = 4;
-    supportedFeatures = [
-      "kvm"
-      "benchmark"
-      "big-parallel"
-      "nixos-test"
-    ];
-    config =
-      { lib, ... }:
-      {
-        # A small set of builder options are available
-        # virtualisation.darwin-builder.memorySize = 8 * 1024;
-
-        virtualisation.cores = 4;
-        virtualisation.memorySize = lib.mkForce (8 * 1024);
-      };
-  };
 
   programs.zsh.enable = true;
   programs.fish.enable = true;
