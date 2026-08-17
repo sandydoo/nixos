@@ -94,7 +94,6 @@
     rsync
     rclone
     croc
-    # watchman # fails to build temporarily
     entr
 
     bat
@@ -142,9 +141,6 @@
     cargo-outdated
     cargo-sweep
     rust-analyzer
-
-    # Lua
-    latest.lua-language-server
 
     # JSON
     # https://github.com/NixOS/nixpkgs/issues/335533
