@@ -26,6 +26,9 @@
 
   networking.nat.externalInterface = "eth0";
 
+  # Allow ssh-ing via tailscale
+  services.tailscale.extraSetFlags = [ "--ssh" ];
+
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
