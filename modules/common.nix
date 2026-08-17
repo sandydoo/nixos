@@ -28,7 +28,6 @@
     "net.ipv6.conf.all.forwarding" = true;
   };
 
-  hardware.enableAllFirmware = true;
   hardware.graphics.enable = true;
 
   # Use networkd
