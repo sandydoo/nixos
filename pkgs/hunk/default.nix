@@ -7,24 +7,24 @@
 }:
 
 let
-  version = "0.18.0";
+  version = "0.19.0";
 
   sources = {
     "x86_64-linux" = {
       asset = "hunkdiff-linux-x64";
-      hash = "sha256-Iz9ou20JjWcRWsFhyk9YtjlkM1/RXkW08sJq6qp6XgE=";
+      hash = "sha256-1NlC/twFuLtRc+KRPlRUBqXZQSug3biPjn9NzXf9BgI=";
     };
     "aarch64-linux" = {
       asset = "hunkdiff-linux-arm64";
-      hash = "sha256-wOERBs7GDoQoGwWc419YjzT3PM/LklqkTttrXnLklVo=";
+      hash = "sha256-L13CVfv0fVlO0xr97AiPAoMeRCKB1VQFkwFjyOIKXt8=";
     };
     "x86_64-darwin" = {
       asset = "hunkdiff-darwin-x64";
-      hash = "sha256-yPylHFG1asOUQDmL/1/cmOQzhzn0g8khpVE09MCDPh4=";
+      hash = "sha256-43lGDNDszL0PEJuYve3KEpBVz/+gALxo3YJVUxYW2zE=";
     };
     "aarch64-darwin" = {
       asset = "hunkdiff-darwin-arm64";
-      hash = "sha256-BTZxySQ+YSpDT2iMgS/Ybsh5c2RMCno4FeDoQiE/pB4=";
+      hash = "sha256-fuzmmCyxRhwMIvnXCkGw+4CU2WXvAtwi+DirwN5xpCk=";
     };
   };
 
