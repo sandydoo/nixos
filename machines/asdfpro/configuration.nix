@@ -9,7 +9,12 @@
 {
   imports = [ ./builders ];
 
-  users.users.${user}.home = "/Users/${user}";
+  users.users.${user} = {
+    home = "/Users/${user}";
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFQ1wc3Gq+BQ0+++gBbTmROemSby/8MNKqBCHrM7nbcS8Il4qh2We+o4Ei+jZA9LxHdCHcuBNxpAHJRn94VvyUw= asdfx"
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     home-manager
