@@ -11,10 +11,10 @@ let
     case "$PINENTRY_USER_DATA" in
     *USE_TTY*) pinentry=${lib.getExe pkgs.pinentry-tty} ;;
     *USE_CURSES*) pinentry=${lib.getExe pkgs.pinentry-curses} ;;
-    ${lib.optionalString pkgs.stdenv.isLinux ''
+    ${lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
       *USE_GNOME3*) pinentry=${lib.getExe pkgs.pinentry-gnome} ;;
     ''}
-    ${lib.optionalString pkgs.stdenv.isDarwin ''
+    ${lib.optionalString pkgs.stdenv.hostPlatform.isDarwin ''
       *USE_MAC*) pinentry=${lib.getBin pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac ;;
     ''}
     esac
