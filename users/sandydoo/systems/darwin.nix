@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   unstable,
   lib,
@@ -22,6 +23,28 @@ let
   '';
 in
 {
+  imports = [ ../../../modules/darwin/secretspec.nix ];
+
+  secretspec = {
+    enable = true;
+    file = ../../../secretspec.toml;
+    profile = "default";
+
+    secrets.privateSshConfig = {
+      name = "SSH_PRIVATE_CONFIG";
+      path = "${config.home.homeDirectory}/.ssh/private/private.config";
+      lifetime = "persistent";
+      mode = "0600";
+    };
+
+    secrets.cachixSshConfig = {
+      name = "SSH_CACHIX_CONFIG";
+      path = "${config.home.homeDirectory}/.ssh/private/cachix.config";
+      lifetime = "runtime";
+      mode = "0600";
+    };
+  };
+
   home.packages = [
     pinentry-custom
     pkgs.macmon # Monitor macOS system stats

@@ -349,6 +349,10 @@
   };
 
   programs.bash.enable = true;
+  programs.bash.initExtra = ''
+    eval "$(devenv hook bash)"
+  '';
+
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -385,6 +389,9 @@
       # Add Obsidian CLI
       fish_add_path /Applications/Obsidian.app/Contents/MacOS
     '';
+    # + ''
+    #   devenv hook fish | source
+    # '';
     plugins = [
       {
         name = "fish-abbreviation-tips";
@@ -397,6 +404,13 @@
       }
     ];
   };
+
+  programs.nushell.enable = true;
+  programs.nushell.extraConfig = ''
+    mkdir ~/.cache/devenv
+    devenv hook nu | save --force ~/.cache/devenv/hook.nu
+    source ~/.cache/devenv/hook.nu
+  '';
 
   programs.git = {
     enable = true;
@@ -447,6 +461,10 @@
         name = "Sander";
         email = "hey@sandydoo.me";
       };
+      # Repro for cachix/devenv#2842 — rewrite GitHub HTTPS → SSH so libgit2
+      # in Nix's resolveRemoteRef trips when there's no SSH credential
+      # callback registered. Remove once #2842 is debugged.
+      url."ssh://git@github.com/".insteadOf = "https://github.com/";
     };
     ignores = [ (builtins.readFile ./git/gitignore) ];
   };
@@ -476,6 +494,8 @@
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
+    enableNushellIntegration = true;
+    options = [ "--cmd cd" ];
   };
 
   programs.tmux.enable = true;
