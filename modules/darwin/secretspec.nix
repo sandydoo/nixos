@@ -111,8 +111,8 @@ let
 
   validatedManifest = pkgs.runCommand "secretspec.toml" { nativeBuildInputs = [ cfg.package ]; } ''
     export HOME="$TMPDIR"
-    secretspec schema --file ${lib.escapeShellArg (toString cfg.file)} --output "$TMPDIR/schema.json"
-    cp ${lib.escapeShellArg (toString cfg.file)} "$out"
+    secretspec schema --file ${cfg.file} --output "$TMPDIR/schema.json"
+    cp ${cfg.file} "$out"
   '';
 
   mkMaterializer =
@@ -141,7 +141,7 @@ let
         ''
           echo "resolving SecretSpec profile ${lib.escapeShellArg profile}..." >&2
           if ! secretspec export \
-            --file ${lib.escapeShellArg (toString manifestFile)} \
+            --file ${manifestFile} \
             --profile ${lib.escapeShellArg profile} \
             --reason "Home Manager secret materialization" \
             --format json > "$work_directory/${profileData.jsonFile}"
