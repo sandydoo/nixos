@@ -40,7 +40,7 @@ in
     secrets.cachixSshConfig = {
       name = "SSH_CACHIX_CONFIG";
       path = "${config.home.homeDirectory}/.ssh/private/cachix.config";
-      lifetime = "runtime";
+      lifetime = "persistent";
       mode = "0600";
     };
   };
