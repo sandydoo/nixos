@@ -6,6 +6,13 @@
   ...
 }:
 
+let
+  sshAgentShellInit = ''
+    if [ ! -S "''${SSH_AUTH_SOCK:-}" ] && [ -S "$HOME/.ssh/agent.sock" ]; then
+      export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+    fi
+  '';
+in
 {
   imports = [ ./builders ];
 
@@ -104,8 +111,17 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
+  # Remote shells do not inherit the GUI login's SSH agent socket.
+  environment.extraInit = sshAgentShellInit;
+  programs.bash.interactiveShellInit = sshAgentShellInit;
   programs.zsh.enable = true;
+  programs.zsh.shellInit = sshAgentShellInit;
   programs.fish.enable = true;
+  programs.fish.shellInit = ''
+    if not test -S "$SSH_AUTH_SOCK"; and test -S "$HOME/.ssh/agent.sock"
+      set -gx SSH_AUTH_SOCK "$HOME/.ssh/agent.sock"
+    end
+  '';
   # Work around incorrect order in PATH. These paths need to come before
   # the system ones.
   # https://github.com/LnL7/nix-darwin/issues/122
@@ -129,6 +145,11 @@
   launchd.user.agents = {
     "ssh-add" = {
       script = ''
+        # Publish a stable path to the existing macOS agent at each GUI login.
+        if [ -S "''${SSH_AUTH_SOCK:-}" ]; then
+          /bin/mkdir -p "$HOME/.ssh"
+          /bin/ln -sfn "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.sock"
+        fi
         /usr/bin/ssh-add --apple-load-keychain --apple-use-keychain
       '';
       serviceConfig.RunAtLoad = true;
