@@ -2,6 +2,10 @@ final: prev: {
   hunk = final.callPackage ../pkgs/hunk { };
   oh-my-pi = final.callPackage ../pkgs/oh-my-pi { };
 
+  secretspec = prev.secretspec.overrideAttrs {
+    NO_GRAPHICS = "1";
+  };
+
   streamlink = prev.streamlink.overridePythonAttrs (old: {
     disabledTests =
       (old.disabledTests or [ ])
