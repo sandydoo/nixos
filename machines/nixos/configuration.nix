@@ -30,10 +30,6 @@
   };
   networking.nameservers = [ "192.168.64.1" ];
 
-  networking.nat.enable = true;
-  networking.nat.internalInterfaces = [ "ve-*" ];
-  networking.nat.externalInterface = "enp0s1";
-
   networking.firewall.enable = false;
 
   virtualisation.libvirtd.enable = true;

@@ -9,6 +9,5 @@
 
     # Hyper-V netvsc interfaces don't get predictable names; they show up as eth0.
     networking.interfaces.eth0.useDHCP = lib.mkDefault true;
-    networking.nat.externalInterface = "eth0";
   };
 }

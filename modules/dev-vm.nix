@@ -7,10 +7,6 @@
     ./remote-builder.nix
   ];
 
-  # NAT for nspawn containers. The platform sets the external interface.
-  networking.nat.enable = true;
-  networking.nat.internalInterfaces = [ "ve-*" ];
-
   networking.firewall.enable = false;
 
   virtualisation.libvirtd.allowedBridges = [

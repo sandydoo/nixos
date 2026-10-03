@@ -25,9 +25,6 @@ in
           "usbhid"
         ];
 
-        # The app chooses the PCI slot. enp0s1 is correct for UTM.
-        networking.nat.externalInterface = "enp0s1";
-
         # Rosetta for Linux needs an Apple silicon host.
         # Run x86_64-linux binaries and builds with it.
         # The app must share Rosetta, or /run/rosetta does not mount.

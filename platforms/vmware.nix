@@ -14,8 +14,6 @@
       "sr_mod"
     ];
 
-    networking.nat.externalInterface = "enp0s1";
-
     # On aarch64, run x86_64-linux binaries and builds with QEMU user emulation.
     boot.binfmt.emulatedSystems = lib.mkIf config.nixpkgs.hostPlatform.isAarch64 [ "x86_64-linux" ];
   };
