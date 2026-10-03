@@ -7,10 +7,7 @@
 let
   builderDown = pkgs.writeShellApplication {
     name = "nix-builder-down";
-    runtimeInputs = [
-      pkgs.coreutils
-      pkgs.libressl.nc
-    ];
+    runtimeInputs = [ pkgs.coreutils ];
     text = builtins.readFile ./builder-down.sh;
   };
 in

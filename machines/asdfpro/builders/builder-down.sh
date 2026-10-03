@@ -20,7 +20,8 @@ if [ -r "$marker" ]; then
   fi
 fi
 
-if nc -z -w 2 "$host" 22 >/dev/null 2>&1; then
+# Use ICMP: TCP probes to port 22 trigger sshd PerSourcePenalties.
+if /sbin/ping -c 1 -t 2 -q "$host" >/dev/null 2>&1; then
   rm -f "$marker"
   exit 1
 fi
