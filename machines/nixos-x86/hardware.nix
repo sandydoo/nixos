@@ -1,19 +1,5 @@
+# Disks of this machine. The Hyper-V parts are in platforms/hyperv.
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}:
-
-{
-  imports = [ ];
-
-  boot.initrd.availableKernelModules = [ "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/3827d0ea-4d6f-490b-807b-41b71944ae8b";
     fsType = "btrfs";
@@ -41,9 +27,4 @@
   };
 
   swapDevices = [ ];
-
-  # Hyper-V netvsc interfaces don't get predictable names; they show up as eth0.
-  networking.interfaces.eth0.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

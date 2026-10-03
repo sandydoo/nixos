@@ -26,6 +26,9 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     claude-code.url = "github:sadjow/claude-code-nix";
@@ -67,6 +70,7 @@
       };
 
       mkSystem = import ./lib/mkSystem.nix { inherit inputs overlays; };
+      machines = import ./machines { inherit inputs mkSystem; };
     in
     {
       formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
@@ -86,73 +90,13 @@
         };
       });
 
-      nixosConfigurations.nixos = mkSystem "nixos" {
-        system = "aarch64-linux";
-        user = "sandydoo";
-        modules = [
-          ./modules/sway.nix
-          ./modules/tailscale.nix
-        ];
-      };
+      inherit (machines) nixosConfigurations darwinConfigurations;
 
-      nixosConfigurations.nixos-vmware = mkSystem "nixos-vmware" {
-        system = "aarch64-linux";
-        user = "sandydoo";
-        modules = [
-          ./modules/gnome.nix
-          ./modules/tailscale.nix
-        ];
-      };
-
-      nixosConfigurations.nixos-utm = mkSystem "nixos-utm" {
-        system = "aarch64-linux";
-        user = "sandydoo";
-        modules = [
-          ./modules/gnome.nix
-          ./modules/tailscale.nix
-        ];
-      };
-
-      nixosConfigurations.nixos-mbp = mkSystem "nixos-mbp" {
-        system = "x86_64-linux";
-        user = "sandydoo";
-        modules = [
-          ./modules/desktop-base.nix
-          ./modules/niri
-          ./modules/tailscale.nix
-        ];
-        homeModules = [
-          ./modules/niri/home.nix
-          ./modules/dank-material-shell/home.nix
-          ./modules/applesmc/kbd-backlight-home.nix
-          ./modules/no-gpg-home.nix
-        ];
-      };
-
-      nixosConfigurations.nixos-x86 = mkSystem "nixos-x86" {
-        system = "x86_64-linux";
-        user = "sandydoo";
-        modules = [
-          ./modules/i3.nix
-          ./modules/tailscale.nix
-        ];
-      };
-
-      darwinConfigurations.asdfpro = mkSystem "asdfpro" {
-        system = "aarch64-darwin";
-        user = "sander";
-        nixUser = "sandydoo";
-        modules = [
-          ./modules/darwin/blackhole.nix
-        ];
-      };
-
-      darwinConfigurations.asdfpro5 = mkSystem "asdfpro" {
-        system = "aarch64-darwin";
-        user = "sandydoo";
-        modules = [
-          ./modules/darwin/blackhole.nix
-        ];
+      apps.aarch64-darwin.utm-install = {
+        type = "app";
+        program = "${
+          nixpkgs.legacyPackages.aarch64-darwin.callPackage ./pkgs/utm-install { }
+        }/bin/utm-install";
       };
     };
 }

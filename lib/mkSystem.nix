@@ -7,6 +7,7 @@ name:
 {
   system,
   user,
+  machine ? name, # Share another machine's configuration directory
   nixUser ? user, # Use another /users config
   modules ? [ ],
   homeModules ? [ ],
@@ -73,10 +74,13 @@ let
     };
 
   baseModules = [
-    ../machines/${name}/configuration.nix
+    ../machines/${machine}/configuration.nix
     homeManagerModule
   ]
-  ++ lib.optionals isLinux [ ../users/${user}.nix ]
+  ++ lib.optionals isLinux [
+    ../users/${user}.nix
+    ../platforms
+  ]
   ++ modules;
 
 in
@@ -110,6 +114,7 @@ else
         inputs.nixpkgs.flake.source = lib.mkForce patchedNixpkgs;
       }
       ++ [
+        { nixpkgs.hostPlatform = lib.mkDefault system; }
         inputs.home-manager.nixosModules.home-manager
       ];
   }

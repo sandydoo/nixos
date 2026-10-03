@@ -2,12 +2,11 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    "${inputs.self}/machines/hardware/hyperv-x86_64.nix"
-    "${inputs.self}/modules/common.nix"
-    "${inputs.self}/modules/remote-builder.nix"
-    "${inputs.self}/modules/hyperv-guest.nix"
+    ./hardware.nix
+    "${inputs.self}/modules/dev-vm.nix"
   ];
+
+  machine.platform = "hyperv";
 
   networking.hostName = "nixos-x86";
   networking.nameservers = [
@@ -23,8 +22,6 @@
       "app.nixos-x86"
     ];
   };
-
-  networking.nat.externalInterface = "eth0";
 
   # Allow ssh-ing via tailscale
   services.tailscale.extraSetFlags = [ "--ssh" ];
