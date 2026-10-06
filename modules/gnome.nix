@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.xserver.enable = true;
@@ -17,8 +17,7 @@
 
   services.desktopManager.gnome.enable = true;
 
-  # Fix broken auto-login
-  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  # Reserve tty1 for GDM's automatic login.
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
