@@ -18,6 +18,7 @@
 
   # Boot to a console; start GNOME with `sudo systemctl start display-manager`.
   systemd.defaultUnit = lib.mkForce "multi-user.target";
+  services.getty.autologinUser = "sandydoo";
 
   # Keep a console on tty2, separate from GDM on tty1.
   systemd.services."getty@tty2" = {
