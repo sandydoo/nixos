@@ -21,11 +21,21 @@
   services.getty.autologinUser = "sandydoo";
 
   # Keep a console on tty2, separate from GDM on tty1.
-  systemd.services."getty@tty2" = {
-    overrideStrategy = "asDropin";
-    wantedBy = [ "getty.target" ];
+  systemd.targets.getty.wants = [ "getty@tty2.service" ];
+
+  # An instance-specific getty drop-in would shadow NixOS's template drop-in,
+  # losing its store paths for agetty and login. Switch VTs in a separate unit.
+  systemd.services.console-tty2 = {
+    description = "Switch to the tty2 console";
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "getty@tty2.service" ];
+    after = [ "getty@tty2.service" ];
     restartIfChanged = false;
-    serviceConfig.ExecStartPre = "${lib.getExe' pkgs.kbd "chvt"} 2";
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${lib.getExe' pkgs.kbd "chvt"} 2";
+    };
   };
 
   # Return to the console when the desktop is stopped.
