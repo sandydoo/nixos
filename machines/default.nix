@@ -15,7 +15,6 @@ in
         system = "x86_64-linux";
         user = "sandydoo";
         modules = [
-          ../modules/gnome.nix
           ../modules/tailscale.nix
         ];
       };

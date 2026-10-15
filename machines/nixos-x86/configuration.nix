@@ -9,6 +9,11 @@
   machine.platform = "hyperv";
 
   networking.hostName = "nixos-x86";
+
+  # Boot straight into a console session.
+  systemd.defaultUnit = "multi-user.target";
+  services.getty.autologinUser = "sandydoo";
+
   networking.nameservers = [
     "1.1.1.1"
     "1.0.0.1"
