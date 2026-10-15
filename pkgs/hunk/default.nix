@@ -7,24 +7,24 @@
 }:
 
 let
-  version = "0.19.0";
+  version = "0.23.0";
 
   sources = {
     "x86_64-linux" = {
       asset = "hunkdiff-linux-x64";
-      hash = "sha256-1NlC/twFuLtRc+KRPlRUBqXZQSug3biPjn9NzXf9BgI=";
+      hash = "sha256-eatkBsuyuADnPG+8JUavuX7U+8O1Cq0HLrmtEhUVgeY=";
     };
     "aarch64-linux" = {
       asset = "hunkdiff-linux-arm64";
-      hash = "sha256-L13CVfv0fVlO0xr97AiPAoMeRCKB1VQFkwFjyOIKXt8=";
+      hash = "sha256-W4korh6YeysXddH+Yu66vMCLn8mUAVTgzvJ9JJQct+Q=";
     };
     "x86_64-darwin" = {
       asset = "hunkdiff-darwin-x64";
-      hash = "sha256-43lGDNDszL0PEJuYve3KEpBVz/+gALxo3YJVUxYW2zE=";
+      hash = "sha256-FMUwJct7s6/WJztlgXq3oQArH46Usk46BU6VJk4WgOA=";
     };
     "aarch64-darwin" = {
       asset = "hunkdiff-darwin-arm64";
-      hash = "sha256-fuzmmCyxRhwMIvnXCkGw+4CU2WXvAtwi+DirwN5xpCk=";
+      hash = "sha256-rkLP5SeYpPUdJfY864aFyipsswOaEk1qb8FyoRL41rg=";
     };
   };
 
@@ -50,6 +50,8 @@ let
     installPhase = ''
       runHook preInstall
       install -Dm755 hunk $out/bin/hunk
+      # Review commands respawn the TUI through the hunkdiff alias.
+      ln -s hunk $out/bin/hunkdiff
       # hunk resolves its bundled review skill by walking up ancestor dirs of
       # the binary looking for skills/hunk-review/SKILL.md.
       cp -r skills $out/skills
@@ -80,6 +82,9 @@ let
         name = "hunk";
         runScript = lib.getExe hunk-unwrapped;
         targetPkgs = pkgs: [ pkgs.stdenv.cc.cc.lib ];
+        extraInstallCommands = ''
+          ln -s hunk $out/bin/hunkdiff
+        '';
         inherit meta passthru;
       }
     else
