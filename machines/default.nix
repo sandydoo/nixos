@@ -32,7 +32,6 @@ in
         system = "aarch64-linux";
         user = "sandydoo";
         modules = [
-          ../modules/gnome.nix
           ../modules/tailscale.nix
         ];
       };
