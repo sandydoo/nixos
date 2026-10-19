@@ -2,46 +2,59 @@
 #
 # The Mac cannot run Linux builds itself.
 # Linux derivations go to the machines below through the build hook.
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
+  utmBuilder = {
+    hostName = "nixos-utm";
+    sshUser = "remotebuilder";
+    sshKey = "/etc/nix/builder_ed25519";
+    publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSVBDYzdTRzJqY2cyUHRuWlppRys4bHRIazY2OURMTmZOQUQ2ZWd3YVI3Ty8=";
+    protocol = "ssh-ng";
+    speedFactor = 1;
+  };
+
   builderDown = pkgs.writeShellApplication {
     name = "nix-builder-down";
     runtimeInputs = [ pkgs.coreutils ];
     text = builtins.readFile ./builder-down.sh;
   };
+
+  sshBuilders = lib.unique (
+    map
+      (builder: {
+        inherit (builder) hostName sshUser;
+      })
+      (builtins.filter (
+        builder: builtins.elem builder.protocol [ "ssh" "ssh-ng" ]
+      ) config.nix.buildMachines)
+  );
 in
 {
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
 
   nix.buildMachines = [
-    {
-      hostName = "nixos-vmware";
-      sshUser = "remotebuilder";
-      sshKey = "/etc/nix/builder_ed25519";
-      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
+    (utmBuilder // {
       maxJobs = 4;
-      protocol = "ssh-ng";
-      speedFactor = 1;
-      # No kmv/nixos-test here because vmware doesn't support nested virt.
       supportedFeatures = [
+        "kvm"
         "benchmark"
         "big-parallel"
+        "nixos-test"
       ];
       systems = [ "aarch64-linux" ];
-    }
-    {
-      hostName = "nixos-vmware";
-      sshUser = "remotebuilder";
-      sshKey = "/etc/nix/builder_ed25519";
-      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ3V1pUYjliUjRJUG9kbnhESXZDVkxwZjg3UWpSdFNZQ1pYc1kvdVBVdTM=";
+    })
+    (utmBuilder // {
       maxJobs = 2;
-      protocol = "ssh-ng";
-      speedFactor = 1;
       supportedFeatures = [ "big-parallel" ];
       systems = [ "x86_64-linux" ];
-    }
+    })
     {
       hostName = "nixos-x86";
       sshUser = "remotebuilder";
@@ -61,18 +74,24 @@ in
     }
   ];
 
-  # Do not let an unreachable nixos-vmware stall builds.
+  # Do not let unreachable remote builders stall builds.
   # build-remote disables a builder for the rest of a build session after
   # its first failed connection.
   # The probe makes that first failure instant and remembers it across
   # sessions (see builder-down.sh).
   # This is read by the nix-daemon's ssh via /etc/ssh/ssh_config.
-  programs.ssh.extraConfig = ''
-    Match host nixos-vmware user remotebuilder exec "${builderDown}/bin/nix-builder-down %h"
-      ProxyCommand /usr/bin/false
-    Match host nixos-vmware user remotebuilder
-      ConnectTimeout 5
-  '';
+  programs.ssh.extraConfig = lib.concatMapStringsSep "\n" (
+    builder:
+    let
+      match = "host ${builder.hostName}" + lib.optionalString (builder.sshUser != null) " user ${builder.sshUser}";
+    in
+    ''
+      Match ${match} exec "${builderDown}/bin/nix-builder-down %h"
+        ProxyCommand /usr/bin/false
+      Match ${match}
+        ConnectTimeout 5
+    ''
+  ) sshBuilders;
 
   nix.linux-builder = {
     enable = false;

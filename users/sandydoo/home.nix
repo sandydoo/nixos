@@ -239,8 +239,8 @@
     ];
     settings = lib.mkMerge [
       (lib.mkIf isDarwin {
-        "nixos-vmware" = {
-          HostName = "nixos-vmware";
+        "nixos-utm" = {
+          HostName = "nixos-utm";
           User = "sandydoo";
           ForwardAgent = true;
         };
