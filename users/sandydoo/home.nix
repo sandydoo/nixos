@@ -41,7 +41,6 @@
     latest.amp-cli
     latest.claude-code
     latest.codex
-    latest.opencode
     oh-my-pi
 
     latest.herdr
