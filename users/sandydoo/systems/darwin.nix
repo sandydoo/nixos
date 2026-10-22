@@ -7,6 +7,41 @@
 }:
 
 let
+  metalToolchain = pkgs.requireFile {
+    name = "Metal.xctoolchain";
+    sha256 = "sha256-dO1ls/R4BaxmCufwH6hhY+9n1y/6eqzvVJytX4e5vik=";
+    hashMode = "recursive";
+    message = ''
+      Download Metal Toolchain 27A266a using Xcode 27.1:
+        DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -downloadComponent MetalToolchain
+      Add the mounted Metal.xctoolchain directory to the Nix store:
+        nix-store --add-fixed --recursive sha256 /path/to/Metal.xctoolchain
+    '';
+  };
+
+  # FFmpeg expects the Metal tools in Xcode's pre-26 directory layout.
+  ffmpegMetalTools = pkgs.runCommand "ffmpeg-metal-tools-27A266a" { } ''
+    mkdir -p "$out/Contents/Developer/Toolchains"
+    ln -s ${metalToolchain} "$out/Contents/Developer/Toolchains/XcodeDefault.xctoolchain"
+  '';
+
+  ffmpeg =
+    (pkgs.ffmpeg-full.override {
+      withUnfree = true;
+      withMetal = true;
+      xcode = ffmpegMetalTools;
+    }).overrideAttrs
+      (old: {
+        patches = (old.patches or [ ]) ++ [
+          # Fix a double release when yadif_videotoolbox drains its autorelease pool.
+          (pkgs.fetchurl {
+            name = "ffmpeg-metal-autorelease.patch";
+            url = "https://code.ffmpeg.org/FFmpeg/FFmpeg/pulls/23850.patch";
+            hash = "sha256-j9FIwwKkb6WjpyDI5eev1qXyzjK/93UtSOmddSXYkyc=";
+          })
+        ];
+      });
+
   pinentry-custom = pkgs.writeShellScriptBin "pinentry-custom" ''
     pinentry=${lib.getExe pkgs.pinentry-tty}
     case "$PINENTRY_USER_DATA" in
@@ -47,6 +82,8 @@ in
 
   home.packages = [
     pinentry-custom
+    ffmpeg
+    pkgs.chromaprint # fpcalc audio fingerprinting CLI
     pkgs.macmon # Monitor macOS system stats
     pkgs.xdr-boost # Boost XDR display brightness to 1600 nits
 
