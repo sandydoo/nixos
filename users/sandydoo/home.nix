@@ -44,6 +44,7 @@
     oh-my-pi
 
     latest.herdr
+    herdr-core
 
     # Node
     nodejs
