@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 
 {
   services.xserver.enable = true;
@@ -28,5 +28,10 @@
   ];
 
   programs.dconf.enable = true;
+  home-manager.users.${user} =
+    { lib, ... }:
+    {
+      dconf.settings."org/gnome/desktop/session".idle-delay = lib.hm.gvariant.mkUint32 0;
+    };
   programs.xwayland.enable = true;
 }

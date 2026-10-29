@@ -1,13 +1,9 @@
 {
   pkgs,
-  lib,
   inputs,
   ...
 }:
 
-let
-  inherit (lib.hm.gvariant) mkUint32;
-in
 {
   imports = [ inputs.vscode-server.homeModules.default ];
 
@@ -35,12 +31,6 @@ in
     nftables
     wireguard-tools
   ];
-
-  dconf.settings = {
-    "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 0;
-    };
-  };
 
   # xsession.enable = true;
   # xsession.initExtra = ''
