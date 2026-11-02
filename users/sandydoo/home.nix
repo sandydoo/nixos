@@ -406,6 +406,7 @@
   };
 
   programs.nushell.enable = true;
+  programs.nushell.loadSessionVariables = false;
   programs.nushell.extraConfig = ''
     mkdir ~/.cache/devenv
     devenv hook nu | save --force ~/.cache/devenv/hook.nu
