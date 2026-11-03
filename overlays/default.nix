@@ -1,5 +1,6 @@
 final: prev: {
-  herdr-core = final.callPackage ../pkgs/herdr-core { };
+  herdr = final.callPackage ../pkgs/herdr { };
+  herdr-core = final.callPackage ../pkgs/herdr { component = "core"; };
   hunk = final.callPackage ../pkgs/hunk { };
   oh-my-pi = final.callPackage ../pkgs/oh-my-pi { };
 

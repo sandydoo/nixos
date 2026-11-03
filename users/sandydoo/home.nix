@@ -43,8 +43,7 @@
     latest.codex
     oh-my-pi
 
-    latest.herdr
-    herdr-core
+    herdr
 
     # Node
     nodejs
