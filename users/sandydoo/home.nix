@@ -73,6 +73,7 @@
 
     # Cloud
     awscli2
+    ssm-session-manager-plugin
     cachix
     _1password-cli
 
