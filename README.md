@@ -56,6 +56,32 @@ Reduce the lease time for DHCP leases. The default is 86400 seconds (24 hours). 
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.InternetSharing.default.plist bootpd -dict DHCPLeaseTimeSecs -int 600
 ```
 
+### Nested KVM on nixos-utm
+
+Linux 6.19+ can hang nested ARM guests under Apple Virtualization because of a regression in GIC interrupt handling.
+Apply these kernel parameters to the outer Linux VM, as set in the [machine configuration](machines/nixos-utm/configuration.nix):
+
+```nix
+boot.kernelParams = [
+  "kvm-arm.vgic_v3_group1_trap=1"
+  "kvm-arm.vgic_v3_common_trap=1"
+];
+```
+
+[Regression report](https://github.com/agent-substrate/substrate/pull/3149) · [Kernel commit](https://github.com/torvalds/linux/commit/73c9726975af1c2bf8d062017c67bcf4fb8821d5)
+
+#### Guest memory
+
+Nested KVM on Apple Virtualization is slow with 4 KiB guest RAM pages because nested page-table faults are expensive.
+Use 2 MiB backing pages by adding these properties to each QEMU `memory-backend-memfd` object:
+
+```text
+hugetlb=on,hugetlbsize=2097152
+```
+
+Reserve enough hugetlb pages for all guest RAM before starting QEMU.
+[Implementation notes](https://github.com/AlexanderMattTurner/agent-glovebox/blob/675906914f190d437f67bb491e56eb68ef274d24/bin/lib/kata_layout.py#L112-L125)
+
 ## Maintenance
 
 ### Delete older generations
