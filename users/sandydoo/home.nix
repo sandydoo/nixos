@@ -170,6 +170,30 @@
     force = true;
   };
 
+  xdg.configFile."herdr-core/config.toml" = {
+    source = (pkgs.formats.toml { }).generate "herdr-core-config.toml" {
+      shell = [
+        "${config.home.profileDirectory}/bin/fish"
+        "--login"
+        "--interactive"
+      ];
+    };
+    force = true;
+  };
+
+  xdg.configFile."herdr-app/settings.json" = {
+    text = builtins.toJSON {
+      # Herdr skips core updates when the executable is managed by Nix.
+      core = "${pkgs.herdr-core}/bin/herdr-core";
+      zoom = 1;
+      sounds.enabled = true;
+      font = "Lilex";
+      minimum_contrast = 1;
+      font_size = 12;
+    };
+    force = true;
+  };
+
   programs.jujutsu = {
     enable = true;
     settings = {
