@@ -20,41 +20,41 @@ let
   releases = {
     core = {
       pname = "herdr-core";
-      version = "0.1.18";
+      version = "0.1.19";
       sources = {
         "x86_64-linux" = {
           target = "linux-x86_64";
-          hash = "sha256-Wy+Xy0sqnXprLMWUJiggPtn7t8wMK0sJrYpvVkjiRrc=";
+          hash = "sha256-Stz7Qj1S8kxcxKHizS/K0fYtKLt3h2rEcsKQgqPqpCQ=";
         };
         "aarch64-linux" = {
           target = "linux-aarch64";
-          hash = "sha256-zzM5PPlQu3Y3NNw+FmEKudr4SSORpO8N5WAmzX91KFM=";
+          hash = "sha256-+Vw0/XF37ViAfXT+TueLs9xz6zfyHGlJYGQACiGryxA=";
         };
         "x86_64-darwin" = {
           target = "macos-x86_64";
-          hash = "sha256-FaErgOk+xOB029uC+opm5SmFer+9+0VvlNURbcQ4/tw=";
+          hash = "sha256-L5W+2uLKG/n5YR1hBm7zrCEcYsoIKCEy1I4oe22hTQg=";
         };
         "aarch64-darwin" = {
           target = "macos-aarch64";
-          hash = "sha256-d9ivCS4lrmUPRCTW2tJ1FPaRahHYB/sHUoWM0nwh5Pw=";
+          hash = "sha256-UzjZAK2tttJzucjpcCckfbMXnM/+3hCheTNY8W4I1oM=";
         };
       };
     };
     app = {
       pname = "herdr";
-      version = "0.1.12";
+      version = "0.1.14";
       sources = {
         "x86_64-linux" = {
           target = "linux-x86_64";
-          hash = "sha256-omXmySXEh0WEBnQf+gnS+g09S9QBo07YwBwzYQjlfB8=";
+          hash = "sha256-R1o4P49DnjGRqGY1tcEobOTf0tn83x58vf3Wxxdvj/M=";
         };
         "aarch64-linux" = {
           target = "linux-aarch64";
-          hash = "sha256-dJ8x0w4/TX4k4nSPdNnLSpvdpMloAnq6/7b7I5/+tpQ=";
+          hash = "sha256-MKQxzpXBc1bv6K/tUMTq+IiNg+9FrNmqkRCU1RcH0Ac=";
         };
         "aarch64-darwin" = {
           target = "macos-aarch64";
-          hash = "sha256-AGpPaECaeVSNGqbF+Z2okRt9FJEO8qxr0aPc5jTKXQM=";
+          hash = "sha256-DabKIUIUOJyjngX99lI/1uS+QjpL59/Tm2d9aKQQ+os=";
         };
       };
     };
