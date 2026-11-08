@@ -18,6 +18,10 @@ let
 in
 final: prev: {
   bclm = final.callPackage ../pkgs/bclm { };
+  cargo-outdated = prev.cargo-outdated.overrideAttrs (old: {
+    # Cargo's rusqlite dependency links against the system SQLite library.
+    buildInputs = (old.buildInputs or [ ]) ++ [ final.sqlite ];
+  });
   latest = prev.latest.extend (
     latestFinal: latestPrev: {
       opencode = fixOpencode latestFinal latestPrev.opencode;
