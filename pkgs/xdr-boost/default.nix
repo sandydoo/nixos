@@ -7,13 +7,13 @@
 
 swiftPackages.stdenv.mkDerivation {
   pname = "xdr-boost";
-  version = "0-unstable-2026-04-02";
+  version = "0-unstable-2026-07-08";
 
   src = fetchFromGitHub {
     owner = "levelsio";
     repo = "xdr-boost";
-    rev = "2f2f20b4c6241243a3a652b9c7be5ec506212bb2";
-    hash = "sha256-n/kFrEPjrjrTuPmBVynMVdsdJ3hPkYLRD4TnLvxUZVc=";
+    rev = "f1d938db8f05952d6e4fa394f1b4c1f44a47bb1a";
+    hash = "sha256-PAt7RJ8iQrZiY5ry3RA7f71S9I79GtybqQu7p95N6qs=";
   };
 
   nativeBuildInputs = [ swiftPackages.swift ];
