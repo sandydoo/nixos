@@ -1,10 +1,9 @@
--- Toggle Ghostty with alt-tab
--- Handled by Ghostty now
+-- Toggle Rex with alt+tab
 hs.hotkey.bind({ "alt" }, "tab", function()
-	if hs.application.frontmostApplication():name() == "Ghostty" then
+	if hs.application.frontmostApplication():name() == "Rex Beta" then
 		hs.application.frontmostApplication():hide()
 	else
-		hs.application.launchOrFocus("Ghostty")
+		hs.application.launchOrFocus("Rex Beta")
 	end
 end)
 
