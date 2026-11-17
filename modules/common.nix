@@ -10,7 +10,7 @@
 }:
 
 {
-  imports = [ inputs.rex.nixosModules.default ];
+  imports = [ ./rex.nix ];
 
   boot.loader.timeout = 2;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -166,8 +166,6 @@
   services.eternal-terminal.port = 2022;
   # The nixos module doesn't expose the port by default.
   networking.firewall.allowedTCPPorts = [ config.services.eternal-terminal.port ];
-
-  services.rex.enable = true;
 
   programs.mosh.enable = true;
   programs.fish.enable = true;
