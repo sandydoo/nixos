@@ -14,10 +14,19 @@
 
   networking.hostName = "unifi";
   networking.dhcpcd.wait = "ipv4";
+  services.avahi = {
+    enable = true;
+    settings.publish = {
+      disable-publishing = false;
+      publish-addresses = true;
+    };
+  };
+
   virtualisation.podman.enable = true;
   virtualisation.oci-containers.backend = "podman";
   services.unifi-os-server = {
     enable = true;
+    ports.ui = 443;
     openFirewallUiPort = true;
     openFirewallServicePorts = true;
   };
