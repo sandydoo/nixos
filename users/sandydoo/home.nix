@@ -264,7 +264,7 @@
     settings = lib.mkMerge [
       (lib.mkIf isDarwin {
         "nixos-utm" = {
-          HostName = "nixos-utm";
+          HostName = "nixos-utm.local";
           User = "sandydoo";
           ForwardAgent = true;
         };

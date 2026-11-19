@@ -11,7 +11,7 @@
 
 let
   utmBuilder = {
-    hostName = "nixos-utm";
+    hostName = "nixos-utm.local";
     sshUser = "remotebuilder";
     sshKey = "/etc/nix/builder_ed25519";
     publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSVBDYzdTRzJqY2cyUHRuWlppRys4bHRIazY2OURMTmZOQUQ2ZWd3YVI3Ty8=";
