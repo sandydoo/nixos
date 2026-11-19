@@ -1,7 +1,9 @@
 -- Toggle Rex with alt+tab
+local rexBundleID = "com.superlogical.rex"
 hs.hotkey.bind({ "alt" }, "tab", function()
-	if hs.application.frontmostApplication():name() == "Rex Beta" then
-		hs.application.frontmostApplication():hide()
+	local app = hs.application.frontmostApplication()
+	if app and app:bundleID() == rexBundleID then
+		app:hide()
 	else
 		hs.application.launchOrFocus("Rex Beta")
 	end
