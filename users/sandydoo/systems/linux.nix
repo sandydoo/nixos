@@ -78,6 +78,7 @@
 
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
     profiles.sandydoo.settings = {
       "browser.startup.homepage" = "https://duckduckgo.com/";
       "browser.search.region" = "GB";
