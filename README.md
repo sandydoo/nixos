@@ -20,17 +20,19 @@ nix build ./#darwinConfigurations.asdfpro.system
 
 ## Setting up VMs on a macOS host
 
+The installer defaults to UTM shared networking. Use `--network nat` for UTM’s NAT Network (macOS 26+), or `--network none` to boot the installed VM without a network adapter. The installer uses a temporary shared adapter for SSH during offline VM setup.
+
 ### UniFi OS Server
 
-On an Apple silicon Mac with UTM, run `networksetup -listallhardwareports` to find the device connected to the management LAN. For example, if it is `en0`, create the guest with:
+On an Apple silicon Mac with UTM, create the guest with:
 
 ```shell
-nix run .#utm-install -- --name unifi --attr unifi --bridge en0
+nix run .#utm-install -- --name unifi --attr unifi --network bridge
 ```
 
-The guest uses the LAN bridge from first boot. If UTM cannot discover the guest address, the installer prompts for the IPv4 lease matching the printed MAC address. Reserve that lease on the LAN DHCP server so devices can keep reaching the server.
+UTM selects the bridge interface automatically. To pin the guest to a specific management LAN interface, add `--interface en0` with the device name from `networksetup -listallhardwareports`. If UTM cannot discover the guest address, the installer prompts for the IPv4 lease matching the printed MAC address. Reserve that lease on the LAN DHCP server so devices can keep reaching the server.
 
-Open `https://<guest-lan-ip>:11443` to finish setup and adopt devices. For devices on a routed subnet, use `http://<guest-lan-ip>:8080/inform` as the inform URL. The [community NixOS module](https://github.com/rcambrj/unifi-os-server) starts the server at boot as `podman-unifi-os-server.service` and keeps its data in `/var/lib/unifi-os-server`.
+From the same LAN, open `https://unifi.local` to finish setup and adopt devices. The VM advertises its hostname over multicast DNS (mDNS). For devices on a routed subnet, use `http://<guest-lan-ip>:8080/inform` as the inform URL. The [community NixOS module](https://github.com/rcambrj/unifi-os-server) starts the server at boot as `podman-unifi-os-server.service` and keeps its data in `/var/lib/unifi-os-server`.
 
 #### How do I change the default NAT subnet for VMs?
 

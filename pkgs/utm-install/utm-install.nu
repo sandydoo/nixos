@@ -42,6 +42,18 @@ def wait-for-status [vm_id: string, want: string] {
   error make {msg: $"VM did not reach status '($want)'"}
 }
 
+def start-vm [vm_id: string] {
+  applescript '
+on run argv
+  tell application "UTM"
+    set vm to virtual machine id (item 1 of argv)
+    reload configuration of vm
+    start vm
+  end tell
+end run
+' $vm_id | ignore
+}
+
 # Set a key in config.plist, or add it when it does not exist.
 def plist-set [config: path, key: string, type: string, value: string] {
   let result = (^/usr/libexec/PlistBuddy -c $"Set :($key) ($value)" $config | complete)
@@ -83,7 +95,7 @@ def wait-for-ssh [target: string] {
   error make {msg: $"cannot connect to ($target) with SSH"}
 }
 
-def bridged-ip [vm_id: string, mac: string] {
+def guest-ip [vm_id: string, mac: string] {
   for _ in 1..30 {
     let ip = (try { applescript '
 on run argv
@@ -98,7 +110,7 @@ end run
     sleep 1sec
   }
   # Apple Virtualization looks up the MAC in the host ARP cache, which may be empty.
-  input $"Enter the LAN IPv4 address leased to ($mac): " | str trim
+  input $"Enter the guest IPv4 address leased to ($mac): " | str trim
 }
 
 # Create a UTM VM and install NixOS onto it with nixos-anywhere.
@@ -109,10 +121,23 @@ def main [
   --cpus: int = 8 # CPU cores
   --memory: int = 16384 # Memory in MiB
   --disk-size: int = 128 # Disk size in GiB
-  --bridge: string # Bridge to this macOS LAN interface (for example en0)
+  --network: string = 'shared' # Installed VM network: shared, nat (macOS 26+), none, or bridge
+  --interface: string # Bridge interface: auto (default) or a macOS device such as en0
   --iso: path # Use this installer ISO instead of building one
   --extra-files: path # Copy the contents of this directory to / on the new system
 ] {
+  if $network not-in [shared nat none bridge] {
+    error make {msg: '--network must be shared, nat, none, or bridge'}
+  }
+  if $interface != null and $network != 'bridge' {
+    error make {msg: '--interface requires --network bridge'}
+  }
+  let bridge_interface = ($interface | default 'auto')
+  if $network == 'nat' and ((^sw_vers -productVersion | split row '.' | first | into int) < 26) {
+    error make {msg: 'UTM NAT Network requires macOS 26 or newer'}
+  }
+  # nixos-anywhere needs SSH until the installed VM is ready for its first boot.
+  let install_network = if $network == 'none' { 'shared' } else { $network }
   for option in ({cpus: $cpus, memory: $memory, disk-size: $disk_size} | transpose key value) {
     if $option.value <= 0 {
       error make {msg: $"--($option.key) must be positive"}
@@ -150,16 +175,21 @@ def main [
   # POSIX file must be resolved outside the `tell` block.
   let vm_id = (applescript '
 on run argv
-  set {vmName, isoPath, mem, cpus, diskMiB, mac, bridgeName} to argv
+  set {vmName, isoPath, mem, cpus, diskMiB, mac, bridgeName, networkMode} to argv
   set iso to POSIX file isoPath
   tell application "UTM"
     set nic to {mode:shared, address:mac}
-    if bridgeName is not "" then set nic to {mode:bridged, address:mac, host interface:bridgeName}
+    if networkMode is "nat" then
+      set nic to {mode:nat network, address:mac}
+    else if networkMode is "bridge" then
+      set nic to {mode:bridged, address:mac}
+      if bridgeName is not "auto" then set nic to {mode:bridged, address:mac, host interface:bridgeName}
+    end if
     set vm to make new virtual machine with properties {backend:apple, configuration:{name:vmName, memory:(mem as integer), cpu cores:(cpus as integer), drives:{{guest size:(diskMiB as integer)}, {source:iso}}, network interfaces:{nic}, displays:{{dynamic resolution:true}}}}
     return id of vm
   end tell
 end run
-' $name $installer_iso ($memory | into string) ($cpus | into string) (($disk_size * 1024) | into string) $mac ($bridge | default ''))
+' $name $installer_iso ($memory | into string) ($cpus | into string) (($disk_size * 1024) | into string) $mac $bridge_interface $install_network)
   if ($config | path type) != 'file' {
     error make {msg: $"VM bundle not found at ($bundle)"}
   }
@@ -184,18 +214,10 @@ end run
     if $result.exit_code != 0 { break }
   }
 
-  applescript '
-on run argv
-  tell application "UTM"
-    set vm to virtual machine id (item 1 of argv)
-    reload configuration of vm
-    start vm
-  end tell
-end run
-' $vm_id | ignore
+  start-vm $vm_id
 
   step 'Waiting for the installer to get an IP address'
-  let ip = if $bridge == null { wait-for-ip $mac $leases } else { bridged-ip $vm_id $mac }
+  let ip = if $install_network == "shared" { wait-for-ip $mac $leases } else { guest-ip $vm_id $mac }
   print --stderr $"IP address: ($ip)"
   let target = $"root@($ip)"
   wait-for-ssh $target
@@ -238,14 +260,22 @@ on run argv
     set cfg to configuration of vm
     set drives of cfg to {{id:id of item 1 of drives of cfg}}
     update configuration of vm with cfg
-    start vm
   end tell
 end run
 ' $vm_id | ignore
   rm --force $iso_image
 
+  if $network == 'none' {
+    ^/usr/libexec/PlistBuddy -c 'Delete :Network:0' $config
+  }
+  start-vm $vm_id
+  if $network == 'none' {
+    print --stderr $"Done. VM '($name)' started with networking disabled."
+    return
+  }
+
   step 'Waiting for the installed system'
-  let installed_ip = if $bridge == null { $ip } else { bridged-ip $vm_id $mac }
+  let installed_ip = if $install_network == "shared" { $ip } else { guest-ip $vm_id $mac }
   wait-for-ssh $"($env.USER)@($installed_ip)"
 
   print --stderr $"
