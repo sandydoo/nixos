@@ -1,14 +1,16 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, user, ... }:
 
+let
+  displayProfile = pkgs.writeText "utm-kanshi.conf" ''
+    profile {
+      output * scale 1
+    }
+  '';
+in
 {
   imports = [
-    "${inputs.self}/modules/dev-vm.nix"
-    "${inputs.self}/modules/datadog-agent.nix"
+    ../../modules/dev-vm.nix
+    ../../modules/datadog-agent.nix
   ];
 
   machine.platform = "apple-vz";
@@ -22,16 +24,34 @@
   ];
 
   networking.hostName = "nixos-utm";
+  environment.systemPackages = [ pkgs.dix ];
 
-  systemd.defaultUnit = "multi-user.target";
-  services.getty.autologinUser = "sandydoo";
+  services.spice-vdagentd.enable = true;
+  services.cage = {
+    enable = true;
+    inherit user;
+    program = pkgs.writeShellScript "utm-terminal" ''
+      ${pkgs.kanshi}/bin/kanshi -c ${displayProfile} &
+      spice-vdagent
 
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-    };
+      while true; do
+        # Scale inside Ghostty so Cage displays the Xwayland surface pixel-for-pixel.
+        GDK_BACKEND=x11 GDK_SCALE=2 ghostty --working-directory="$HOME" \
+          --gtk-single-instance=false --quit-after-last-window-closed=true
+        sleep 1
+      done
+    '';
+  };
+  systemd.services.cage-tty1 = {
+    path = [ pkgs.spice-vdagent pkgs.ghostty ];
+    serviceConfig.Restart = "always";
   };
 
+  home-manager.users.${user}.programs.fish.interactiveShellInit = ''
+    if test "$TERM_PROGRAM" = ghostty
+      bind ctrl-d delete-char
+    end
+  '';
 
   nixpkgs.config.allowUnsupportedSystem = true;
 }
