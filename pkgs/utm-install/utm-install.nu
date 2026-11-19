@@ -4,7 +4,7 @@
 # Steps:
 #   1. Build the installer ISO (nixosConfigurations.nixos-utm-installer).
 #   2. Create the VM with AppleScript and enable Rosetta in config.plist.
-#   3. Boot the ISO and find the VM IP in the vmnet DHCP leases.
+#   3. Boot the ISO and find the VM IP.
 #   4. Partition with disko and install with nixos-anywhere.
 #      The system is built on the VM itself.
 #   5. Remove the ISO and boot the installed system.
@@ -83,6 +83,24 @@ def wait-for-ssh [target: string] {
   error make {msg: $"cannot connect to ($target) with SSH"}
 }
 
+def bridged-ip [vm_id: string, mac: string] {
+  for _ in 1..30 {
+    let ip = (try { applescript '
+on run argv
+  tell application "UTM" to set addresses to query ip (virtual machine id (item 1 of argv))
+  repeat with addr in addresses
+    if (addr as text) contains "." then return addr as text
+  end repeat
+  return ""
+end run
+' $vm_id } catch { '' })
+    if $ip != '' { return $ip }
+    sleep 1sec
+  }
+  # Apple Virtualization looks up the MAC in the host ARP cache, which may be empty.
+  input $"Enter the LAN IPv4 address leased to ($mac): " | str trim
+}
+
 # Create a UTM VM and install NixOS onto it with nixos-anywhere.
 def main [
   --name: string = 'nixos-utm' # UTM VM name
@@ -91,6 +109,7 @@ def main [
   --cpus: int = 8 # CPU cores
   --memory: int = 16384 # Memory in MiB
   --disk-size: int = 128 # Disk size in GiB
+  --bridge: string # Bridge to this macOS LAN interface (for example en0)
   --iso: path # Use this installer ISO instead of building one
   --extra-files: path # Copy the contents of this directory to / on the new system
 ] {
@@ -131,14 +150,16 @@ def main [
   # POSIX file must be resolved outside the `tell` block.
   let vm_id = (applescript '
 on run argv
-  set {vmName, isoPath, mem, cpus, diskMiB, mac} to argv
+  set {vmName, isoPath, mem, cpus, diskMiB, mac, bridgeName} to argv
   set iso to POSIX file isoPath
   tell application "UTM"
-    set vm to make new virtual machine with properties {backend:apple, configuration:{name:vmName, memory:(mem as integer), cpu cores:(cpus as integer), drives:{{guest size:(diskMiB as integer)}, {source:iso}}, network interfaces:{{mode:shared, address:mac}}, displays:{{dynamic resolution:true}}}}
+    set nic to {mode:shared, address:mac}
+    if bridgeName is not "" then set nic to {mode:bridged, address:mac, host interface:bridgeName}
+    set vm to make new virtual machine with properties {backend:apple, configuration:{name:vmName, memory:(mem as integer), cpu cores:(cpus as integer), drives:{{guest size:(diskMiB as integer)}, {source:iso}}, network interfaces:{nic}, displays:{{dynamic resolution:true}}}}
     return id of vm
   end tell
 end run
-' $name $installer_iso ($memory | into string) ($cpus | into string) (($disk_size * 1024) | into string) $mac)
+' $name $installer_iso ($memory | into string) ($cpus | into string) (($disk_size * 1024) | into string) $mac ($bridge | default ''))
   if ($config | path type) != 'file' {
     error make {msg: $"VM bundle not found at ($bundle)"}
   }
@@ -174,10 +195,15 @@ end run
 ' $vm_id | ignore
 
   step 'Waiting for the installer to get an IP address'
-  let ip = (wait-for-ip $mac $leases)
+  let ip = if $bridge == null { wait-for-ip $mac $leases } else { bridged-ip $vm_id $mac }
   print --stderr $"IP address: ($ip)"
   let target = $"root@($ip)"
   wait-for-ssh $target
+
+  let addresses = (^ssh ...$SSH_OPTS $target 'cat /sys/class/net/*/address' | lines)
+  if $mac not-in $addresses {
+    error make {msg: $"SSH target ($ip) does not have the new VM MAC address ($mac)"}
+  }
 
   # disko.nix formats /dev/vda. Make sure it is the new, empty VM disk.
   let disk = (^ssh ...$SSH_OPTS $target lsblk -dnbo SIZE,RO /dev/vda
@@ -219,14 +245,14 @@ end run
   rm --force $iso_image
 
   step 'Waiting for the installed system'
-  wait-for-ssh $"($env.USER)@($ip)"
+  let installed_ip = if $bridge == null { $ip } else { bridged-ip $vm_id $mac }
+  wait-for-ssh $"($env.USER)@($installed_ip)"
 
   print --stderr $"
-Done. VM '($name)' runs ($flake)#($attr) at ($ip).
+Done. VM '($name)' runs ($flake)#($attr) at ($installed_ip).
 
-  ssh ($ip)
+  ssh ($installed_ip)
 
-To keep this IP address, add the MAC address ($mac) to /etc/bootptab.
-See README.md.
+Reserve MAC address ($mac) on the DHCP server to keep this address.
 "
 }
