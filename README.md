@@ -20,6 +20,18 @@ nix build ./#darwinConfigurations.asdfpro.system
 
 ## Setting up VMs on a macOS host
 
+### UniFi OS Server
+
+On an Apple silicon Mac with UTM, run `networksetup -listallhardwareports` to find the device connected to the management LAN. For example, if it is `en0`, create the guest with:
+
+```shell
+nix run .#utm-install -- --name unifi --attr unifi --bridge en0
+```
+
+The guest uses the LAN bridge from first boot. If UTM cannot discover the guest address, the installer prompts for the IPv4 lease matching the printed MAC address. Reserve that lease on the LAN DHCP server so devices can keep reaching the server.
+
+Open `https://<guest-lan-ip>:11443` to finish setup and adopt devices. For devices on a routed subnet, use `http://<guest-lan-ip>:8080/inform` as the inform URL. The [community NixOS module](https://github.com/rcambrj/unifi-os-server) starts the server at boot as `podman-unifi-os-server.service` and keeps its data in `/var/lib/unifi-os-server`.
+
 #### How do I change the default NAT subnet for VMs?
 
 ```shell

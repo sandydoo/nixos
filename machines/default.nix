@@ -63,6 +63,19 @@ in
 
     }
     // {
+      unifi = inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          user = "sandydoo";
+          isLinux = true;
+        };
+        modules = [
+          ../platforms
+          ../users/sandydoo.nix
+          ./unifi/configuration.nix
+        ];
+      };
+
       # Installer ISO used by `nix run .#utm-install`.
       nixos-utm-installer = inputs.nixpkgs.lib.nixosSystem {
         modules = [ ../platforms/apple-vz/installer.nix ];

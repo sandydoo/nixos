@@ -29,6 +29,9 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    unifi-os-server.url = "github:rcambrj/unifi-os-server";
+    unifi-os-server.inputs.nixpkgs.follows = "nixpkgs";
+
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
 
     claude-code.url = "github:sadjow/claude-code-nix";
