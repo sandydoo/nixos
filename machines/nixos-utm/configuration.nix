@@ -24,6 +24,9 @@ in
   ];
 
   networking.hostName = "nixos-utm";
+  services.resolved.settings.Resolve.MulticastDNS = true;
+  systemd.network.networks."99-ethernet-default-dhcp".networkConfig.MulticastDNS = true;
+
   environment.systemPackages = [ pkgs.dix ];
 
   services.spice-vdagentd.enable = true;
