@@ -27,6 +27,11 @@ in
   services.resolved.settings.Resolve.MulticastDNS = true;
   systemd.network.networks."99-ethernet-default-dhcp".networkConfig.MulticastDNS = true;
 
+  services.rex = {
+    extraListen = [ "0.0.0.0:7297" ];
+    allowAnonymous = true;
+  };
+
   environment.systemPackages = [ pkgs.dix ];
 
   services.spice-vdagentd.enable = true;
